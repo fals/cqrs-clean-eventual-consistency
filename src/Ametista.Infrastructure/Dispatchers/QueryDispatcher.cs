@@ -14,13 +14,13 @@ namespace Ametista.Infrastructure
             this.componentContext = componentContext;
         }
 
-        public Task<TResult> ExecuteAsync<TResult>(IQuery<TResult> query)
+        public Task<TModel> ExecuteAsync<TModel>(IQuery<TModel> query) where TModel : IQueryModel
         {
-            var queryHandlerType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TResult));
+            var queryHandlerType = typeof(IQueryHandler<,>).MakeGenericType(query.GetType(), typeof(TModel));
 
             var handler = componentContext.Resolve(queryHandlerType);
 
-            return (Task<TResult>)queryHandlerType
+            return (Task<TModel>)queryHandlerType
                 .GetMethod("HandleAsync")
                 .Invoke(handler, new object[] { query });
         }
