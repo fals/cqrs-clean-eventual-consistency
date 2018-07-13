@@ -12,4 +12,9 @@
     <PackageReference Include="MSTest.TestFramework" Version="1.2.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Core\" />
+    <Folder Include="Application\" />
+  </ItemGroup>
+
 </Project>

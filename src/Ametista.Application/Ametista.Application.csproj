@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
 </Project>

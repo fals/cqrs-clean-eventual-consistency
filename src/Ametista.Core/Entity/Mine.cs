@@ -1,17 +1,14 @@
 ﻿using Ametista.Core.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Ametista.Core.Entity
 {
-    public class Gemstone : IEntity
+    public class Mine : IAggregate
     {
-        protected Gemstone()
-        {
-        }
-
         public virtual Guid Id { get; private set; }
         public virtual string Name { get; private set; }
-        public virtual string ScientifiqueName { get; private set; }
 
     }
 }
