@@ -9,16 +9,17 @@
     <Folder Include="Bus\" />
     <Folder Include="Persistence\Mapping\" />
     <Folder Include="Persistence\Repository\" />
-    <Folder Include="Queries\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.7.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ametista.Application\Ametista.Application.csproj" />
     <ProjectReference Include="..\Ametista.Core\Ametista.Core.csproj" />
   </ItemGroup>
 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ametista.Core.Entity
 {
-    public class Prospecting : IAggregate
+    public class Mining : IAggregate
     {
         public virtual Guid Id { get; private set; }
         public virtual Miner Miner { get; private set; }

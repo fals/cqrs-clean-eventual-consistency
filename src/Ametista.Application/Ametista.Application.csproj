@@ -6,7 +6,10 @@
 
   <ItemGroup>
     <Folder Include="Commands\" />
-    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ametista.Core\Ametista.Core.csproj" />
   </ItemGroup>
 
 </Project>

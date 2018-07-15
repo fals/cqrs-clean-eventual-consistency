@@ -10,6 +10,24 @@ namespace Ametista.Infrastructure.Persistence
         {
         }
 
-        public DbSet<Gemstone> Student { get; set; }
+        public DbSet<Gemstone> Gemstones { get; set; }
+        public DbSet<Mine> Mines { get; set; }
+        public DbSet<Mining> Minings{ get; set; }
+        public DbSet<Miner> Miners { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Gemstone>()
+                .ToTable("Gemstones");
+
+            modelBuilder.Entity<Mine>()
+                .ToTable("Mines");
+
+            modelBuilder.Entity<Mining>()
+                .ToTable("Minings");
+
+            modelBuilder.Entity<Miner>()
+                .ToTable("Miners");
+        }
     }
 }
