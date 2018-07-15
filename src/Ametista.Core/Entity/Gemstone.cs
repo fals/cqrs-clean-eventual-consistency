@@ -11,7 +11,7 @@ namespace Ametista.Core.Entity
 
         public virtual Guid Id { get; private set; }
         public virtual string Name { get; private set; }
-        public virtual string ScientifiqueName { get; private set; }
+        public virtual string ScientificName { get; private set; }
 
     }
 }

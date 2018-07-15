@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 
 namespace Ametista.Core.Interfaces
 {
-    public interface IMaterialize<TEntity, TQModel> where TEntity: IEntity where TQModel : IQueryModel
+    public interface IMaterialize<TData>
     {
-        TQModel Materialize(TEntity entity);
+        Task<bool> Materialize(TData data);
     }
 }
