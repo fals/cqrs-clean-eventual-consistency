@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Ametista.Core.Interfaces
+namespace Ametista.Core
 {
     public interface IMaterialize<TEvent> where TEvent : IEvent
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ametista.Core.Interfaces
+namespace Ametista.Core
 {
     public interface IEvent
     {

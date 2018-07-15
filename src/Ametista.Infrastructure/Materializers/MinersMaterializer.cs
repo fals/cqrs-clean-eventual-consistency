@@ -1,11 +1,11 @@
 ﻿using Ametista.Application.Events;
-using Ametista.Core.Interfaces;
 using Ametista.Infrastructure.Persistence;
 using Ametista.Infrastructure.Queries;
 using System.Linq;
 using Ametista.Application.Queries;
 using System.Threading.Tasks;
 using System;
+using Ametista.Core;
 
 namespace Ametista.Infrastructure.Materializers
 {
