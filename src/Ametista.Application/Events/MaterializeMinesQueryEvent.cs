@@ -7,8 +7,10 @@ namespace Ametista.Application.Events
 {
     public class MaterializeMinesQueryModelEvent : Event
     {
-        public MaterializeMinesQueryModelEvent()
+        public Guid MineId { get; set; }
+        public MaterializeMinesQueryModelEvent(Guid mineId)
         {
+            MineId = mineId;
             Name = nameof(MaterializeMinesQueryModelEvent);
         }
     }

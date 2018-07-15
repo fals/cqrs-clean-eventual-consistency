@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ametista.Infrastructure.Persistence
 {
-    public class AmetistaDbContext : DbContext
+    public class WriteDbContext : DbContext
     {
-        public AmetistaDbContext(DbContextOptions<AmetistaDbContext> options)
+        public WriteDbContext(DbContextOptions<WriteDbContext> options)
             : base(options)
         {
         }

@@ -2,8 +2,8 @@
 
 namespace Ametista.Core.Interfaces
 {
-    public interface IMaterialize<TData>
+    public interface IMaterialize<TEvent> where TEvent : IEvent
     {
-        Task<bool> Materialize(TData data);
+        Task<bool> Materialize(TEvent e);
     }
 }

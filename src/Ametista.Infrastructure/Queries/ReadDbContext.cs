@@ -4,12 +4,12 @@ using MongoDB.Driver;
 
 namespace Ametista.Infrastructure.Queries
 {
-    public class MongoDbContext
+    public class ReadDbContext
     {
         private readonly MongoClient _mongoClient;
         private readonly IMongoDatabase _database;
 
-        public MongoDbContext(string connectionString, string databaseName)
+        public ReadDbContext(string connectionString, string databaseName)
         {
             _mongoClient = new MongoClient(connectionString);
             _database = _mongoClient.GetDatabase(databaseName);
