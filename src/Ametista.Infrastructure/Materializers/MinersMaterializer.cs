@@ -6,6 +6,8 @@ using Ametista.Application.Queries;
 using System.Threading.Tasks;
 using System;
 using Ametista.Core;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace Ametista.Infrastructure.Materializers
 {
@@ -63,9 +65,12 @@ namespace Ametista.Infrastructure.Materializers
                 TotalQuantityMostFoundGem = mostFoundGem?.Qùantity
             };
 
-            await readDbContext.MinersMaterializedView.InsertOneAsync(queryModel);
+            var result = await readDbContext.MinersMaterializedView.ReplaceOneAsync(
+               filter: new BsonDocument("Id", miner.Id),
+               options: new UpdateOptions { IsUpsert = true },
+               replacement: queryModel);
 
-            return true;
+            return result.ModifiedCount > 0;
         }
     }
 }
