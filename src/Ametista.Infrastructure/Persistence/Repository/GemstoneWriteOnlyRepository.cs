@@ -1,13 +1,11 @@
 ﻿using Ametista.Core.Entity;
-using Ametista.Core.Interfaces;
+using Ametista.Core.Repository;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Ametista.Infrastructure.Persistence.Repository
 {
-    public class GemstoneWriteOnlyRepository : IWriteOnlyRepository<Gemstone>
+    public class GemstoneWriteOnlyRepository : IGemstoneWriteOnlyRepository
     {
         private readonly WriteDbContext context;
 

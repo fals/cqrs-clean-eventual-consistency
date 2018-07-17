@@ -14,5 +14,9 @@ namespace Ametista.Core.Entity
         public virtual string ScientificName { get; private set; }
         public virtual decimal Price { get; private set; }
 
+        public static Gemstone CreateNew(string name, string scientificName, decimal price)
+        {
+            return new Gemstone() { Id = Guid.NewGuid(), Name = name, ScientificName = scientificName, Price = price };
+        }
     }
 }

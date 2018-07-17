@@ -6,7 +6,7 @@ namespace Ametista.Core
 {
     public interface ICommandResult
     {
-        bool Succss { get; }
+        bool Success { get; }
         DateTime Executed { get; }
     }
 }
