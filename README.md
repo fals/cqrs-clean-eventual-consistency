@@ -5,4 +5,4 @@ CQRS, using Clean Architecture, multiple databases and Eventual Consistency
 
 [![Build status](https://ci.appveyor.com/api/projects/status/cqrs-clean-eventual-consistency/branch/master?svg=true)](https://ci.appveyor.com/project/fals/cqrs-clean-eventual-consistency/branch/master)
 
-![cqrs-clean](https://github.com/fals/cqrs-clean-eventual-consistency/blob/master/doc/cqrs-clean.png)
+![cqrs-clean](https://github.com/fals/cqrs-clean-eventual-consistency/blob/master/docs/cqrs-clean.png)
