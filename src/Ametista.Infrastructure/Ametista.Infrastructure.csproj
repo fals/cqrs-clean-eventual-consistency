@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Bus\" />
-    <Folder Include="Persistence\Mapping\" />
-    <Folder Include="Persistence\Repository\" />
   </ItemGroup>
 
   <ItemGroup>

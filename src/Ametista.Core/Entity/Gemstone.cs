@@ -3,7 +3,7 @@ using System;
 
 namespace Ametista.Core.Entity
 {
-    public class Gemstone : IEntity
+    public class Gemstone : IAggregate
     {
         protected Gemstone()
         {
