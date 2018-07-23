@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Ametista.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Ametista.Application.Queries
 {
-    public class GetMinersQuery
+    public class GetMinersQuery : IQuery<MinersQueryModel>
     {
         public Guid Id { get; set; }
         public string FullName { get; set; }

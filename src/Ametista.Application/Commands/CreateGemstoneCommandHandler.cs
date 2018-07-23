@@ -26,7 +26,14 @@ namespace Ametista.Application.Commands
             await _writeOnlyRepository.Add(gemstone);
             await _eventBus.Publish(materializeGemstoneEvent);
 
-            return new CreateGemstoneCommandResult() { Id = gemstone.Id };
+            return new CreateGemstoneCommandResult()
+            {
+                Id = gemstone.Id,
+                Name = gemstone.Name,
+                Price = gemstone.Price,
+                ScientificName = gemstone.ScientificName,
+                Success = true
+            };
         }
     }
 }
