@@ -13,12 +13,4 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Core\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Ametista.Core\Ametista.Core.csproj" />
-  </ItemGroup>
-
 </Project>

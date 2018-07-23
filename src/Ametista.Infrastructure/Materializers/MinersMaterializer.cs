@@ -28,12 +28,12 @@ namespace Ametista.Infrastructure.Materializers
                 .Miners
                 .Find(e.Id);
 
-            var totalMiningGems = writeDbContext
+            var totalGems = writeDbContext
                 .Minings
                 .Where(x => x.Miner.Id == e.Id)
                 .Sum(x => x.Quantity);
 
-            var totalAmountGems = writeDbContext
+            var totalProfitGems = writeDbContext
                .Minings
                .Where(x => x.Miner.Id == e.Id)
                .Sum(x => x.Gemstone.Price);
@@ -58,8 +58,8 @@ namespace Ametista.Infrastructure.Materializers
                 RegisterNumber = miner.RegisterNumber.ToString(),
                 BirthDate = miner.BirthDate,
                 FullName = miner.ToString(),
-                TotalMiningGems = totalMiningGems,
-                TotalAmoutGems = totalAmountGems,
+                TotalGems = totalGems,
+                TotalProfitGems = totalProfitGems,
                 MostFoundGemstoneId = mostFoundGem?.GemstoneId,
                 MostFoundGemstoneName = mostFoundGem?.GemstoneName,
                 TotalQuantityMostFoundGem = mostFoundGem?.Qùantity

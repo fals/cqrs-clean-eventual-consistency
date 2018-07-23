@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Ametista.Core
 {
@@ -7,6 +8,6 @@ namespace Ametista.Core
     public interface IQueryHandler<TQuery, TModel> : IQueryHandler
         where TQuery : IQuery<TModel> where TModel : IQueryModel
     {
-        Task<TModel> HandleAsync(TQuery query);
+        Task<IEnumerable<TModel>> HandleAsync(TQuery query);
     }
 }
