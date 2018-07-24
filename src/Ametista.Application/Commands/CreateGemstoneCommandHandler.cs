@@ -20,6 +20,8 @@ namespace Ametista.Application.Commands
 
         public async Task<CreateGemstoneCommandResult> Handle(CreateGemstoneCommand command)
         {
+            command = command ?? throw new ArgumentNullException(nameof(command));
+
             Gemstone gemstone = Gemstone.CreateNew(command.Name, command.ScientificName, command.Price);
             MaterializeGemstoneEvent materializeGemstoneEvent = new MaterializeGemstoneEvent(gemstone.Id);
 
