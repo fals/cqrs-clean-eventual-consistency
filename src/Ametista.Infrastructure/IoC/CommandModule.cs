@@ -19,7 +19,7 @@ namespace Ametista.Infrastructure
 
             builder
                 .RegisterType<CommandDispatcher>()
-                .As<ICommandDispatcher>();
+                .As<IMaterializeDispatcher>();
         }
     }
 }

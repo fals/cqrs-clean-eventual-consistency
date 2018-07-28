@@ -2,7 +2,7 @@
 
 namespace Ametista.Core
 {
-    public interface IMaterialize<TEvent> where TEvent : IEvent
+    public interface IMaterializer<TEvent> where TEvent : IEvent
     {
         Task<bool> Materialize(TEvent e);
     }

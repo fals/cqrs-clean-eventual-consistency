@@ -12,13 +12,13 @@ namespace Ametista.UnitTest.Application
 {
     public class CreateGemstomeCommandTest
     {
-        private readonly Mock<IGemstoneWriteOnlyRepository> repository;
+        private readonly Mock<IGemstoneRepository> repository;
         private readonly Mock<IEventBus> eventBus;
         private readonly ICommandHandler<CreateGemstoneCommand, CreateGemstoneCommandResult> handler;
 
         public CreateGemstomeCommandTest()
         {
-            repository = new Mock<IGemstoneWriteOnlyRepository>();
+            repository = new Mock<IGemstoneRepository>();
             eventBus = new Mock<IEventBus>();
             handler = new CreateGemstoneCommandHandler(repository.Object, eventBus.Object);
         }

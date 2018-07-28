@@ -1,6 +1,4 @@
-﻿using Ametista.Application.Events;
-using Ametista.Infrastructure.Persistence;
-using Ametista.Infrastructure.Queries;
+﻿using Ametista.Infrastructure.Queries;
 using System.Linq;
 using System.Threading.Tasks;
 using System;
@@ -8,38 +6,40 @@ using Ametista.Core;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Ametista.Queries;
+using Ametista.Core.Repository;
+using Ametista.Core.Events;
 
 namespace Ametista.Infrastructure.Materializers
 {
-    public class MinersMaterializer : IMaterialize<MaterializeMinersQueryEvent>
+    public class MinersMaterializer : IMaterializer<MaterializeMinersQueryEvent>
     {
-        private readonly WriteDbContext writeDbContext;
+        private readonly IMinerRepository minerRepository;
+        private readonly IMiningRepository miningRepository;
         private readonly ReadDbContext readDbContext;
 
-        public MinersMaterializer(WriteDbContext writeDbContext, ReadDbContext readDbContext)
+        public MinersMaterializer(IMinerRepository minerRepository, IMiningRepository miningRepository, ReadDbContext readDbContext)
         {
-            this.writeDbContext = writeDbContext ?? throw new ArgumentNullException(nameof(writeDbContext));
+            this.minerRepository = minerRepository ?? throw new ArgumentNullException(nameof(minerRepository));
+            this.miningRepository = miningRepository ?? throw new ArgumentNullException(nameof(miningRepository));
             this.readDbContext = readDbContext ?? throw new ArgumentNullException(nameof(readDbContext));
         }
 
         public async Task<bool> Materialize(MaterializeMinersQueryEvent e)
         {
-            var miner = writeDbContext
-                .Miners
-                .Find(e.Id);
+            var miner = await minerRepository.FindAsync(e.MinerId);
 
-            var totalGems = writeDbContext
-                .Minings
+            int totalGems = miningRepository
+                .FindAll()
                 .Where(x => x.Miner.Id == e.Id)
                 .Sum(x => x.Quantity);
 
-            var totalProfitGems = writeDbContext
-               .Minings
+            var totalProfitGems = miningRepository
+               .FindAll()
                .Where(x => x.Miner.Id == e.Id)
                .Sum(x => x.Gemstone.Price);
 
-            var mostFoundGem = writeDbContext
-                .Minings
+            var mostFoundGem = miningRepository
+                .FindAll()
                 .Where(x => x.Miner.Id == e.Id)
                 .GroupBy(x => new { x.Gemstone.Id, x.Gemstone.Name })
                 .Select(x => new

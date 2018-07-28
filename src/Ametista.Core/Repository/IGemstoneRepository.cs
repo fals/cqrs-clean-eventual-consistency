@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Ametista.Core.Repository
 {
-    public interface IGemstoneWriteOnlyRepository : IWriteOnlyRepository<Gemstone>
+    public interface IGemstoneRepository : IRepository<Gemstone>
     {
     }
 }

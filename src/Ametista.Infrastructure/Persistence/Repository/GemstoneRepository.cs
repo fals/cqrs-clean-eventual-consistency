@@ -1,15 +1,16 @@
 ﻿using Ametista.Core.Entity;
 using Ametista.Core.Repository;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ametista.Infrastructure.Persistence.Repository
 {
-    public class GemstoneWriteOnlyRepository : IGemstoneWriteOnlyRepository
+    public class GemstoneRepository : IGemstoneRepository
     {
         private readonly WriteDbContext context;
 
-        public GemstoneWriteOnlyRepository(WriteDbContext context)
+        public GemstoneRepository(WriteDbContext context)
         {
             this.context = context ?? throw new ArgumentNullException(nameof(context));
         }
@@ -28,7 +29,12 @@ namespace Ametista.Infrastructure.Persistence.Repository
             return await context.SaveChangesAsync() > 0;
         }
 
-        public async Task<Gemstone> Find(Guid id)
+        public IQueryable<Gemstone> FindAll()
+        {
+            return context.Gemstones.AsQueryable();
+        }
+
+        public async Task<Gemstone> FindAsync(Guid id)
         {
             return await context.Gemstones.FindAsync(id);
         }

@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  ametista.api:
+    image: ametistaapi
+    build:
+      context: .
+      dockerfile: Ametista.Api\Dockerfile

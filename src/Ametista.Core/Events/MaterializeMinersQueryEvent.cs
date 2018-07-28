@@ -1,9 +1,6 @@
-﻿using Ametista.Core.Events;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
-namespace Ametista.Application.Events
+namespace Ametista.Core.Events
 {
     public class MaterializeMinersQueryEvent : Event
     {

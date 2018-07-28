@@ -13,4 +13,12 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Ametista.Api\Ametista.Api.csproj" />
+    <ProjectReference Include="..\Ametista.Command\Ametista.Command.csproj" />
+    <ProjectReference Include="..\Ametista.Core\Ametista.Core.csproj" />
+    <ProjectReference Include="..\Ametista.Infrastructure\Ametista.Infrastructure.csproj" />
+    <ProjectReference Include="..\Ametista.Query\Ametista.Query.csproj" />
+  </ItemGroup>
+
 </Project>

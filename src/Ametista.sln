@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Query", "Ametista.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Command", "Ametista.Command\Ametista.Command.csproj", "{3F46E2CF-F965-4785-A02C-FD14DFD1FC7E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Api", "Ametista.Api\Ametista.Api.csproj", "{8C3E9371-487F-4BCF-AA05-DC7586C5B206}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{3F46E2CF-F965-4785-A02C-FD14DFD1FC7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F46E2CF-F965-4785-A02C-FD14DFD1FC7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F46E2CF-F965-4785-A02C-FD14DFD1FC7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C3E9371-487F-4BCF-AA05-DC7586C5B206}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C3E9371-487F-4BCF-AA05-DC7586C5B206}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C3E9371-487F-4BCF-AA05-DC7586C5B206}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C3E9371-487F-4BCF-AA05-DC7586C5B206}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

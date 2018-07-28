@@ -2,17 +2,17 @@
 using Ametista.Core.Entity;
 using Ametista.Core.Repository;
 using System;
-using Ametista.Application.Events;
 using System.Threading.Tasks;
+using Ametista.Core.Events;
 
 namespace Ametista.Application.Commands
 {
     public class CreateGemstoneCommandHandler : ICommandHandler<CreateGemstoneCommand, CreateGemstoneCommandResult>
     {
-        private readonly IGemstoneWriteOnlyRepository _writeOnlyRepository;
+        private readonly IGemstoneRepository _writeOnlyRepository;
         private readonly IEventBus _eventBus;
 
-        public CreateGemstoneCommandHandler(IGemstoneWriteOnlyRepository writeOnlyRepository, IEventBus eventBus)
+        public CreateGemstoneCommandHandler(IGemstoneRepository writeOnlyRepository, IEventBus eventBus)
         {
             _writeOnlyRepository = writeOnlyRepository ?? throw new ArgumentNullException(nameof(writeOnlyRepository));
             _eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));

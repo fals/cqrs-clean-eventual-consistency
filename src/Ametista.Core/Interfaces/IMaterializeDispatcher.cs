@@ -5,6 +5,6 @@ namespace Ametista.Core
 {
     public interface IMaterializeDispatcher
     {
-        Task<bool> Dispatch<TEvent>(IMaterialize<TEvent> e) where TEvent : IEvent;
+        Task<bool> Dispatch<TEvent>(IMaterializer<TEvent> e) where TEvent : IEvent;
     }
 }

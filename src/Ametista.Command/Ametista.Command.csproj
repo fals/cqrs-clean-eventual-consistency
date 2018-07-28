@@ -8,8 +8,4 @@
     <ProjectReference Include="..\Ametista.Core\Ametista.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
 </Project>
