@@ -1,17 +1,18 @@
 ﻿using Ametista.Core;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ametista.Application.Queries
+namespace Ametista.Queries
 {
-    public class GetMinersQuery : IQuery<MinersQueryModel>
+    public class MinersQueryModel : IQueryModel
     {
         public Guid Id { get; set; }
         public string FullName { get; set; }
         public DateTime BirthDate { get; set; }
         public int TotalGems { get; set; }
         public decimal TotalProfitGems { get; set; }
+        public Guid? MostFoundGemstoneId { get; set; }
+        public string MostFoundGemstoneName { get; set; }
+        public int? TotalQuantityMostFoundGem { get; set; }
         public string RegisterNumber { get; set; }
     }
 }

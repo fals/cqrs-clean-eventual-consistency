@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ametista.Application\Ametista.Application.csproj" />
+    <ProjectReference Include="..\Ametista.Command\Ametista.Command.csproj" />
     <ProjectReference Include="..\Ametista.Core\Ametista.Core.csproj" />
   </ItemGroup>
 

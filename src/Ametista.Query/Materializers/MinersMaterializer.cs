@@ -2,12 +2,12 @@
 using Ametista.Infrastructure.Persistence;
 using Ametista.Infrastructure.Queries;
 using System.Linq;
-using Ametista.Application.Queries;
 using System.Threading.Tasks;
 using System;
 using Ametista.Core;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Ametista.Queries;
 
 namespace Ametista.Infrastructure.Materializers
 {

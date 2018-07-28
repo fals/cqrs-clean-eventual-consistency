@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Core", "Ametista.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Infrastructure", "Ametista.Infrastructure\Ametista.Infrastructure.csproj", "{E09F4EE6-FC5D-4DA0-B00E-8BA43CA4F5BD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Application", "Ametista.Application\Ametista.Application.csproj", "{8BA2A39E-8B8B-498F-B080-4F2ED2E6E751}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.UnitTest", "Ametista.UnitTest\Ametista.UnitTest.csproj", "{3DDBA5F3-B1AF-4FFF-8738-E9A65FF9A343}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Sync", "Ametista.Sync\Ametista.Sync.csproj", "{A3C52FA3-3799-480D-92AB-535927DEDF3D}"
@@ -17,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Fitness", "Ametist
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C04D6B23-BFAD-4FBF-9D28-69BC9C6213B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ametista.IntegrationTest", "Ametista.IntegrationTest\Ametista.IntegrationTest.csproj", "{35D9F966-61FF-4D17-A666-34F4D2C9E847}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.IntegrationTest", "Ametista.IntegrationTest\Ametista.IntegrationTest.csproj", "{35D9F966-61FF-4D17-A666-34F4D2C9E847}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Query", "Ametista.Query\Ametista.Query.csproj", "{952E7FC7-DC35-4093-9395-BE43B9DD814A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Command", "Ametista.Command\Ametista.Command.csproj", "{3F46E2CF-F965-4785-A02C-FD14DFD1FC7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,10 +35,6 @@ Global
 		{E09F4EE6-FC5D-4DA0-B00E-8BA43CA4F5BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E09F4EE6-FC5D-4DA0-B00E-8BA43CA4F5BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E09F4EE6-FC5D-4DA0-B00E-8BA43CA4F5BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8BA2A39E-8B8B-498F-B080-4F2ED2E6E751}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8BA2A39E-8B8B-498F-B080-4F2ED2E6E751}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8BA2A39E-8B8B-498F-B080-4F2ED2E6E751}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8BA2A39E-8B8B-498F-B080-4F2ED2E6E751}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3DDBA5F3-B1AF-4FFF-8738-E9A65FF9A343}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3DDBA5F3-B1AF-4FFF-8738-E9A65FF9A343}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DDBA5F3-B1AF-4FFF-8738-E9A65FF9A343}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,6 +51,14 @@ Global
 		{35D9F966-61FF-4D17-A666-34F4D2C9E847}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35D9F966-61FF-4D17-A666-34F4D2C9E847}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35D9F966-61FF-4D17-A666-34F4D2C9E847}.Release|Any CPU.Build.0 = Release|Any CPU
+		{952E7FC7-DC35-4093-9395-BE43B9DD814A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{952E7FC7-DC35-4093-9395-BE43B9DD814A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{952E7FC7-DC35-4093-9395-BE43B9DD814A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{952E7FC7-DC35-4093-9395-BE43B9DD814A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F46E2CF-F965-4785-A02C-FD14DFD1FC7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F46E2CF-F965-4785-A02C-FD14DFD1FC7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F46E2CF-F965-4785-A02C-FD14DFD1FC7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F46E2CF-F965-4785-A02C-FD14DFD1FC7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

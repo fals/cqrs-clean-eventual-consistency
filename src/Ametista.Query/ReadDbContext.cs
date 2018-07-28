@@ -1,4 +1,5 @@
 ﻿using Ametista.Application.Queries;
+using Ametista.Queries;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 

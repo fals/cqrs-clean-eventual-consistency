@@ -5,18 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Bus\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
     <PackageReference Include="MongoDB.Driver" Version="2.7.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ametista.Command\Ametista.Command.csproj" />
     <ProjectReference Include="..\Ametista.Core\Ametista.Core.csproj" />
+    <ProjectReference Include="..\Ametista.Infrastructure\Ametista.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
