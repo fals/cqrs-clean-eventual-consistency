@@ -20,7 +20,7 @@ namespace Ametista.Infrastructure
                 throw new System.ArgumentNullException(nameof(e));
             }
 
-            var materializerTyoe = typeof(IMaterializer<>).MakeGenericType(e.GetType());
+            var materializerTyoe = typeof(IMaterializer<>).MakeGenericType(e.GetType(), typeof(TEvent));
 
             dynamic handler = componentContext.Resolve(materializerTyoe);
 
