@@ -9,18 +9,18 @@ using MongoDB.Driver;
 
 namespace Ametista.Infrastructure.Queries
 {
-    public class GetMinesQueryHandler : IQueryHandler<GetMinesQuery, MinesQueryModel>
+    public class GetMinesViewQueryHandler : IQueryHandler<GetMinesViewQuery, MinesViewQueryModel>
     {
         private readonly ReadDbContext _readDbContext;
 
-        public GetMinesQueryHandler(ReadDbContext readDbContext)
+        public GetMinesViewQueryHandler(ReadDbContext readDbContext)
         {
             _readDbContext = readDbContext;
         }
 
-        public async Task<IEnumerable<MinesQueryModel>> HandleAsync(GetMinesQuery query)
+        public async Task<IEnumerable<MinesViewQueryModel>> HandleAsync(GetMinesViewQuery query)
         {
-            var filter = Builders<MinesQueryModel>.Filter.Where(x => x.Name == query.Name);
+            var filter = Builders<MinesViewQueryModel>.Filter.Where(x => x.Name == query.Name);
 
             return await _readDbContext
                 .MinesMaterializedView

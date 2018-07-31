@@ -52,7 +52,7 @@ namespace Ametista.Infrastructure.Materializers
                 .OrderByDescending(x => x.Qùantity)
                 .FirstOrDefault();
 
-            var queryModel = new MinersQueryModel()
+            var queryModel = new MinersViewQueryModel()
             {
                 Id = miner.Id,
                 RegisterNumber = miner.RegisterNumber.ToString(),

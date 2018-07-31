@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ametista.Application.Queries
 {
-    public class MinesQueryModel : IQueryModel
+    public class MinesViewQueryModel : IQueryModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

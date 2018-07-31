@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ametista.Application.Queries
 {
-    public class GetMinesQuery : IQuery<MinesQueryModel>
+    public class GetMinesViewQuery : IQuery<MinesViewQueryModel>
     {
         public string Name { get; set; }
         public string ManagersName { get; set; }

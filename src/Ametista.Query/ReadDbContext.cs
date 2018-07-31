@@ -17,30 +17,30 @@ namespace Ametista.Infrastructure.Queries
             Map();
         }
 
-        internal IMongoCollection<MinesQueryModel> MinesMaterializedView
+        internal IMongoCollection<MinesViewQueryModel> MinesMaterializedView
         {
             get
             {
-                return _database.GetCollection<MinesQueryModel>("MinesMaterializedView");
+                return _database.GetCollection<MinesViewQueryModel>("MinesMaterializedView");
             }
         }
 
-        internal IMongoCollection<MinersQueryModel> MinersMaterializedView
+        internal IMongoCollection<MinersViewQueryModel> MinersMaterializedView
         {
             get
             {
-                return _database.GetCollection<MinersQueryModel>("MinersMaterializedView");
+                return _database.GetCollection<MinersViewQueryModel>("MinersMaterializedView");
             }
         }
 
         private void Map()
         {
-            BsonClassMap.RegisterClassMap<MinesQueryModel>(cm =>
+            BsonClassMap.RegisterClassMap<MinesViewQueryModel>(cm =>
             {
                 cm.AutoMap();
             });
 
-            BsonClassMap.RegisterClassMap<MinersQueryModel>(cm =>
+            BsonClassMap.RegisterClassMap<MinersViewQueryModel>(cm =>
             {
                 cm.AutoMap();
             });
