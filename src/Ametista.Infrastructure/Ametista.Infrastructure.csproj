@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Ametista.Core\Ametista.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\Repository\" />
+  </ItemGroup>
+
 </Project>

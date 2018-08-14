@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Application\" />
     <Folder Include="Core\" />
   </ItemGroup>
 

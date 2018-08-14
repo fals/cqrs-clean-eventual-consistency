@@ -1,7 +1,4 @@
-﻿using Ametista.Application.Queries;
-using Ametista.Queries;
-using MongoDB.Bson.Serialization;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 
 namespace Ametista.Infrastructure.Queries
 {
@@ -14,36 +11,36 @@ namespace Ametista.Infrastructure.Queries
         {
             _mongoClient = new MongoClient(connectionString);
             _database = _mongoClient.GetDatabase(databaseName);
-            Map();
+            //Map();
         }
 
-        internal IMongoCollection<MinesViewQueryModel> MinesMaterializedView
-        {
-            get
-            {
-                return _database.GetCollection<MinesViewQueryModel>("MinesMaterializedView");
-            }
-        }
+        //internal IMongoCollection<MinesViewQueryModel> MinesMaterializedView
+        //{
+        //    get
+        //    {
+        //        return _database.GetCollection<MinesViewQueryModel>("MinesMaterializedView");
+        //    }
+        //}
 
-        internal IMongoCollection<MinersViewQueryModel> MinersMaterializedView
-        {
-            get
-            {
-                return _database.GetCollection<MinersViewQueryModel>("MinersMaterializedView");
-            }
-        }
+        //internal IMongoCollection<MinersViewQueryModel> MinersMaterializedView
+        //{
+        //    get
+        //    {
+        //        return _database.GetCollection<MinersViewQueryModel>("MinersMaterializedView");
+        //    }
+        //}
 
-        private void Map()
-        {
-            BsonClassMap.RegisterClassMap<MinesViewQueryModel>(cm =>
-            {
-                cm.AutoMap();
-            });
+        //private void Map()
+        //{
+        //    BsonClassMap.RegisterClassMap<MinesViewQueryModel>(cm =>
+        //    {
+        //        cm.AutoMap();
+        //    });
 
-            BsonClassMap.RegisterClassMap<MinersViewQueryModel>(cm =>
-            {
-                cm.AutoMap();
-            });
-        }
+        //    BsonClassMap.RegisterClassMap<MinersViewQueryModel>(cm =>
+        //    {
+        //        cm.AutoMap();
+        //    });
+        //}
     }
 }
