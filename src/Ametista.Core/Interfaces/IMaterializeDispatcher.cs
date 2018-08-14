@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Ametista.Core
 {
-    public interface IMaterializeDispatcher
+    public interface IMaterializerDispatcher
     {
         Task<bool> Dispatch<TEvent>(IMaterializer<TEvent> e) where TEvent : IEvent;
     }

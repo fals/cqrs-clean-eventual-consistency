@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace Ametista.Infrastructure
 {
-    public class MaterializeDispatcher : IMaterializeDispatcher
+    public class MaterializerDispatcher : IMaterializerDispatcher
     {
         private readonly IComponentContext componentContext;
 
-        public MaterializeDispatcher(IComponentContext componentContext)
+        public MaterializerDispatcher(IComponentContext componentContext)
         {
             this.componentContext = componentContext;
         }
