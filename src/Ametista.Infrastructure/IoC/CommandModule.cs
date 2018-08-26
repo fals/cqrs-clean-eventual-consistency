@@ -2,7 +2,7 @@
 using Autofac;
 using System.Reflection;
 
-namespace Ametista.Infrastructure
+namespace Ametista.Infrastructure.IoC
 {
     public class CommandModule : Autofac.Module
     {
@@ -19,7 +19,7 @@ namespace Ametista.Infrastructure
 
             builder
                 .RegisterType<CommandDispatcher>()
-                .As<IMaterializerDispatcher>();
+                .As<ICommandDispatcher>();
         }
     }
 }

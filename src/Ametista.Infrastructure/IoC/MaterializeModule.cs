@@ -2,7 +2,7 @@
 using Autofac;
 using System.Reflection;
 
-namespace Ametista.Infrastructure
+namespace Ametista.Infrastructure.IoC
 {
     public class MaterializeModule : Autofac.Module
     {
@@ -14,7 +14,7 @@ namespace Ametista.Infrastructure
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterType<CommandDispatcher>()
+                .RegisterType<MaterializerDispatcher>()
                 .As<IMaterializerDispatcher>();
         }
     }

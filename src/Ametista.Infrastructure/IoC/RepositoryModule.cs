@@ -4,7 +4,7 @@ using Autofac;
 
 namespace Ametista.Infrastructure.IoC
 {
-    internal class RepositoryModule : Autofac.Module
+    public class RepositoryModule : Autofac.Module
     {
         protected override void Load(ContainerBuilder builder)
         {

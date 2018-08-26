@@ -2,7 +2,7 @@
 using Autofac;
 using System.Reflection;
 
-namespace Ametista.Infrastructure
+namespace Ametista.Infrastructure.IoC
 {
     public class QueryModule : Autofac.Module
     {
