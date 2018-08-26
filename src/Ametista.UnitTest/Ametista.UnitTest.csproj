@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\" />
-    <Folder Include="Core\" />
+    <Folder Include="Command\" />
+    <Folder Include="Entity\" />
   </ItemGroup>
 
   <ItemGroup>

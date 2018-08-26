@@ -4,7 +4,7 @@ using System;
 
 namespace Ametista.Core.Entity
 {
-    public class Transaction : IEntity
+    public class Transaction : IAggregate
     {
         public static Transaction CreateTransactionForCard(Guid cardGuid, string uniqueId, DateTimeOffset chargeDate, Money charge)
         {
