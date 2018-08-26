@@ -1,16 +1,12 @@
 ﻿using Ametista.Core.Interfaces;
 using Ametista.Core.ValueObjects;
 using System;
+using System.Collections.Generic;
 
 namespace Ametista.Core.Entity
 {
     public class Transaction : IAggregate
     {
-        public static Transaction CreateTransactionForCard(Guid cardGuid, string uniqueId, DateTimeOffset chargeDate, Money charge)
-        {
-            return new Transaction(cardGuid, uniqueId, chargeDate, charge);
-        }
-
         protected Transaction()
         {
         }
@@ -24,10 +20,31 @@ namespace Ametista.Core.Entity
             Charge = charge ?? throw new ArgumentNullException(nameof(charge));
         }
 
-        public Guid Id { get; private set; }
         public Guid CardId { get; private set; }
-        public string UniqueId { get; private set; }
-        public DateTimeOffset ChargeDate { get; private set; }
+
         public Money Charge { get; private set; }
+
+        public DateTimeOffset ChargeDate { get; private set; }
+
+        public Guid Id { get; private set; }
+
+        public string UniqueId { get; private set; }
+
+        public static Transaction CreateTransactionForCard(Guid cardGuid, string uniqueId, DateTimeOffset chargeDate, Money charge)
+        {
+            return new Transaction(cardGuid, uniqueId, chargeDate, charge);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var transaction = obj as Transaction;
+            return transaction != null &&
+                   UniqueId == transaction.UniqueId;
+        }
+
+        public override int GetHashCode()
+        {
+            return -401120461 + EqualityComparer<string>.Default.GetHashCode(UniqueId);
+        }
     }
 }

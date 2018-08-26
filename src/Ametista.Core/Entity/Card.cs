@@ -18,16 +18,18 @@ namespace Ametista.Core.Entity
             ExpirationDate = expirationDate;
         }
 
+        public string CardHolder { get; private set; }
+
+        public DateTime ExpirationDate { get; private set; }
+
+        public Guid Id { get; private set; }
+
+        public string Number { get; private set; }
+
         public static Card CreateNewCard(string number, string cardHolder, DateTime expirationDate)
         {
             return new Card(number, cardHolder, expirationDate);
         }
-
-        public Guid Id { get; private set; }
-        public string Number { get; private set; }
-        public string CardHolder { get; private set; }
-        public DateTime ExpirationDate { get; private set; }
-
         public override bool Equals(object obj)
         {
             var card = obj as Card;
