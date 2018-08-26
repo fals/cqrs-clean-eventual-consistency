@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Ametista.Command.Commands;
+using Ametista.Command;
+using Ametista.Query;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Ametista.Command.Commands;
-using Ametista.Core;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Ametista.Api.Controllers
 {

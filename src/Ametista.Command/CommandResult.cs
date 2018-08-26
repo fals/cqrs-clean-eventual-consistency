@@ -1,7 +1,7 @@
 ﻿using Ametista.Core;
 using System;
 
-namespace Ametista.Application
+namespace Ametista.Command
 {
     public abstract class CommandResult : ICommandResult
     {

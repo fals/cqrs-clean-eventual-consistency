@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using Ametista.Core;
+using System.Threading.Tasks;
 
-namespace Ametista.Core
+namespace Ametista.Query
 {
     public interface IMaterializer<TEvent> where TEvent : IEvent
     {

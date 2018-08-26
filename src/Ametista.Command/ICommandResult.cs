@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ametista.Core
+namespace Ametista.Command
 {
     public interface ICommandResult
     {

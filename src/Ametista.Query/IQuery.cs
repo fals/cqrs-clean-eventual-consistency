@@ -1,4 +1,4 @@
-﻿namespace Ametista.Core
+﻿namespace Ametista.Query
 {
     public interface IQuery
     { }

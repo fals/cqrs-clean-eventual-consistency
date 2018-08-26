@@ -1,4 +1,4 @@
-﻿using Ametista.Core;
+﻿using Ametista.Command;
 using Autofac;
 using System.Reflection;
 
@@ -12,6 +12,7 @@ namespace Ametista.Infrastructure.IoC
                 .RegisterAssemblyTypes(typeof(ICommandHandler<,>).GetTypeInfo().Assembly)
                 .AsClosedTypesOf(typeof(ICommandHandler<,>))
                 .InstancePerLifetimeScope();
+
             builder
                 .RegisterAssemblyTypes(typeof(ICommandHandler<>).GetTypeInfo().Assembly)
                 .AsClosedTypesOf(typeof(ICommandHandler<>))

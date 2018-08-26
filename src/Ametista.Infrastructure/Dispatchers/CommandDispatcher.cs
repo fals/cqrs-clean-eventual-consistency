@@ -1,4 +1,4 @@
-﻿using Ametista.Core;
+﻿using Ametista.Command;
 using Autofac;
 using System.Threading.Tasks;
 
@@ -27,8 +27,8 @@ namespace Ametista.Infrastructure
             return (Task<TResult>)commandHandlerType
                 .GetMethod("Handle")
                 .Invoke(handler, new object[] { command });
-
         }
+
         public Task DispatchNonResult(ICommand command)
         {
             var commandHandlerType = typeof(ICommandHandler<>).MakeGenericType(command.GetType());
@@ -38,7 +38,6 @@ namespace Ametista.Infrastructure
             return (Task)commandHandlerType
                 .GetMethod("HandleNonResult")
                 .Invoke(handler, new object[] { command });
-
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Ametista.Core;
+using Ametista.Query;
 using Autofac;
 using System.Reflection;
 using System.Threading.Tasks;

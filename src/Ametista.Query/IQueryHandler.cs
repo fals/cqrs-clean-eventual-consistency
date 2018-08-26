@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Ametista.Core
+namespace Ametista.Query
 {
     public interface IQueryHandler { }
 
