@@ -1,5 +1,6 @@
-﻿using Ametista.Command.Commands;
+﻿using Ametista.Api.Models;
 using Ametista.Command;
+using Ametista.Command.Commands;
 using Ametista.Query;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -41,7 +42,15 @@ namespace Ametista.Api.Controllers
 
             if (result.Success)
             {
-                return Ok(result);
+                var response = new CreateCardResponse()
+                {
+                    Id = result.Id,
+                    Number = result.Number,
+                    CardHolder = result.CardHolder,
+                    ExpirationDate = result.ExpirationDate
+                };
+
+                return Ok(response);
             }
 
             return BadRequest();

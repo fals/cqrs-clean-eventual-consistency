@@ -1,14 +1,15 @@
-﻿using Ametista.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Ametista.Command.Commands
+namespace Ametista.Api.Models
 {
     public class CreateCardRequest
     {
+        [Required]
         public string Number { get; set; }
+        [Required]
         public string CardHolder { get; set; }
+        [Required]
         public DateTime ExpirationDate { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ametista.Command.Commands
+namespace Ametista.Api.Models
 {
     public class CreateCardResponse
     {

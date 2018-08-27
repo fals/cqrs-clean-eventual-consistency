@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ametista.Api\Ametista.Api.csproj" />
     <ProjectReference Include="..\Ametista.Command\Ametista.Command.csproj" />
     <ProjectReference Include="..\Ametista.Core\Ametista.Core.csproj" />
     <ProjectReference Include="..\Ametista.Infrastructure\Ametista.Infrastructure.csproj" />
