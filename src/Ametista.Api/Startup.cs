@@ -20,7 +20,7 @@ namespace Ametista.Api
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public virtual void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
             {
@@ -31,7 +31,7 @@ namespace Ametista.Api
                     .AllowCredentials());
             });
 
-            services.AddMvc();
+            services.AddMvc().AddApplicationPart(typeof(Startup).Assembly);
 
             services.AddSwaggerGen(c =>
             {
@@ -42,18 +42,16 @@ namespace Ametista.Api
                 .AddDbContext<WriteDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WriteDbContext")));
         }
 
-        public void ConfigureContainer(ContainerBuilder builder)
+        public virtual void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new CommandModule());
             builder.RegisterModule(new MaterializeModule());
             builder.RegisterModule(new InfrastructureModule());
             builder.RegisterModule(new QueryModule());
-
-            //var container = builder.Build();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public virtual void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseSwagger();
 

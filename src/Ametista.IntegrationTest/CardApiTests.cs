@@ -28,8 +28,8 @@ namespace Ametista.IntegrationTest
             request.Number = "784789407238904742389";
 
             // Act
+            var response = await client.PostAsJsonAsync("api/Cards/", request);
 
-            var response = await client.PostAsJsonAsync("api/Cards", request);
             //Assert
             response.EnsureSuccessStatusCode();
             Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);

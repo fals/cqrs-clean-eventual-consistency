@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Ametista.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -17,26 +18,23 @@ namespace Ametista.IntegrationTest
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
+            builder
+                .UseSetting(WebHostDefaults.ApplicationKey, typeof(Api.Startup).GetTypeInfo().Assembly.GetName().Name);
+
             builder.ConfigureServices(services =>
             {
-                // Create a new service provider.
                 var serviceProvider = new ServiceCollection()
                     .AddEntityFrameworkInMemoryDatabase()
                     .BuildServiceProvider();
 
-                // Add a database context (ApplicationDbContext) using an in-memory 
-                // database for testing.
                 services.AddDbContext<WriteDbContext>(options =>
                 {
                     options.UseInMemoryDatabase("InMemoryDbForTesting");
                     options.UseInternalServiceProvider(serviceProvider);
                 });
 
-                // Build the service provider.
                 var sp = services.BuildServiceProvider();
 
-                // Create a scope to obtain a reference to the database
-                // context (ApplicationDbContext).
                 using (var scope = sp.CreateScope())
                 {
                     var scopedServices = scope.ServiceProvider;
