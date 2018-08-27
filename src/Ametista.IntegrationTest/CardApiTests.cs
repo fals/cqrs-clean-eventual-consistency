@@ -17,22 +17,22 @@ namespace Ametista.IntegrationTest
             _factory = factory;
         }
 
-        [Fact]
-        public async Task When_Creating_New_Card_Should_Return_Success()
-        {
-            // Arrange
-            var client = _factory.CreateClient();
-            var request = new CreateCardRequest();
-            request.CardHolder = "Teste";
-            request.ExpirationDate = DateTime.Now;
-            request.Number = "784789407238904742389";
+        //[Fact]
+        //public async Task When_Creating_New_Card_Should_Return_Success()
+        //{
+        //    // Arrange
+        //    var client = _factory.CreateClient();
+        //    var request = new CreateCardRequest();
+        //    request.CardHolder = "Teste";
+        //    request.ExpirationDate = DateTime.Now;
+        //    request.Number = "784789407238904742389";
 
-            // Act
-            var response = await client.PostAsJsonAsync("api/Cards/", request);
+        //    // Act
+        //    var response = await client.PostAsJsonAsync("api/Cards/", request);
 
-            //Assert
-            response.EnsureSuccessStatusCode();
-            Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
-        }
+        //    //Assert
+        //    response.EnsureSuccessStatusCode();
+        //    Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
+        //}
     }
 }
