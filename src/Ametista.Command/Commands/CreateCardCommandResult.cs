@@ -10,6 +10,7 @@ namespace Ametista.Command.Commands
             Number = number ?? throw new ArgumentNullException(nameof(number));
             CardHolder = cardHolder ?? throw new ArgumentNullException(nameof(cardHolder));
             ExpirationDate = expirationDate;
+            Success = true;
         }
 
         public Guid Id { get; set; }

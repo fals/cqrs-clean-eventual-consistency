@@ -18,7 +18,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Command\" />
     <Folder Include="Entity\" />
   </ItemGroup>
 
