@@ -1,8 +1,21 @@
-version: '3'
+version: '3.4'
 
 services:
+  sql.data:
+    image: microsoft/mssql-server-linux:2017-latest
+
+  nosql.data:
+    image: mongo:latest
+
+  rabbitmq:
+    image: rabbitmq:alpine
+
   ametista.api:
     image: ametistaapi
     build:
       context: .
-      dockerfile: Ametista.Api\Dockerfile
+      dockerfile: Ametista.Api/Dockerfile
+    depends_on:
+      - sql.data
+      - rabbitmq
+      - nosql.data
