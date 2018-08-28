@@ -20,6 +20,16 @@ namespace Ametista.Infrastructure.Persistence
 
             modelBuilder.Entity<Transaction>()
             .ToTable("Transactions");
+
+            modelBuilder
+                .Entity<Transaction>()
+                .OwnsOne(p => p.Charge)
+                .Property(p => p.CurrencyCode).HasColumnName("CurrencyCode");
+
+            modelBuilder
+                .Entity<Transaction>()
+                .OwnsOne(p => p.Charge)
+                .Property(p => p.Amount).HasColumnName("Amount");
         }
     }
 }

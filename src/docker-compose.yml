@@ -8,7 +8,7 @@ services:
     image: mongo:latest
 
   rabbitmq:
-    image: rabbitmq:alpine
+    image: rabbitmq:3-management-alpine
 
   ametista.api:
     image: ametistaapi

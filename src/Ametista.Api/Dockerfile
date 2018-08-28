@@ -12,7 +12,6 @@ COPY ["Ametista.Query/Ametista.Query.csproj", "Ametista.Query/"]
 RUN dotnet restore "Ametista.Api/Ametista.Api.csproj"
 COPY . .
 WORKDIR "/src/Ametista.Api"
-RUN dotnet test
 RUN dotnet build "Ametista.Api.csproj" -c Release -o /app
 
 FROM build AS publish
