@@ -4,13 +4,13 @@ namespace Ametista.Command.Commands
 {
     public class CreateCardCommandResult : CommandResult
     {
-        public CreateCardCommandResult(Guid id, string number, string cardHolder, DateTime expirationDate)
+        public CreateCardCommandResult(Guid id, string number, string cardHolder, DateTime expirationDate, bool success)
         {
             Id = id;
             Number = number ?? throw new ArgumentNullException(nameof(number));
             CardHolder = cardHolder ?? throw new ArgumentNullException(nameof(cardHolder));
             ExpirationDate = expirationDate;
-            Success = true;
+            Success = success;
         }
 
         public Guid Id { get; set; }

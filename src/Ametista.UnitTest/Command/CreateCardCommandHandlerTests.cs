@@ -1,10 +1,9 @@
 ﻿using Ametista.Command.Commands;
 using Ametista.Core;
+using Ametista.Core.Entity;
 using Ametista.Core.Repository;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -20,6 +19,8 @@ namespace Ametista.UnitTest.Command
         {
             eventBusMock = new Mock<IEventBus>();
             cardRepositoryMock = new Mock<ICardRepository>();
+            cardRepositoryMock.Setup(x => x.Add(It.IsAny<Card>()))
+                .ReturnsAsync(true);
 
             handler = new CreateCardCommandHandler(eventBusMock.Object, cardRepositoryMock.Object);
         }
@@ -29,7 +30,7 @@ namespace Ametista.UnitTest.Command
         public async Task Return_Success_Result()
         {
             // Arrange
-            var command = new CreateCardCommand("33334444555566667777", "MR FILIPE LIMA", DateTime.Now.Date);
+            var command = CreateCardCommand();
 
             // Act
             var result = await handler.Handle(command);
@@ -43,7 +44,7 @@ namespace Ametista.UnitTest.Command
         public async Task Return_CardHolder_Within_Result()
         {
             // Arrange
-            var command = new CreateCardCommand("33334444555566667777", "MR FILIPE LIMA", DateTime.Now.Date);
+            var command = CreateCardCommand();
 
             // Act
             var result = await handler.Handle(command);
@@ -57,7 +58,7 @@ namespace Ametista.UnitTest.Command
         public async Task Return_Number_Within_Result()
         {
             // Arrange
-            var command = new CreateCardCommand("33334444555566667777", "MR FILIPE LIMA", DateTime.Now.Date);
+            var command = CreateCardCommand();
 
             // Act
             var result = await handler.Handle(command);
@@ -71,13 +72,18 @@ namespace Ametista.UnitTest.Command
         public async Task Return_ExpirationDate_Within_Result()
         {
             // Arrange
-            var command = new CreateCardCommand("33334444555566667777", "MR FILIPE LIMA", DateTime.Now.Date);
+            var command = CreateCardCommand();
 
             // Act
             var result = await handler.Handle(command);
 
             // Assert
             Assert.Equal(command.ExpirationDate, result.ExpirationDate);
+        }
+
+        private CreateCardCommand CreateCardCommand()
+        {
+            return new CreateCardCommand("33334444555566667777", "MR FILIPE LIMA", DateTime.Now.Date);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Ametista.Core;
-using System;
+﻿using System;
 
 namespace Ametista.Command
 {

@@ -22,13 +22,16 @@ namespace Ametista.Command.Commands
         {
             var newCard = Card.CreateNewCard(command.Number, command.CardHolder, command.ExpirationDate);
 
-            await cardRepository.Add(newCard);
+            var success = await cardRepository.Add(newCard);
 
-            var cardCreatedEvent = new NewCardCreatedEvent(newCard.Id);
+            if (success)
+            {
+                var cardCreatedEvent = new NewCardCreatedEvent(newCard.Id);
 
-            await eventBus.Publish(cardCreatedEvent);
+                await eventBus.Publish(cardCreatedEvent);
+            }
 
-            return new CreateCardCommandResult(newCard.Id, newCard.Number, newCard.CardHolder, newCard.ExpirationDate);
+            return new CreateCardCommandResult(newCard.Id, newCard.Number, newCard.CardHolder, newCard.ExpirationDate, success);
         }
     }
 }

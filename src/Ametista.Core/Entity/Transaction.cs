@@ -35,6 +35,11 @@ namespace Ametista.Core.Entity
             return new Transaction(cardGuid, uniqueId, chargeDate, charge);
         }
 
+        public static object CreateTransactionForCard(object cardId, object uniqueId, object chargeDate, Money charge)
+        {
+            throw new NotImplementedException();
+        }
+
         public override bool Equals(object obj)
         {
             var transaction = obj as Transaction;

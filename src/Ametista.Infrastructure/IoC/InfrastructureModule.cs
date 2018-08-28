@@ -15,6 +15,10 @@ namespace Ametista.Infrastructure.IoC
                 .As<ICardRepository>();
 
             builder
+                .RegisterType<TransactionRepository>()
+                .As<ITransactionRepository>();
+
+            builder
                 .RegisterType<RabbitMq>()
                 .As<IEventBus>();
         }
