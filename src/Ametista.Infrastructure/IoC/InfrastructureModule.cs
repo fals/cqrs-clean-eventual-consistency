@@ -19,7 +19,7 @@ namespace Ametista.Infrastructure.IoC
                 .As<ITransactionRepository>();
 
             builder
-                .RegisterType<RabbitMq>()
+                .RegisterType<RabbitMQEventBus>()
                 .As<IEventBus>();
         }
     }

@@ -7,7 +7,7 @@ namespace Ametista.Core.Events
         public NewCardCreatedEvent(Guid cardId)
         {
             CardId = cardId;
-            Name = "_" + (nameof(NewCardCreatedEvent));
+            Name = (nameof(NewCardCreatedEvent));
         }
 
         public Guid CardId { get; set; }

@@ -7,7 +7,7 @@ namespace Ametista.Core.Events
         public NewTransactionCreatedEvent(Guid transactionId)
         {
             TransactionId = transactionId;
-            Name = "_" + (nameof(NewTransactionCreatedEvent));
+            Name = (nameof(NewTransactionCreatedEvent));
         }
 
         public Guid TransactionId { get; set; }
