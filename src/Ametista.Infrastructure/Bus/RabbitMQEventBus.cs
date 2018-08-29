@@ -5,7 +5,6 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Ametista.Infrastructure.Bus
 {
@@ -25,32 +24,32 @@ namespace Ametista.Infrastructure.Bus
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                channel.QueueDeclare(queue: QUEUE_NAME,
-                                     durable: true,
-                                     exclusive: false,
-                                     autoDelete: false,
-                                     arguments: null);
+                channel.ExchangeDeclare(exchange: QUEUE_NAME, type: "fanout");
 
                 string message = JsonConvert.SerializeObject(@event);
                 var body = Encoding.UTF8.GetBytes(message);
                 var eventName = @event.GetType().Name;
 
-                channel.BasicPublish(exchange: "",
-                                     routingKey: eventName,
-                                     basicProperties: null,
-                                     body: body);
+                var properties = channel.CreateBasicProperties();
+                properties.DeliveryMode = 2; // persistent
+
+                channel.BasicPublish(exchange: QUEUE_NAME,
+                                 routingKey: eventName,
+                                 mandatory: true,
+                                 basicProperties: properties,
+                                 body: body);
             }
         }
 
-        public void Subscribe<T>() where T : IEvent 
+        public void Subscribe<T>() where T : IEvent
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory() { HostName = "rabbitmq" };
             using (var connection = factory.CreateConnection())
             using (var channel = connection.CreateModel())
             {
-                var eventName = typeof(T).Name;
+                channel.ExchangeDeclare(exchange: QUEUE_NAME, type: "fanout");
 
-                channel.QueueDeclare(queue: eventName, durable: true, exclusive: false, autoDelete: false, arguments: null);
+                channel.QueueDeclare(queue: QUEUE_NAME, durable: true, exclusive: false, autoDelete: false, arguments: null);
 
                 channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
 
@@ -61,12 +60,15 @@ namespace Ametista.Infrastructure.Bus
                     var message = Encoding.UTF8.GetString(body);
                     var @event = JsonConvert.DeserializeObject<T>(message);
 
-                    eventDispatcher.Dispatch(@event);
+                    //eventDispatcher.Dispatch(@event);
 
                     channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                 };
 
                 channel.BasicConsume(queue: QUEUE_NAME, autoAck: false, consumer: consumer);
+
+                Console.WriteLine(" Press [enter] to exit.");
+                Console.ReadLine();
             }
         }
     }

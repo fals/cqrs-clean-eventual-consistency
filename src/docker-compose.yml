@@ -21,7 +21,7 @@ services:
 
   rabbitmq:
     container_name: ametista-rabbitmq
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:3.7.7-management-alpine
     ports:
       - "15672:15672"  # Important: In a production environment your should remove the external port
       - "5672:5672"    # Important: In a production environment your should remove the external port
@@ -38,5 +38,16 @@ services:
       - nosql.data
     ports:
       - "5101:80"
+
+  ametista.sync:
+    container_name: ametista-sync
+    image: ametistasync
+    build:
+      context: .
+      dockerfile: Ametista.Sync/Dockerfile
+    depends_on:
+      - rabbitmq
+      - mssql
+      - nosql.data
 volumes:
   mssql_server_data:
