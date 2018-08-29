@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ametista.Core
+namespace Ametista.Core.Interfaces
 {
     public interface IEventBus
     {
-        Task<bool> Publish(IEvent @event);
-        Task<bool> Subscribe(string eventName);
+        void Publish(IEvent @event);
+        void Subscribe<T>() where T : IEvent;
     }
 }

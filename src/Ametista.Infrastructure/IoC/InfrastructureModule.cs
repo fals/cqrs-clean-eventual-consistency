@@ -1,4 +1,4 @@
-﻿using Ametista.Core;
+﻿using Ametista.Core.Interfaces;
 using Ametista.Core.Repository;
 using Ametista.Infrastructure.Bus;
 using Ametista.Infrastructure.Persistence.Repository;

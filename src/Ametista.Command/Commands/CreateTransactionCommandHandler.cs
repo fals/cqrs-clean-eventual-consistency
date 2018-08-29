@@ -1,6 +1,7 @@
 ﻿using Ametista.Core;
 using Ametista.Core.Entity;
 using Ametista.Core.Events;
+using Ametista.Core.Interfaces;
 using Ametista.Core.Repository;
 using Ametista.Core.ValueObjects;
 using System;
@@ -30,7 +31,7 @@ namespace Ametista.Command.Commands
             {
                 var transactionCreatedEvent = new NewTransactionCreatedEvent(newTransaction.Id);
 
-                await eventBus.Publish(transactionCreatedEvent);
+                eventBus.Publish(transactionCreatedEvent);
             }
 
             return new CreateTransactionCommandResult(

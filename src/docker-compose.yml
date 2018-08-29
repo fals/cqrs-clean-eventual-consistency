@@ -1,21 +1,39 @@
 version: '3.4'
 
 services:
-  sql.data:
+  mssql:
     image: microsoft/mssql-server-linux:2017-latest
+    container_name: ametista-mssql
+    volumes:
+      - mssql_server_data:/var/opt/mssql/data
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_PID: Express
+      SA_PASSWORD: MyPassword123456
+    ports:
+      - "1433:1433"
 
   nosql.data:
+    container_name: ametista-mongodb
     image: mongo:latest
+    ports:
+      - "27017:27017"  # Important: In a production environment your should remove the external port
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
+    ports:
+      - "15672:15672"  # Important: In a production environment your should remove the external port
+      - "5672:5672"    # Important: In a production environment your should remove the external port
 
   ametista.api:
+    container_name: ametista-api
     image: ametistaapi
     build:
       context: .
       dockerfile: Ametista.Api/Dockerfile
     depends_on:
-      - sql.data
+      - mssql
       - rabbitmq
       - nosql.data
+volumes:
+  mssql_server_data:

@@ -45,6 +45,7 @@ namespace Ametista.Api
         public virtual void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new CommandModule());
+            builder.RegisterModule(new EventModule());
             builder.RegisterModule(new MaterializeModule());
             builder.RegisterModule(new InfrastructureModule());
             builder.RegisterModule(new QueryModule());

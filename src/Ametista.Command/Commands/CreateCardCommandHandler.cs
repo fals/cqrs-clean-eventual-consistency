@@ -1,6 +1,7 @@
 ﻿using Ametista.Core;
 using Ametista.Core.Entity;
 using Ametista.Core.Events;
+using Ametista.Core.Interfaces;
 using Ametista.Core.Repository;
 using System;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace Ametista.Command.Commands
             {
                 var cardCreatedEvent = new NewCardCreatedEvent(newCard.Id);
 
-                await eventBus.Publish(cardCreatedEvent);
+                eventBus.Publish(cardCreatedEvent);
             }
 
             return new CreateCardCommandResult(newCard.Id, newCard.Number, newCard.CardHolder, newCard.ExpirationDate, success);

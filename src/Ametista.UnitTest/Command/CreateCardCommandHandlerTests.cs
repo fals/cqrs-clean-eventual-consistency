@@ -1,6 +1,7 @@
 ﻿using Ametista.Command.Commands;
 using Ametista.Core;
 using Ametista.Core.Entity;
+using Ametista.Core.Interfaces;
 using Ametista.Core.Repository;
 using Moq;
 using System;
