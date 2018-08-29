@@ -29,7 +29,7 @@ namespace Ametista.Command.Commands
             {
                 var cardCreatedEvent = new NewCardCreatedEvent(newCard.Id);
 
-                eventBus.Publish(cardCreatedEvent);
+                    eventBus.Publish(cardCreatedEvent);
             }
 
             return new CreateCardCommandResult(newCard.Id, newCard.Number, newCard.CardHolder, newCard.ExpirationDate, success);
