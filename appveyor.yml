@@ -9,15 +9,12 @@ dotnet_csproj:
   file_version: '{version}'
   informational_version: '{version}'
 before_build:
+- choco install opencover.portable
+- choco install codecov
 - cmd: dotnet restore ./src/Ametista.sln
-test_script:
- - .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.2.0\tools\xunit.console.x86.exe" -targetargs:"C:\projects\cqrs-clean-eventual-consistency\src\Ametista.UnitTest\bin\Debug\netcoreapp2.1\Ametista.UnitTest.dll -noshadow" -output:".\coverage.xml" -filter:"+[SystemUnderTest*]* -[Tests*]*"
-# use codecov bash script. Requires powershell and bash to be installed, which both are on the AppVeyor machine image
-after_test:
-  - ps: |
-      $env:PATH = 'C:\msys64\usr\bin;' + $env:PATH
-      Invoke-WebRequest -Uri 'https://codecov.io/bash' -OutFile codecov.sh
-      bash codecov.sh -f "coverage.xml"
 build:
   project: ./src/Ametista.sln
   verbosity: minimal
+test_script:
+- OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\Ametista.UnitTest\bin\Debug\Ametista.UnitTest.dll -noshadow" -filter:"+[Ametista.*]* -[Ametista.UnitTest*]*" -output:".\Ametista_UnitTest.xml"
+- codecov -f "Ametista_UnitTest.xml
