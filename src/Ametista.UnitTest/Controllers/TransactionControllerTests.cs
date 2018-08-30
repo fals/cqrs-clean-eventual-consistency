@@ -1,5 +1,5 @@
 ﻿using Ametista.Api.Controllers;
-using Ametista.Api.Models;
+using Ametista.Api.Model;
 using Ametista.Command;
 using Ametista.Command.Commands;
 using Ametista.Query;

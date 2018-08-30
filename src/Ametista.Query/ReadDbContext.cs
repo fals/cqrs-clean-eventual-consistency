@@ -1,6 +1,8 @@
-﻿using MongoDB.Driver;
+﻿using Ametista.Query.Queries;
+using MongoDB.Bson.Serialization;
+using MongoDB.Driver;
 
-namespace Ametista.Infrastructure.Queries
+namespace Ametista.Query
 {
     public class ReadDbContext
     {
@@ -11,16 +13,16 @@ namespace Ametista.Infrastructure.Queries
         {
             _mongoClient = new MongoClient(connectionString);
             _database = _mongoClient.GetDatabase(databaseName);
-            //Map();
+            Map();
         }
 
-        //internal IMongoCollection<MinesViewQueryModel> MinesMaterializedView
-        //{
-        //    get
-        //    {
-        //        return _database.GetCollection<MinesViewQueryModel>("MinesMaterializedView");
-        //    }
-        //}
+        internal IMongoCollection<CardViewQueryModel> CardViewQueryModel
+        {
+            get
+            {
+                return _database.GetCollection<CardViewQueryModel>("CardViewQueryModel");
+            }
+        }
 
         //internal IMongoCollection<MinersViewQueryModel> MinersMaterializedView
         //{
@@ -30,17 +32,17 @@ namespace Ametista.Infrastructure.Queries
         //    }
         //}
 
-        //private void Map()
-        //{
-        //    BsonClassMap.RegisterClassMap<MinesViewQueryModel>(cm =>
-        //    {
-        //        cm.AutoMap();
-        //    });
+        private void Map()
+        {
+            BsonClassMap.RegisterClassMap<CardViewQueryModel>(cm =>
+            {
+                cm.AutoMap();
+            });
 
-        //    BsonClassMap.RegisterClassMap<MinersViewQueryModel>(cm =>
-        //    {
-        //        cm.AutoMap();
-        //    });
-        //}
+            //BsonClassMap.RegisterClassMap<MinersViewQueryModel>(cm =>
+            //{
+            //    cm.AutoMap();
+            //});
+        }
     }
 }

@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Materializers\" />
-    <Folder Include="Queries\" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ametista.Api.Models
+namespace Ametista.Api.Model
 {
     public class CreateTransactionResponse
     {

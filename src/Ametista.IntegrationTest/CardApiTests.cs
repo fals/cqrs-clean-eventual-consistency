@@ -1,10 +1,5 @@
-using Ametista.Command.Commands;
 using Microsoft.AspNetCore.Mvc.Testing;
-using System;
-using System.Threading.Tasks;
 using Xunit;
-using System.Net.Http;
-
 
 namespace Ametista.IntegrationTest
 {

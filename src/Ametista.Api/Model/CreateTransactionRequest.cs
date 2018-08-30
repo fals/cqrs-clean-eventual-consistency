@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Ametista.Api.Models
+namespace Ametista.Api.Model
 {
     public class CreateTransactionRequest
     {

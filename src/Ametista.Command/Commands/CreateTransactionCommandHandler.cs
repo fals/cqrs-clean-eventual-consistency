@@ -1,5 +1,4 @@
-﻿using Ametista.Core;
-using Ametista.Core.Entity;
+﻿using Ametista.Core.Entity;
 using Ametista.Core.Events;
 using Ametista.Core.Interfaces;
 using Ametista.Core.Repository;

@@ -1,5 +1,4 @@
-﻿using Ametista.Command;
-using Ametista.Core.Interfaces;
+﻿using Ametista.Core.Interfaces;
 using Autofac;
 using System.Reflection;
 

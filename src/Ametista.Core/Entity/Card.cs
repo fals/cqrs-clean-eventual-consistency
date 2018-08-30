@@ -30,6 +30,7 @@ namespace Ametista.Core.Entity
         {
             return new Card(number, cardHolder, expirationDate);
         }
+
         public override bool Equals(object obj)
         {
             var card = obj as Card;

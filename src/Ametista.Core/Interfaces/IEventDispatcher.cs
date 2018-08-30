@@ -1,5 +1,4 @@
-﻿using Ametista.Core;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Ametista.Core.Interfaces
 {

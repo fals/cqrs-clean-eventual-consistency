@@ -1,6 +1,5 @@
 ﻿using Ametista.Core;
 using Ametista.Core.Interfaces;
-using Ametista.Query;
 using Autofac;
 using System.Threading.Tasks;
 

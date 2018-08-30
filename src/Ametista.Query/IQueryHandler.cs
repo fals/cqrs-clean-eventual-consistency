@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Ametista.Query
 {
     public interface IQueryHandler { }
 
-    public interface IQueryHandler<TQuery, TModel> : IQueryHandler
-        where TQuery : IQuery<TModel> where TModel : IQueryModel
+    public interface IQueryHandler<TQuery, TQResult> : IQueryHandler
+        where TQuery : IQuery<TQResult>
     {
-        Task<IEnumerable<TModel>> HandleAsync(TQuery query);
+        Task<TQResult> HandleAsync(TQuery query);
     }
 }

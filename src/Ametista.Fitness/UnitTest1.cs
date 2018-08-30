@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 
 namespace Ametista.Fitness
@@ -8,7 +7,6 @@ namespace Ametista.Fitness
         [Fact]
         public void Test1()
         {
-
         }
     }
 }

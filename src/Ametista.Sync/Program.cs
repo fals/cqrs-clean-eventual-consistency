@@ -7,7 +7,7 @@ namespace Amestista.Sync
 {
     public class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Start Sync Application!");
 

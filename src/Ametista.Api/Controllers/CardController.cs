@@ -1,7 +1,9 @@
-﻿using Ametista.Api.Models;
+﻿using Ametista.Api.Model;
+using Ametista.Api.Model;
 using Ametista.Command;
 using Ametista.Command.Commands;
 using Ametista.Query;
+using Ametista.Query.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,9 +31,24 @@ namespace Ametista.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            return "value";
+            var query = new GetCardByIdQuery(id);
+
+            var queryResult = await queryDispatcher.ExecuteAsync(query);
+
+            if (queryResult == null)
+            {
+                return BadRequest(id);
+            }
+
+            return Ok(new CardViewReponse()
+            {
+                CardHolder = queryResult.CardHolder,
+                ExpirationDate = queryResult.ExpirationDate,
+                Id = queryResult.Id,
+                Number = queryResult.Number
+            });
         }
 
         [HttpPost]

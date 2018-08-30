@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="Entity\" />
+    <Folder Include="Query\" />
   </ItemGroup>
 
   <ItemGroup>

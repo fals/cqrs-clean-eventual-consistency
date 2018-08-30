@@ -1,7 +1,4 @@
-﻿using Ametista.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace Ametista.Core.Events
 {

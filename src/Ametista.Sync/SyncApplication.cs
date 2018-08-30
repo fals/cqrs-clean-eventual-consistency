@@ -1,8 +1,5 @@
 ﻿using Ametista.Core.Events;
 using Ametista.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Ametista.Sync
 {
@@ -14,6 +11,7 @@ namespace Ametista.Sync
     public class SyncApplication : IApplication
     {
         private readonly IEventBus eventBus;
+
         public SyncApplication(IEventBus eventBus)
         {
             this.eventBus = eventBus;

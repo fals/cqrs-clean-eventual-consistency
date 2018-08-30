@@ -9,6 +9,7 @@ namespace Ametista.IntegrationTest
         public TestStartup(IConfiguration configuration) : base(configuration)
         {
         }
+
         public override void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();

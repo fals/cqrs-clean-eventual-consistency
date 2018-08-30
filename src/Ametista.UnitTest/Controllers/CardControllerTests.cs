@@ -1,8 +1,9 @@
 ﻿using Ametista.Api.Controllers;
-using Ametista.Api.Models;
+using Ametista.Api.Model;
 using Ametista.Command;
 using Ametista.Command.Commands;
 using Ametista.Query;
+using Ametista.Query.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
@@ -25,6 +26,9 @@ namespace Ametista.UnitTest.Controllers
                 .ReturnsAsync(new CreateCardCommandResult(Guid.NewGuid(), "784789407238904742389", "Teste", DateTime.Now.Date, true));
 
             queryDispatcherMock = new Mock<IQueryDispatcher>();
+            queryDispatcherMock
+               .Setup(x => x.ExecuteAsync(It.IsAny<GetCardByIdQuery>()))
+               .ReturnsAsync(GetCardViewQueryModel());
 
             controller = new CardController(commandDispatcherMock.Object, queryDispatcherMock.Object);
         }
@@ -34,7 +38,7 @@ namespace Ametista.UnitTest.Controllers
         public async Task Post_Retuns_Response_With_Number()
         {
             // Arrange
-            var request = GetResquest();
+            var request = GetCreateCardResquest();
 
             // Act
             var data = await Post(request);
@@ -48,7 +52,7 @@ namespace Ametista.UnitTest.Controllers
         public async Task Post_Retuns_Response_With_CardHolder()
         {
             // Arrange
-            var request = GetResquest();
+            var request = GetCreateCardResquest();
 
             // Act
             var data = await Post(request);
@@ -62,7 +66,7 @@ namespace Ametista.UnitTest.Controllers
         public async Task Post_Retuns_Response_With_ExpirationDate()
         {
             // Arrange
-            var request = GetResquest();
+            var request = GetCreateCardResquest();
 
             // Act
             var data = await Post(request);
@@ -76,13 +80,27 @@ namespace Ametista.UnitTest.Controllers
         public async Task Post_Retuns_Response_With_Id()
         {
             // Arrange
-            var request = GetResquest();
+            var request = GetCreateCardResquest();
 
             // Act
             var data = await Post(request);
 
             // Assert
             Assert.NotEqual(Guid.Empty, data.Id);
+        }
+
+        [Fact]
+        [Trait("Card", nameof(CardController))]
+        public async Task GetById_Retuns_Response()
+        {
+            // Arrange
+            var id = Guid.NewGuid();
+
+            // Act
+            var data = await GetCardById(id);
+
+            // Assert
+            Assert.NotNull(data);
         }
 
         private async Task<CreateCardResponse> Post(CreateCardRequest request)
@@ -94,7 +112,27 @@ namespace Ametista.UnitTest.Controllers
             return data;
         }
 
-        private CreateCardRequest GetResquest()
+        private async Task<CardViewReponse> GetCardById(Guid id)
+        {
+            var response = await controller.GetById(id);
+            var result = Assert.IsType<OkObjectResult>(response);
+            var data = Assert.IsType<CardViewReponse>(result.Value);
+
+            return data;
+        }
+
+        private CardViewQueryModel GetCardViewQueryModel()
+        {
+            return new CardViewQueryModel()
+            {
+                CardHolder = "Teste",
+                ExpirationDate = DateTime.Now,
+                Id = Guid.NewGuid(),
+                Number = Guid.NewGuid().ToString()
+            };
+        }
+
+        private CreateCardRequest GetCreateCardResquest()
         {
             var request = new CreateCardRequest();
             request.CardHolder = "Teste";
