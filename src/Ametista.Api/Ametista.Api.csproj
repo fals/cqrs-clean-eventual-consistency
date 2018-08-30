@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     <DockerTargetOS>Linux</DockerTargetOS>
+    <DebugType>Full</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
