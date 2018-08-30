@@ -11,7 +11,7 @@ dotnet_csproj:
 before_build:
 - cmd: dotnet restore ./src/Ametista.sln
 test_script:
- - .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.2.0\tools\xunit.console.x86.exe" -targetargs:"Tests\bin\Debug\tests.dll -noshadow" -output:".\coverage.xml" -filter:"+[SystemUnderTest*]* -[Tests*]*"
+ - .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.2.0\tools\xunit.console.x86.exe" -targetargs:"src\Ametista.UnitTest\bin\Debug\netcoreapp2.1\Ametista.UnitTest.dll -noshadow" -output:".\coverage.xml" -filter:"+[SystemUnderTest*]* -[Tests*]*"
 # use codecov bash script. Requires powershell and bash to be installed, which both are on the AppVeyor machine image
 after_test:
   - ps: |
