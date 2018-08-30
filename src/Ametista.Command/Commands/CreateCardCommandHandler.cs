@@ -26,7 +26,7 @@ namespace Ametista.Command.Commands
 
             if (success)
             {
-                var cardCreatedEvent = new NewCardCreatedEvent(newCard.Id);
+                var cardCreatedEvent = new CardCreatedEvent(newCard);
 
                 eventBus.Publish(cardCreatedEvent);
             }

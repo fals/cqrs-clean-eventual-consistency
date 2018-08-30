@@ -1,4 +1,5 @@
-﻿using Ametista.Infrastructure.IoC;
+﻿using Ametista.Core;
+using Ametista.Infrastructure.IoC;
 using Ametista.Infrastructure.Persistence;
 using Autofac;
 using Microsoft.AspNetCore.Builder;
@@ -31,6 +32,8 @@ namespace Ametista.Api
                     .AllowCredentials());
             });
 
+            services.AddSingleton(Configuration.Get<AmetistaConfiguration>());
+
             services.AddMvc().AddApplicationPart(typeof(Startup).Assembly);
 
             services.AddSwaggerGen(c =>
@@ -39,14 +42,13 @@ namespace Ametista.Api
             });
 
             services
-                .AddDbContext<WriteDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WriteDbContext")));
+                .AddDbContext<WriteDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString")));
         }
 
         public virtual void ConfigureContainer(ContainerBuilder builder)
         {
             builder.RegisterModule(new CommandModule());
             builder.RegisterModule(new EventModule());
-            builder.RegisterModule(new MaterializeModule());
             builder.RegisterModule(new InfrastructureModule());
             builder.RegisterModule(new QueryModule());
         }

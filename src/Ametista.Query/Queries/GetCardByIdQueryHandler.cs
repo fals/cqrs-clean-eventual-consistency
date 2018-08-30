@@ -16,7 +16,7 @@ namespace Ametista.Query.Queries
         public async Task<CardViewQueryModel> HandleAsync(GetCardByIdQuery query)
         {
             FilterDefinition<CardViewQueryModel> filter = Builders<CardViewQueryModel>.Filter.Eq("Id", query.Id);
-            var result = await readDbContext.CardViewQueryModel.FindAsync(filter);
+            var result = await readDbContext.CardViewMaterializedView.FindAsync(filter);
 
             return await result.FirstOrDefaultAsync();
         }

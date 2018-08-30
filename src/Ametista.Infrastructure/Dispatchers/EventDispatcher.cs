@@ -14,18 +14,18 @@ namespace Ametista.Infrastructure
             this.componentContext = componentContext;
         }
 
-        public Task<bool> Dispatch<TEvent>(TEvent e) where TEvent : IEvent
+        public Task Dispatch<TEvent>(TEvent e) where TEvent : IEvent
         {
             if (e == null)
             {
                 throw new System.ArgumentNullException(nameof(e));
             }
 
-            var eventType = typeof(IEventHandler<>).MakeGenericType(e.GetType(), typeof(TEvent));
+            var eventType = typeof(IEventHandler<>).MakeGenericType(e.GetType());
 
             dynamic handler = componentContext.Resolve(eventType);
 
-            return (Task<bool>)eventType
+            return (Task)eventType
                 .GetMethod("Handle")
                 .Invoke(handler, new object[] { e });
         }

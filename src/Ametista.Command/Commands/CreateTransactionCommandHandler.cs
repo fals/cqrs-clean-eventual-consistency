@@ -28,7 +28,7 @@ namespace Ametista.Command.Commands
 
             if (success)
             {
-                var transactionCreatedEvent = new NewTransactionCreatedEvent(newTransaction.Id);
+                var transactionCreatedEvent = new TransactionCreatedEvent(newTransaction);
 
                 eventBus.Publish(transactionCreatedEvent);
             }

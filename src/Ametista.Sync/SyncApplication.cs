@@ -19,7 +19,8 @@ namespace Ametista.Sync
 
         public void Run()
         {
-            eventBus.Subscribe<NewCardCreatedEvent>();
+            eventBus.Subscribe<CardCreatedEvent>();
+            eventBus.Subscribe<TransactionCreatedEvent>();
         }
     }
 }

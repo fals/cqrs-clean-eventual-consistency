@@ -7,11 +7,11 @@ namespace Ametista.Core.Events
         public Event()
         {
             Id = Guid.NewGuid();
-            Date = DateTime.Now;
+            OccurredOn = DateTime.Now;
         }
 
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime OccurredOn { get; set; }
     }
 }

@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <DebugType>Full</DebugType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,10 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ametista.Core\Ametista.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Materializers\" />
   </ItemGroup>
 
 </Project>

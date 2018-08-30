@@ -1,4 +1,5 @@
-﻿using Ametista.Query.Queries;
+﻿using Ametista.Core;
+using Ametista.Query.Queries;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 
@@ -9,18 +10,18 @@ namespace Ametista.Query
         private readonly MongoClient _mongoClient;
         private readonly IMongoDatabase _database;
 
-        public ReadDbContext(string connectionString, string databaseName)
+        public ReadDbContext(AmetistaConfiguration ametistaConfiguration)
         {
-            _mongoClient = new MongoClient(connectionString);
-            _database = _mongoClient.GetDatabase(databaseName);
+            _mongoClient = new MongoClient(ametistaConfiguration.ConnectionStrings.MongoConnectionString);
+            _database = _mongoClient.GetDatabase(ametistaConfiguration.ConnectionStrings.MongoDatabase);
             Map();
         }
 
-        internal IMongoCollection<CardViewQueryModel> CardViewQueryModel
+        internal IMongoCollection<CardViewQueryModel> CardViewMaterializedView
         {
             get
             {
-                return _database.GetCollection<CardViewQueryModel>("CardViewQueryModel");
+                return _database.GetCollection<CardViewQueryModel>("CardViewMaterializedView");
             }
         }
 

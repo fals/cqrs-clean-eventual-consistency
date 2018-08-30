@@ -6,6 +6,6 @@ namespace Ametista.Core
     {
         Guid Id { get; set; }
         string Name { get; set; }
-        DateTime Date { get; set; }
+        DateTime OccurredOn { get; set; }
     }
 }
