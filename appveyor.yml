@@ -16,5 +16,5 @@ build:
   project: ./src/Ametista.sln
   verbosity: minimal
 test_script:
-- OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\Ametista.UnitTest\bin\Debug\Ametista.UnitTest.dll -noshadow" -filter:"+[UnitTestTargetProject*]* -[Ametista.UnitTest*]*" -output:".\Ametista_UnitTest.xml"
+- OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\Ametista.UnitTest\bin\Debug\Ametista.UnitTest.dll -noshadow" -filter:"+[Ametista.*]* -[Ametista.UnitTest*]*" -output:".\Ametista_UnitTest.xml"
 - codecov -f "Ametista_UnitTest.xml
