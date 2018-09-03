@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Ametista.Query.QueryModel;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 

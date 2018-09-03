@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ametista.Query.QueryModel;
+using System;
 
 namespace Ametista.Query.Queries
 {

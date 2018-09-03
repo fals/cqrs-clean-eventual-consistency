@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Ametista.Query.QueryModel;
+using MongoDB.Driver;
 using System;
 using System.Threading.Tasks;
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ametista.Query.Queries
+namespace Ametista.Query.QueryModel
 {
     public class TransactionListQueryModel : IQueryModel
     {

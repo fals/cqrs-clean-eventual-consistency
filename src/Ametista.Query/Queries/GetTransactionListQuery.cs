@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ametista.Query.QueryModel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

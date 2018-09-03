@@ -2,6 +2,7 @@
 using Ametista.Core.Interfaces;
 using Ametista.Core.Repository;
 using Ametista.Query.Queries;
+using Ametista.Query.QueryModel;
 using System;
 using System.Threading.Tasks;
 

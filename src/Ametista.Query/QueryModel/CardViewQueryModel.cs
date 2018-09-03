@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ametista.Query.Queries
+namespace Ametista.Query.QueryModel
 {
     public class CardViewQueryModel : IQueryModel
     {
