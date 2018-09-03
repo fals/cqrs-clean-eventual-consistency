@@ -4,6 +4,7 @@ using Ametista.Command;
 using Ametista.Command.Commands;
 using Ametista.Query;
 using Ametista.Query.Queries;
+using Ametista.Query.QueryModel;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using System;
