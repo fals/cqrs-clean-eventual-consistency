@@ -17,11 +17,18 @@ namespace Ametista.Infrastructure.IoC
 
             builder
                 .RegisterType<SyncCardEventHandler>()
-                .As<IEventHandler<CardCreatedEvent>>();
+                .As<IEventHandler<CardCreatedEvent>>()
+                .InstancePerLifetimeScope();
+
+            builder
+                .RegisterType<SyncTransactionEventHandler>()
+                .As<IEventHandler<TransactionCreatedEvent>>()
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<EventDispatcher>()
-                .As<IEventDispatcher>();
+                .As<IEventDispatcher>()
+                .SingleInstance();
         }
     }
 }

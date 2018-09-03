@@ -2,10 +2,11 @@
 using Ametista.Command;
 using Ametista.Command.Commands;
 using Ametista.Query;
+using Ametista.Query.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Ametista.Api.Controllers
 {
@@ -24,9 +25,26 @@ namespace Ametista.Api.Controllers
 
         // GET: api/Transaction
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get([FromQuery]GetTransactionsRequest request)
         {
-            return new string[] { "value1", "value2" };
+            var query = new GetTransactionListQuery()
+            {
+                Amount = request.Amount,
+                CardHolder = request.CardHolder,
+                CardNumber = request.CardNumber,
+                ChargeDate = request.ChargeDate,
+                Limit = request.Limit,
+                Offset = request.Offset
+            };
+
+            var result = await queryDispatcher.ExecuteAsync(query);
+
+            if (result.Count() == 0)
+            {
+                return NotFound(query);
+            }
+
+            return Ok(result);
         }
 
         // GET: api/Transaction/5

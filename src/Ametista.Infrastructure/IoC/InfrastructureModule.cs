@@ -12,15 +12,18 @@ namespace Ametista.Infrastructure.IoC
         {
             builder
                 .RegisterType<CardRepository>()
-                .As<ICardRepository>();
+                .As<ICardRepository>()
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<TransactionRepository>()
-                .As<ITransactionRepository>();
+                .As<ITransactionRepository>()
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<RabbitMQEventBus>()
-                .As<IEventBus>();
+                .As<IEventBus>()
+                .InstancePerLifetimeScope();
         }
     }
 }

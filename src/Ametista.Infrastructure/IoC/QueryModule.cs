@@ -15,11 +15,12 @@ namespace Ametista.Infrastructure.IoC
             builder
                 .RegisterType<ReadDbContext>()
                 .AsSelf()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<QueryDispatcher>()
-                .As<IQueryDispatcher>();
+                .As<IQueryDispatcher>()
+                .SingleInstance();
         }
     }
 }

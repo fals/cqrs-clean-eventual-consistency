@@ -4,7 +4,7 @@ namespace Ametista.Core.Events
 {
     public class TransactionCreatedEvent : Event
     {
-        public Transaction Data { get; private set; }
+        public Transaction Data { get; set; }
     
         public TransactionCreatedEvent(Transaction transaction)
         {

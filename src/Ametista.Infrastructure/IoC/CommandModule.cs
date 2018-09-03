@@ -20,7 +20,8 @@ namespace Ametista.Infrastructure.IoC
 
             builder
                 .RegisterType<CommandDispatcher>()
-                .As<ICommandDispatcher>();
+                .As<ICommandDispatcher>()
+                .SingleInstance();
         }
     }
 }

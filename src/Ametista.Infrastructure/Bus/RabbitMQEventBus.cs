@@ -60,9 +60,16 @@ namespace Ametista.Infrastructure.Bus
                     var message = Encoding.UTF8.GetString(body);
                     var @event = JsonConvert.DeserializeObject<T>(message);
 
-                    eventDispatcher.Dispatch(@event);
+                    try
+                    {
+                        eventDispatcher.Dispatch(@event);
 
-                    channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+                        channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+                    }
+                    catch
+                    {
+
+                    }
                 };
 
                 channel.BasicConsume(queue: QUEUE_NAME, autoAck: false, consumer: consumer);

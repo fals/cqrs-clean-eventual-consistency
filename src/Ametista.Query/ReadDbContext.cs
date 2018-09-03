@@ -25,13 +25,13 @@ namespace Ametista.Query
             }
         }
 
-        //internal IMongoCollection<MinersViewQueryModel> MinersMaterializedView
-        //{
-        //    get
-        //    {
-        //        return _database.GetCollection<MinersViewQueryModel>("MinersMaterializedView");
-        //    }
-        //}
+        internal IMongoCollection<TransactionListQueryModel> TransactionListMaterializedView
+        {
+            get
+            {
+                return _database.GetCollection<TransactionListQueryModel>("TransactionListMaterializedView");
+            }
+        }
 
         private void Map()
         {
@@ -40,10 +40,10 @@ namespace Ametista.Query
                 cm.AutoMap();
             });
 
-            //BsonClassMap.RegisterClassMap<MinersViewQueryModel>(cm =>
-            //{
-            //    cm.AutoMap();
-            //});
+            BsonClassMap.RegisterClassMap<TransactionListQueryModel>(cm =>
+            {
+                cm.AutoMap();
+            });
         }
     }
 }

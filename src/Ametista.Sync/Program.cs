@@ -1,7 +1,9 @@
 ﻿using Ametista.Core;
 using Ametista.Infrastructure.IoC;
+using Ametista.Infrastructure.Persistence;
 using Ametista.Sync;
 using Autofac;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.FileExtensions;
 using Microsoft.Extensions.Configuration.Json;
@@ -26,6 +28,17 @@ namespace Amestista.Sync
             builder.RegisterType<SyncApplication>()
                 .As<IApplication>();
 
+
+            builder.Register(c =>
+            {
+                var opt = new DbContextOptionsBuilder<WriteDbContext>();
+                opt.UseSqlServer(configuration.GetConnectionString("SqlServerConnectionString"));
+
+                return new WriteDbContext(opt.Options);
+            })
+            .AsSelf()
+            .InstancePerLifetimeScope();
+            
             builder.RegisterModule(new CommandModule());
             builder.RegisterModule(new EventModule());
             builder.RegisterModule(new InfrastructureModule());

@@ -4,6 +4,6 @@ namespace Ametista.Query
 {
     public interface IQueryDispatcher
     {
-        Task<TModel> ExecuteAsync<TModel>(IQuery<TModel> query) where TModel : IQueryModel;
+        Task<TModel> ExecuteAsync<TModel>(IQuery<TModel> query);
     }
 }
