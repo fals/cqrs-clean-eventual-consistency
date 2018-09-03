@@ -23,7 +23,7 @@ namespace Ametista.Infrastructure.IoC
             builder
                 .RegisterType<RabbitMQEventBus>()
                 .As<IEventBus>()
-                .InstancePerLifetimeScope();
+                .SingleInstance();
         }
     }
 }

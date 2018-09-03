@@ -20,9 +20,9 @@ namespace Ametista.Sync
 
         public void Run()
         {
-            //Task.Run(() => eventBus.Subscribe<CardCreatedEvent>());
-            //Task.Run(() => eventBus.Subscribe<TransactionCreatedEvent>());
-            eventBus.Subscribe<TransactionCreatedEvent>();
+            Task.Run(() => eventBus.Subscribe<CardCreatedEvent>());
+            Task.Run(() => eventBus.Subscribe<TransactionCreatedEvent>());
+            //eventBus.Subscribe<TransactionCreatedEvent>();
         }
     }
 }

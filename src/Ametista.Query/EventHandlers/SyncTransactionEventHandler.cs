@@ -22,8 +22,9 @@ namespace Ametista.Query.EventHandlers
         {
             var card = await cardRepository.FindAsync(e.Data.CardId);
 
-            var transactionListQueryModel = new TransactionListQueryModel()
+            var transactionList = new TransactionListQueryModel()
             {
+                Id = e.Data.Id,
                 Amount = e.Data.Charge.Amount,
                 ChargeDate = e.Data.ChargeDate,
                 CardHolder = card.CardHolder,
@@ -32,7 +33,7 @@ namespace Ametista.Query.EventHandlers
                 UniqueId = e.Data.UniqueId
             };
 
-            await readDbContext.TransactionListMaterializedView.InsertOneAsync(transactionListQueryModel);
+            await readDbContext.TransactionListMaterializedView.InsertOneAsync(transactionList);
         }
     }
 }

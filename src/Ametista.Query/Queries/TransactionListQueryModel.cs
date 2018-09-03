@@ -6,6 +6,7 @@ namespace Ametista.Query.Queries
 {
     public class TransactionListQueryModel : IQueryModel
     {
+        public object Id { get; set; }
         public decimal Amount { get;  set; }
         public string CurrencyCode { get;  set; }
         public string CardNumber { get;  set; }

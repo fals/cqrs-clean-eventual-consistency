@@ -1,9 +1,11 @@
 ﻿using Ametista.Core;
 using Ametista.Core.Interfaces;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
+using System.Reflection;
 using System.Text;
 
 namespace Ametista.Infrastructure.Bus
@@ -16,6 +18,11 @@ namespace Ametista.Infrastructure.Bus
         public RabbitMQEventBus(IEventDispatcher eventDispatcher)
         {
             this.eventDispatcher = eventDispatcher ?? throw new ArgumentNullException(nameof(eventDispatcher));
+
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                ContractResolver = new NonPublicPropertiesResolver()
+            };
         }
 
         public void Publish(IEvent @event)
@@ -38,6 +45,20 @@ namespace Ametista.Infrastructure.Bus
                                  mandatory: true,
                                  basicProperties: properties,
                                  body: body);
+            }
+        }
+
+        public class NonPublicPropertiesResolver : DefaultContractResolver
+        {
+            protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+            {
+                var prop = base.CreateProperty(member, memberSerialization);
+                if (member is PropertyInfo pi)
+                {
+                    prop.Readable = (pi.GetMethod != null);
+                    prop.Writable = (pi.SetMethod != null);
+                }
+                return prop;
             }
         }
 
