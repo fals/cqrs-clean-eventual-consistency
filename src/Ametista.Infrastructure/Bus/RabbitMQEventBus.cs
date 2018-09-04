@@ -29,22 +29,26 @@ namespace Ametista.Infrastructure.Bus
         {
             var factory = new ConnectionFactory() { HostName = "rabbitmq" };
             using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
             {
-                channel.ExchangeDeclare(exchange: QUEUE_NAME, type: "fanout");
+                using (var channel = connection.CreateModel())
+                {
+                    var eventName = @event.GetType().Name;
 
-                string message = JsonConvert.SerializeObject(@event);
-                var body = Encoding.UTF8.GetBytes(message);
-                var eventName = @event.GetType().Name;
+                    channel.ExchangeDeclare(exchange: QUEUE_NAME, type: "fanout");
+                    channel.QueueBind(QUEUE_NAME, QUEUE_NAME, eventName);
 
-                var properties = channel.CreateBasicProperties();
-                properties.DeliveryMode = 2; // persistent
+                    string message = JsonConvert.SerializeObject(@event);
+                    var body = Encoding.UTF8.GetBytes(message);
+                   
+                    var properties = channel.CreateBasicProperties();
+                    properties.DeliveryMode = 2; // persistent
 
-                channel.BasicPublish(exchange: QUEUE_NAME,
-                                 routingKey: eventName,
-                                 mandatory: true,
-                                 basicProperties: properties,
-                                 body: body);
+                    channel.BasicPublish(exchange: QUEUE_NAME,
+                                     routingKey: eventName,
+                                     mandatory: true,
+                                     basicProperties: properties,
+                                     body: body);
+                }
             }
         }
 
@@ -66,41 +70,43 @@ namespace Ametista.Infrastructure.Bus
         {
             var factory = new ConnectionFactory() { HostName = "rabbitmq" };
             using (var connection = factory.CreateConnection())
-            using (var channel = connection.CreateModel())
             {
-                channel.ExchangeDeclare(exchange: QUEUE_NAME, type: "fanout");
-
-                channel.QueueDeclare(queue: QUEUE_NAME, durable: true, exclusive: false, autoDelete: false, arguments: null);
-
-                channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
-
-                var consumer = new EventingBasicConsumer(channel);
-                consumer.Received += (model, ea) =>
+                using (var channel = connection.CreateModel())
                 {
-                    var body = ea.Body;
-                    var message = Encoding.UTF8.GetString(body);
-                    var @event = JsonConvert.DeserializeObject<T>(message);
-                    var subType = typeof(T).Name;
+                    channel.ExchangeDeclare(exchange: QUEUE_NAME, type: "fanout");
 
-                    try
+                    channel.QueueDeclare(queue: QUEUE_NAME, durable: true, exclusive: false, autoDelete: false, arguments: null);
+
+                    channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
+
+                    var consumer = new EventingBasicConsumer(channel);
+                    consumer.Received += (model, ea) =>
                     {
-                        if (subType == @event.Name)
+                        var body = ea.Body;
+                        var message = Encoding.UTF8.GetString(body);
+                        var @event = JsonConvert.DeserializeObject<T>(message);
+                        var subType = typeof(T).Name;
+
+                        try
                         {
-                            eventDispatcher.Dispatch(@event);
+                            if (subType == @event.Name)
+                            {
+                                eventDispatcher.Dispatch(@event);
 
-                            channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+                                channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+                            }
                         }
-                    }
-                    catch
-                    {
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                    };
 
-                    }
-                };
+                    channel.BasicConsume(queue: QUEUE_NAME, autoAck: false, consumer: consumer);
 
-                channel.BasicConsume(queue: QUEUE_NAME, autoAck: false, consumer: consumer);
-
-                Console.WriteLine(" Press [enter] to exit.");
-                Console.ReadLine();
+                    Console.WriteLine(" Press [enter] to exit.");
+                    Console.ReadLine();
+                }
             }
         }
     }
