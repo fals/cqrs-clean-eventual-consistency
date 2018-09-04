@@ -13,12 +13,10 @@ namespace Ametista.Query.EventHandlers
     public class SyncCardEventHandler : IEventHandler<CardCreatedEvent>
     {
         private readonly ReadDbContext readDbContext;
-        private readonly ICardRepository cardRepository;
 
-        public SyncCardEventHandler(ReadDbContext readDbContext, ICardRepository cardRepository)
+        public SyncCardEventHandler(ReadDbContext readDbContext)
         {
             this.readDbContext = readDbContext ?? throw new ArgumentNullException(nameof(readDbContext));
-            this.cardRepository = cardRepository ?? throw new ArgumentNullException(nameof(cardRepository));
         }
 
         public async Task Handle(CardCreatedEvent e)

@@ -80,12 +80,16 @@ namespace Ametista.Infrastructure.Bus
                     var body = ea.Body;
                     var message = Encoding.UTF8.GetString(body);
                     var @event = JsonConvert.DeserializeObject<T>(message);
+                    var subType = typeof(T).Name;
 
                     try
                     {
-                        eventDispatcher.Dispatch(@event);
+                        if (subType == @event.Name)
+                        {
+                            eventDispatcher.Dispatch(@event);
 
-                        channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+                            channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+                        }
                     }
                     catch
                     {
