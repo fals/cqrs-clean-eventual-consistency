@@ -113,11 +113,11 @@ namespace Ametista.UnitTest.Controllers
             return data;
         }
 
-        private async Task<CardViewReponse> GetCardById(Guid id)
+        private async Task<GetCardViewReponse> GetCardById(Guid id)
         {
             var response = await controller.GetById(id);
             var result = Assert.IsType<OkObjectResult>(response);
-            var data = Assert.IsType<CardViewReponse>(result.Value);
+            var data = Assert.IsType<GetCardViewReponse>(result.Value);
 
             return data;
         }

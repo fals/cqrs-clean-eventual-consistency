@@ -25,6 +25,14 @@ namespace Ametista.Query
             }
         }
 
+        internal IMongoCollection<CardListQueryModel> CardListMaterializedView
+        {
+            get
+            {
+                return _database.GetCollection<CardListQueryModel>("CardListMaterializedView");
+            }
+        }
+
         internal IMongoCollection<TransactionListQueryModel> TransactionListMaterializedView
         {
             get
@@ -36,6 +44,11 @@ namespace Ametista.Query
         private void Map()
         {
             BsonClassMap.RegisterClassMap<CardViewQueryModel>(cm =>
+            {
+                cm.AutoMap();
+            });
+
+            BsonClassMap.RegisterClassMap<CardListQueryModel>(cm =>
             {
                 cm.AutoMap();
             });

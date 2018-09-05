@@ -2,7 +2,7 @@
 
 namespace Ametista.Api.Model
 {
-    public class CardViewReponse
+    public class GetCardViewReponse
     {
         public string CardHolder { get; set; }
 

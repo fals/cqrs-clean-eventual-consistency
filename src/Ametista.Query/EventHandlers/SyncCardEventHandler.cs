@@ -1,11 +1,7 @@
 ﻿using Ametista.Core.Events;
 using Ametista.Core.Interfaces;
-using Ametista.Core.Repository;
-using Ametista.Query.Queries;
 using Ametista.Query.QueryModel;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Ametista.Query.EventHandlers
@@ -29,7 +25,21 @@ namespace Ametista.Query.EventHandlers
                 Number = e.Data.Number
             };
 
+            var cardList = new CardListQueryModel()
+            {
+                Id = e.Data.Id,
+                Number = e.Data.Number,
+                CardHolder = e.Data.CardHolder,
+                CurrentMonthTotal = 0M,
+                ExpirationDate = e.Data.ExpirationDate,
+                HighestChargeDate = null,
+                HighestTransactionAmount = null,
+                HighestTransactionId = null,
+                LastMonthTotal = null
+            };
+
             await readDbContext.CardViewMaterializedView.InsertOneAsync(cardView);
+            await readDbContext.CardListMaterializedView.InsertOneAsync(cardList);
         }
     }
 }

@@ -1,12 +1,11 @@
 ﻿using Ametista.Api.Model;
-using Ametista.Api.Model;
 using Ametista.Command;
 using Ametista.Command.Commands;
 using Ametista.Query;
 using Ametista.Query.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ametista.Api.Controllers
@@ -25,9 +24,38 @@ namespace Ametista.Api.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> Get([FromQuery]GetCardListQuery request)
         {
-            return new string[] { "value1", "value2" };
+            var query = new GetCardListQuery()
+            {
+                CardHolder = request.CardHolder,
+                ChargeDate = request.ChargeDate,
+                Number = request.Number,
+                Limit = request.Limit,
+                Offset = request.Offset
+            };
+
+            var result = await queryDispatcher.ExecuteAsync(query);
+
+            if (!result.Any())
+            {
+                return NotFound(query);
+            }
+
+            var respose = result.Select(x => new GetCardListResponse()
+            {
+                Id = x.Id,
+                Number = x.Number,
+                CardHolder = x.CardHolder,
+                CurrentMonthTotal = x.CurrentMonthTotal,
+                ExpirationDate = x.ExpirationDate,
+                HighestChargeDate = x.HighestChargeDate,
+                HighestTransactionAmount= x.HighestTransactionAmount,
+                HighestTransactionId = x.HighestTransactionId,
+                LastMonthTotal = x.LastMonthTotal
+            });
+
+            return Ok(respose);
         }
 
         [HttpGet("{id}")]
@@ -42,13 +70,15 @@ namespace Ametista.Api.Controllers
                 return BadRequest(id);
             }
 
-            return Ok(new CardViewReponse()
+            var resonse = new GetCardViewReponse()
             {
                 CardHolder = queryResult.CardHolder,
                 ExpirationDate = queryResult.ExpirationDate,
                 Id = queryResult.Id,
                 Number = queryResult.Number
-            });
+            };
+
+            return Ok(resonse);
         }
 
         [HttpPost]
@@ -70,19 +100,7 @@ namespace Ametista.Api.Controllers
                 return Ok(response);
             }
 
-            return BadRequest();
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return BadRequest(request);
         }
     }
 }

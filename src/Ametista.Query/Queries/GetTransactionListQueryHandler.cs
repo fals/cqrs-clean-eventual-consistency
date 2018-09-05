@@ -21,7 +21,10 @@ namespace Ametista.Query.Queries
             var result = readDbContext
                 .TransactionListMaterializedView
                 .AsQueryable()
-                .Where(x => x.CardNumber == query.CardNumber);
+                .WhereIf(!string.IsNullOrEmpty(query.CardNumber), x => x.CardNumber == query.CardNumber)
+                .WhereIf(!string.IsNullOrEmpty(query.CardHolder), x => x.CardHolder.Contains(query.CardNumber))
+                .WhereIf(query.ChargeDate.HasValue, x => x.ChargeDate == query.ChargeDate)
+                .WhereIf(query.BetweenAmount.HasValue, x => x.Amount >= query.BetweenAmount && x.Amount <= query.BetweenAmount);
 
             var itemsTask = await result
                 .Skip(query.Offset)

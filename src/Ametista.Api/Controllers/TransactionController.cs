@@ -23,13 +23,12 @@ namespace Ametista.Api.Controllers
             this.queryDispatcher = queryDispatcher ?? throw new ArgumentNullException(nameof(queryDispatcher));
         }
 
-        // GET: api/Transaction
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery]GetTransactionsRequest request)
         {
             var query = new GetTransactionListQuery()
             {
-                Amount = request.Amount,
+                BetweenAmount = request.BetweenAmount,
                 CardHolder = request.CardHolder,
                 CardNumber = request.CardNumber,
                 ChargeDate = request.ChargeDate,
@@ -39,22 +38,24 @@ namespace Ametista.Api.Controllers
 
             var result = await queryDispatcher.ExecuteAsync(query);
 
-            if (result.Count() == 0)
+            if (!result.Any())
             {
                 return NotFound(query);
             }
 
-            return Ok(result);
+            var response = result.Select(x => new GetTransactionsResponse()
+            {
+                Amount = x.Amount,
+                CardHolder = x.CardHolder,
+                CardNumber = x.CardNumber,
+                ChargeDate = x.ChargeDate,
+                CurrencyCode = x.CurrencyCode,
+                UniqueId = x.UniqueId
+            });
+
+            return Ok(response);
         }
 
-        // GET: api/Transaction/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST: api/Transaction
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]CreateTransactionRequest request)
         {
@@ -76,19 +77,7 @@ namespace Ametista.Api.Controllers
                 return Ok(response);
             }
 
-            return BadRequest(command);
-        }
-
-        // PUT: api/Transaction/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return BadRequest(request);
         }
     }
 }
