@@ -18,7 +18,9 @@ namespace Ametista.Query.Queries
 
         public async Task<IEnumerable<TransactionListQueryModel>> HandleAsync(GetTransactionListQuery query)
         {
-            var result = readDbContext
+            try
+            {
+                var result = readDbContext
                 .TransactionListMaterializedView
                 .AsQueryable()
                 .WhereIf(!string.IsNullOrEmpty(query.CardNumber), x => x.CardNumber == query.CardNumber)
@@ -26,12 +28,17 @@ namespace Ametista.Query.Queries
                 .WhereIf(query.ChargeDate.HasValue, x => x.ChargeDate == query.ChargeDate)
                 .WhereIf(query.BetweenAmount.HasValue, x => x.Amount >= query.BetweenAmount && x.Amount <= query.BetweenAmount);
 
-            var itemsTask = await result
-                .Skip(query.Offset)
-                .Take(query.Limit)
-                .ToListAsync();
-            
-            return itemsTask;
+                var itemsTask = await result
+                    .Skip(query.Offset)
+                    .Take(query.Limit)
+                    .ToListAsync();
+
+                return itemsTask;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

@@ -30,12 +30,11 @@ namespace Ametista.Query.EventHandlers
                 Id = e.Data.Id,
                 Number = e.Data.Number,
                 CardHolder = e.Data.CardHolder,
-                CurrentMonthTotal = 0M,
                 ExpirationDate = e.Data.ExpirationDate,
                 HighestChargeDate = null,
                 HighestTransactionAmount = null,
                 HighestTransactionId = null,
-                LastMonthTotal = null
+                TransactionCount = 0
             };
 
             await readDbContext.CardViewMaterializedView.InsertOneAsync(cardView);

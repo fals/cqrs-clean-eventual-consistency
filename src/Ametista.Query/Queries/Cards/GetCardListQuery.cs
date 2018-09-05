@@ -10,7 +10,7 @@ namespace Ametista.Query.Queries
         public string CardHolder { get; set; }
         public DateTime? ChargeDate { get; set; }
         public string Number { get; set; }
-        public int Offset { get; set; }
-        public int Limit { get; set; }
+        public int Offset { get; set; } = 0;
+        public int Limit { get; set; } = 1;
     }
 }

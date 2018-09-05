@@ -18,19 +18,26 @@ namespace Ametista.Query.Queries
 
         public async Task<IEnumerable<CardListQueryModel>> HandleAsync(GetCardListQuery query)
         {
-            var result = readDbContext
+            try
+            {
+                var result = readDbContext
                .CardListMaterializedView
                .AsQueryable()
-               .WhereIf(string.IsNullOrEmpty(query.Number), x => x.Number.Contains(query.Number))
-               .WhereIf(string.IsNullOrEmpty(query.CardHolder), x => x.CardHolder.Contains(query.CardHolder))
+               .WhereIf(!string.IsNullOrEmpty(query.Number), x => x.Number.Contains(query.Number))
+               .WhereIf(!string.IsNullOrEmpty(query.CardHolder), x => x.CardHolder.Contains(query.CardHolder))
                .WhereIf(query.ChargeDate.HasValue, x => x.ExpirationDate == query.ChargeDate);
 
-            var itemsTask = await result
-                .Skip(query.Offset)
-                .Take(query.Limit)
-                .ToListAsync();
+                var itemsTask = await result
+                    .Skip(query.Offset)
+                    .Take(query.Limit)
+                    .ToListAsync();
 
-            return itemsTask;
+                return itemsTask;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using Ametista.Core.Interfaces;
 using Ametista.Core.Repository;
 using Ametista.Query.Queries;
 using Ametista.Query.QueryModel;
+using MongoDB.Driver;
 using System;
 using System.Threading.Tasks;
 
@@ -11,30 +12,41 @@ namespace Ametista.Query.EventHandlers
     public class SyncTransactionEventHandler : IEventHandler<TransactionCreatedEvent>
     {
         private readonly ReadDbContext readDbContext;
-        private readonly ICardRepository cardRepository;
 
-        public SyncTransactionEventHandler(ReadDbContext readDbContext, ICardRepository cardRepository)
+        public SyncTransactionEventHandler(ReadDbContext readDbContext)
         {
             this.readDbContext = readDbContext ?? throw new ArgumentNullException(nameof(readDbContext));
-            this.cardRepository = cardRepository ?? throw new ArgumentNullException(nameof(cardRepository));
         }
 
         public async Task Handle(TransactionCreatedEvent e)
         {
-            var card = await cardRepository.FindAsync(e.Data.CardId);
+            FilterDefinition<CardListQueryModel> filter = Builders<CardListQueryModel>.Filter.Eq("Id", e.Data.CardId);
+            var cardList = await readDbContext.CardListMaterializedView
+                .Find(filter)
+                .FirstOrDefaultAsync();
 
             var transactionList = new TransactionListQueryModel()
             {
                 Id = e.Data.Id,
                 Amount = e.Data.Charge.Amount,
                 ChargeDate = e.Data.ChargeDate,
-                CardHolder = card.CardHolder,
-                CardNumber = card.Number,
+                CardHolder = cardList.CardHolder,
+                CardNumber = cardList.Number,
                 CurrencyCode = e.Data.Charge.CurrencyCode,
                 UniqueId = e.Data.UniqueId
             };
 
+            if (e.Data.Charge.Amount > cardList.HighestTransactionAmount)
+            {
+                cardList.HighestChargeDate = e.Data.ChargeDate;
+                cardList.HighestTransactionId = e.Data.Id;
+                cardList.HighestTransactionAmount = e.Data.Charge.Amount; 
+            }
+
+            cardList.TransactionCount += 1;
+
             await readDbContext.TransactionListMaterializedView.InsertOneAsync(transactionList);
+            await readDbContext.CardListMaterializedView.ReplaceOneAsync(x => x.Id == cardList.Id, cardList, new UpdateOptions { IsUpsert = true });
         }
     }
 }

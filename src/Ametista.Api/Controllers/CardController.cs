@@ -24,7 +24,7 @@ namespace Ametista.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery]GetCardListQuery request)
+        public async Task<IActionResult> Get([FromQuery]GetCardListRequest request)
         {
             var query = new GetCardListQuery()
             {
@@ -47,12 +47,9 @@ namespace Ametista.Api.Controllers
                 Id = x.Id,
                 Number = x.Number,
                 CardHolder = x.CardHolder,
-                CurrentMonthTotal = x.CurrentMonthTotal,
                 ExpirationDate = x.ExpirationDate,
-                HighestChargeDate = x.HighestChargeDate,
                 HighestTransactionAmount= x.HighestTransactionAmount,
-                HighestTransactionId = x.HighestTransactionId,
-                LastMonthTotal = x.LastMonthTotal
+                HighestTransactionId = x.HighestTransactionId
             });
 
             return Ok(respose);
