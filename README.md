@@ -1,4 +1,4 @@
-# ![Guaraci](docs/guaraci-icon.png) Clean Arquiteture CQRS with Derived Data  
+# ![Guaraci](docs/guaraci-icon.png) Clean Architecture CQRS with Derived Data  
 
 CQRS, using Clean Architecture, multiple databases and Eventual Consistency
 
