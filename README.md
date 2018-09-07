@@ -15,7 +15,9 @@ Coming soon.
 >The strategy behind that facilitation is to leave as >many options open as possible, for as long as possible.
 >-Robin C. Martin
 
-Clean Architecture has lots of different interpretations and implementations around. I've tried to implement CQRS with Clean in the best way to take advantage of the main concepts of this architectural pattern, making this microservice template flexible, maintainable, evolvable, testable, detached from technology and what I think as more important, with business as central goal.
+Clean Architecture has lots of different interpretations and implementations around. I've tried to implement CQRS with Clean in the best way to take advantage of the main concepts of this architectural pattern, making this microservice template flexible, maintainable, evolvable, testable, detached from technology and what I think as more important respecting the policy rule below:
+
+>Source Code dependencies must point only inward, towards higher-level policy.
 
 ![cqrs-clean](https://github.com/fals/cqrs-clean-eventual-consistency/blob/master/docs/cqrs-clean.png)
 
