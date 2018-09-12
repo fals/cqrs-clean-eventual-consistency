@@ -5,17 +5,14 @@
 
 pool:
   vmImage: 'Ubuntu 16.04'
-
+  
 variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet restore
-  displayName: 'dotnet restore'  
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
-- script: dotnet test Ametista.UnitTest --logger trx --collect "Code coverage"
-  displayName: 'dotnet test'
+- script: |
+    dotnet build --configuration $(buildConfiguration)
+    dotnet test dotnetcore-tests --configuration $(buildConfiguration) --logger trx
 - task: PublishTestResults@2
   inputs:
     testRunner: VSTest
