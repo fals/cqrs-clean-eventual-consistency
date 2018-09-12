@@ -55,7 +55,7 @@ Each command has it own handler, in which the Use Case is implemented. Every tim
 
 ![](docs/create_card_interaction.png)
 
-The example above you can see a CreateCardCommand, which is handled by the CreateCardCommandHandler. The handler acts as the Use Case implementaion, making the interactions between the command and Card domain entity. The Card is created given the command coming from the command and persisted using the CardWriteOnlyRepository. An CardCreatedEvent is then published to the event bus and an CreateCardCommandResult is returned to the caller.
+The example above you can see a CreateCardCommand, which is handled by the CreateCardCommandHandler. The handler acts as the Use Case implementaion, making the interactions between the command and Card domain entity. The Card is created given the data carried by the command and persisted using the CardWriteOnlyRepository. An CardCreatedEvent is then published to the event bus and an CreateCardCommandResult is returned to the caller.
 
 Every command has a result pair in this implementations, because its not using an async model for the command stack. If you go for an async model, you could publish the result or even another event to a message queue to inform other clients.
 
