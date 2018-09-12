@@ -11,9 +11,9 @@ namespace Ametista.Command.Commands
     public class CreateTransactionCommandHandler : ICommandHandler<CreateTransactionCommand, CreateTransactionCommandResult>
     {
         private readonly IEventBus eventBus;
-        private readonly ITransactionRepository transactionRepository;
+        private readonly ITransactionWriteOnlyRepository transactionRepository;
 
-        public CreateTransactionCommandHandler(IEventBus eventBus, ITransactionRepository transactionRepository)
+        public CreateTransactionCommandHandler(IEventBus eventBus, ITransactionWriteOnlyRepository transactionRepository)
         {
             this.eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
             this.transactionRepository = transactionRepository ?? throw new ArgumentNullException(nameof(transactionRepository));

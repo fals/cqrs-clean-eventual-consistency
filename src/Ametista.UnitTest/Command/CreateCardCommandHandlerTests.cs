@@ -13,12 +13,12 @@ namespace Ametista.UnitTest.Command
     {
         private readonly CreateCardCommandHandler handler;
         private readonly Mock<IEventBus> eventBusMock;
-        private readonly Mock<ICardRepository> cardRepositoryMock;
+        private readonly Mock<ICardWriteOnlyRepository> cardRepositoryMock;
 
         public CreateCardCommandHandlerTests()
         {
             eventBusMock = new Mock<IEventBus>();
-            cardRepositoryMock = new Mock<ICardRepository>();
+            cardRepositoryMock = new Mock<ICardWriteOnlyRepository>();
             cardRepositoryMock.Setup(x => x.Add(It.IsAny<Card>()))
                 .ReturnsAsync(true);
 

@@ -12,12 +12,12 @@ namespace Ametista.Infrastructure.IoC
         {
             builder
                 .RegisterType<CardRepository>()
-                .As<ICardRepository>()
+                .As<ICardWriteOnlyRepository>()
                 .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<TransactionRepository>()
-                .As<ITransactionRepository>()
+                .As<ITransactionWriteOnlyRepository>()
                 .InstancePerLifetimeScope();
 
             builder

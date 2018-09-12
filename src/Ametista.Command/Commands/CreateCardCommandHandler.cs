@@ -10,9 +10,9 @@ namespace Ametista.Command.Commands
     public class CreateCardCommandHandler : ICommandHandler<CreateCardCommand, CreateCardCommandResult>
     {
         private readonly IEventBus eventBus;
-        private readonly ICardRepository cardRepository;
+        private readonly ICardWriteOnlyRepository cardRepository;
 
-        public CreateCardCommandHandler(IEventBus eventBus, ICardRepository cardRepository)
+        public CreateCardCommandHandler(IEventBus eventBus, ICardWriteOnlyRepository cardRepository)
         {
             this.eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
             this.cardRepository = cardRepository ?? throw new ArgumentNullException(nameof(cardRepository));

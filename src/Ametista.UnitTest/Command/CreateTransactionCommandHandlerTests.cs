@@ -13,12 +13,12 @@ namespace Ametista.UnitTest.Command
     {
         private readonly CreateTransactionCommandHandler handler;
         private readonly Mock<IEventBus> eventBusMock;
-        private readonly Mock<ITransactionRepository> transactionRepositoryMock;
+        private readonly Mock<ITransactionWriteOnlyRepository> transactionRepositoryMock;
 
         public CreateTransactionCommandHandlerTests()
         {
             eventBusMock = new Mock<IEventBus>();
-            transactionRepositoryMock = new Mock<ITransactionRepository>();
+            transactionRepositoryMock = new Mock<ITransactionWriteOnlyRepository>();
             transactionRepositoryMock.Setup(x => x.Add(It.IsAny<Transaction>()))
                 .ReturnsAsync(true);
 

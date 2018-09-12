@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ametista.Infrastructure.Persistence.Repository
 {
-    public class CardRepository : ICardRepository
+    public class CardRepository : ICardWriteOnlyRepository
     {
         private readonly WriteDbContext writeDbContext;
 

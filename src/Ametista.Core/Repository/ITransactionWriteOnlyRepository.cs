@@ -3,7 +3,7 @@ using Ametista.Core.Interfaces;
 
 namespace Ametista.Core.Repository
 {
-    public interface ITransactionRepository : IRepository<Transaction>
+    public interface ITransactionWriteOnlyRepository : IWriteOnlyRepository<Transaction>
     {
     }
 }

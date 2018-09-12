@@ -31,11 +31,32 @@ The outer ring contains a way for users to communicate with our application, the
 
 ## :scissors: CQRS
 
-Coming soon.
+In most scenarios business domains are complex, and they grow even more in complexity over time. Implementing simple queries using the same model became harder and using the same entities to perform them not suitable. 
+
+To address this problem a good alternative is CQRS pattern. CRQS is an acronym for Command and Query Responsibility Segregation. As mentioned we have a well defined segregation between the model you write from the one you read.
+
+![](docs/cqrs_layer_diagram.png)
+
+This pattern is an excellent choice to maintain the scalability of your system, given the single responsibility of each stack, you can perform tuning to the stack in which more commonly operations are performed. 
+
+For example, if you have a heavy load in the query stack you should implement cache strategies and database replication to balance and drastically improve readings. In other hand, if you have a heavy write load in your system, you could simply turn the command stack from a sync model to a async model to improve it.
+
+> Separating queries from commands gives you the chance to work on the scalability aspects of both
+> parts in total isolation, Dino Esposito, Architecting for the Enterprise 2nd edition
+
+This miroservice template contains an implementations of CQRS with different databases, which makes even more clear the separation between commands and queries.
+
+Although, CQRS bring complexity to your system, given that you must support messaging brokers and events to guarantee the synchronization between the write database and the read database.
 
 ### :arrow_down: Command Stack
 
-Coming soon.
+Commands are responsible for performing writes in your system and should be task based.  
+
+Each command has it own handler, in which the Use Case is implemented. Every time a command is dispatched and processed if the outcome is successful, an event is publish into a message broker with all needed information from your business entity, thereby your query stack can acknowledge changes in the write model, and persist it into the read database.
+
+The example above you can see a CreateCardCommand, which is handled by the CreateCardCommandHandler. The handler acts as the Use Case implementaion, making the interactions between the command and Card domain entity. The Card is created given the command coming from the command and persisted using the CardWriteOnlyRepository. An CardCreatedEvent is then published to the event bus and an CreateCardCommandResult is returned to the caller.
+
+Every command has a result pair in this implementations, because its not using an async model for the command stack. If you go for an async model, you could publish the result or even another event to a message queue to inform other clients.
 
 ### :arrow_up: Query Stack
 
@@ -74,3 +95,7 @@ Coming soon.
 Here's a list of reliable information used to bring this project to life.
 
 * <a href="https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164" target="_blank">Clean Architecture, Robbin C. Marting</a>
+
+* <a href="https://azure.microsoft.com/en-us/campaigns/cloud-application-architecture-guide/" target="_blank">Cloud Application Architecture Guide</a>
+
+* <a href="https://www.microsoftpressstore.com/store/microsoft-.net-architecting-applications-for-the-enterprise-9780735685352" target="_blank">Microsoft .NET - Architecting Applications for the Enterprise, 2nd Edition</a>
