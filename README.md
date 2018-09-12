@@ -12,8 +12,7 @@ Coming soon.
 
 ## :dart: Clean Architecture
 
->The strategy behind that facilitation is to leave as many options open as possible, for as long as possible. 
--Robin C. Martin
+>The strategy behind that facilitation is to leave as many options open as possible, for as long as possible, Robbin C. Martin
 
 Clean Architecture has lots of different interpretations and implementations around. I've tried to implement CQRS with Clean in the best way to take advantage of the main concepts of this architectural pattern, making this microservice template flexible, maintainable, evolvable, testable, detached from technology and what I think as more important respecting the policy rule below:
 
@@ -53,6 +52,8 @@ Although, CQRS bring complexity to your system, given that you must support mess
 Commands are responsible for performing writes in your system and should be task based.  
 
 Each command has it own handler, in which the Use Case is implemented. Every time a command is dispatched and processed if the outcome is successful, an event is publish into a message broker with all needed information from your business entity, thereby your query stack can acknowledge changes in the write model, and persist it into the read database.
+
+![](docs/create_card_interaction.png)
 
 The example above you can see a CreateCardCommand, which is handled by the CreateCardCommandHandler. The handler acts as the Use Case implementaion, making the interactions between the command and Card domain entity. The Card is created given the command coming from the command and persisted using the CardWriteOnlyRepository. An CardCreatedEvent is then published to the event bus and an CreateCardCommandResult is returned to the caller.
 
