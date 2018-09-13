@@ -12,7 +12,7 @@ Coming soon.
 
 ## :dart: Clean Architecture
 
->The strategy behind that facilitation is to leave as many options open as possible, for as long as possible, Robbin C. Martin
+>The strategy behind that facilitation is to leave as many options open as possible, for as long as possible, Robet C. Martin
 
 Clean Architecture has lots of different interpretations and implementations around. I've tried to implement CQRS with Clean in the best way to take advantage of the main concepts of this architectural pattern, making this microservice template flexible, maintainable, evolvable, testable, detached from technology and what I think as more important respecting the policy rule below:
 
