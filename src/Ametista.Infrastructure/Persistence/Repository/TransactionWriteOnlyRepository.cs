@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Ametista.Infrastructure.Persistence.Repository
 {
-    public class TransactionRepository : ITransactionWriteOnlyRepository
+    public class TransactionWriteOnlyRepository : ITransactionWriteOnlyRepository
     {
         private readonly WriteDbContext writeDbContext;
 
-        public TransactionRepository(WriteDbContext writeDbContext)
+        public TransactionWriteOnlyRepository(WriteDbContext writeDbContext)
         {
             this.writeDbContext = writeDbContext ?? throw new ArgumentNullException(nameof(writeDbContext));
         }

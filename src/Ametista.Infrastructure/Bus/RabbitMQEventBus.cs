@@ -1,10 +1,16 @@
 ﻿using Ametista.Core;
 using Ametista.Core.Interfaces;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Polly;
+using Polly.Retry;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RabbitMQ.Client.Exceptions;
 using System;
+using System.Collections.Generic;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,11 +20,26 @@ namespace Ametista.Infrastructure.Bus
     public class RabbitMQEventBus : IEventBus, IDisposable
     {
         private readonly string QUEUE_NAME = "ametista_events";
-        private readonly IEventDispatcher eventDispatcher;
+        private readonly string BROKER_NAME = "ametista_events";
 
-        public RabbitMQEventBus(IEventDispatcher eventDispatcher)
+        private readonly IEventDispatcher _eventDispatcher;
+        private readonly IPersistentConnection<IModel> _persistentConnection;
+        private readonly ILogger<RabbitMQEventBus> _logger;
+        private static Dictionary<string, Type> _subsManager = new Dictionary<string, Type>();
+        private readonly int _retryCount;
+
+        private IModel _consumerChannel;
+
+        public RabbitMQEventBus(IEventDispatcher eventDispatcher,
+            IPersistentConnection<IModel> persistentConnection,
+            ILogger<RabbitMQEventBus> logger,
+            int retryCount = 5)
         {
-            this.eventDispatcher = eventDispatcher ?? throw new ArgumentNullException(nameof(eventDispatcher));
+            _eventDispatcher = eventDispatcher ?? throw new ArgumentNullException(nameof(eventDispatcher));
+            _persistentConnection = persistentConnection ?? throw new ArgumentNullException(nameof(persistentConnection));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _retryCount = retryCount;
+            _consumerChannel = CreateConsumerChannel();
 
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
@@ -28,28 +49,39 @@ namespace Ametista.Infrastructure.Bus
 
         public void Publish(IEvent @event)
         {
-            var factory = new ConnectionFactory() { HostName = "rabbitmq" };
-            using (var connection = factory.CreateConnection())
+            if (!_persistentConnection.IsConnected)
             {
-                using (var channel = connection.CreateModel())
+                _persistentConnection.TryConnect();
+            }
+
+            var policy = RetryPolicy.Handle<BrokerUnreachableException>()
+                .Or<SocketException>()
+                .WaitAndRetry(_retryCount, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), (ex, time) =>
                 {
-                    var eventName = @event.GetType().Name;
+                    _logger.LogWarning(ex.ToString());
+                });
 
-                    channel.ExchangeDeclare(exchange: QUEUE_NAME, type: "fanout");
-                    channel.QueueBind(QUEUE_NAME, QUEUE_NAME, eventName);
+            using (var channel = _persistentConnection.CreateModel())
+            {
+                var eventName = @event.GetType().Name;
 
-                    string message = JsonConvert.SerializeObject(@event);
-                    var body = Encoding.UTF8.GetBytes(message);
-                   
+                channel.ExchangeDeclare(exchange: BROKER_NAME,
+                                    type: "direct");
+
+                var message = JsonConvert.SerializeObject(@event);
+                var body = Encoding.UTF8.GetBytes(message);
+
+                policy.Execute(() =>
+                {
                     var properties = channel.CreateBasicProperties();
                     properties.DeliveryMode = 2; // persistent
 
-                    channel.BasicPublish(exchange: QUEUE_NAME,
+                    channel.BasicPublish(exchange: BROKER_NAME,
                                      routingKey: eventName,
                                      mandatory: true,
                                      basicProperties: properties,
                                      body: body);
-                }
+                });
             }
         }
 
@@ -69,46 +101,79 @@ namespace Ametista.Infrastructure.Bus
 
         public void Subscribe<T>() where T : IEvent
         {
-            var factory = new ConnectionFactory() { HostName = "rabbitmq" };
-            using (var connection = factory.CreateConnection())
+            var eventName = typeof(T).Name;
+            var containsKey = _subsManager.ContainsKey(eventName);
+            if (!containsKey)
             {
-                using (var channel = connection.CreateModel())
+                if (!_persistentConnection.IsConnected)
                 {
-                    channel.ExchangeDeclare(exchange: QUEUE_NAME, type: "fanout");
-
-                    channel.QueueDeclare(queue: QUEUE_NAME, durable: true, exclusive: false, autoDelete: false, arguments: null);
-
-                    channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
-
-                    var consumer = new EventingBasicConsumer(channel);
-                    consumer.Received += (model, ea) =>
-                    {
-                        var body = ea.Body;
-                        var message = Encoding.UTF8.GetString(body);
-                        var @event = JsonConvert.DeserializeObject<T>(message);
-                        var subType = typeof(T).Name;
-
-                        try
-                        {
-                            if (subType == @event.Name)
-                            {
-                                eventDispatcher.Dispatch(@event);
-
-                                channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
-                    };
-
-                    channel.BasicConsume(queue: QUEUE_NAME, autoAck: false, consumer: consumer);
+                    _persistentConnection.TryConnect();
                 }
+
+                using (var channel = _persistentConnection.CreateModel())
+                {
+                    channel.QueueBind(queue: QUEUE_NAME,
+                                      exchange: BROKER_NAME,
+                                      routingKey: eventName);
+                }
+            }
+
+            _subsManager.Add(eventName, typeof(T));
+        }
+
+        private IModel CreateConsumerChannel()
+        {
+            if (!_persistentConnection.IsConnected)
+            {
+                _persistentConnection.TryConnect();
+            }
+
+            var channel = _persistentConnection.CreateModel();
+
+            channel.ExchangeDeclare(exchange: BROKER_NAME,
+                                 type: "direct");
+
+            channel.QueueDeclare(queue: QUEUE_NAME,
+                                 durable: true,
+                                 exclusive: false,
+                                 autoDelete: false,
+                                 arguments: null);
+
+            var consumer = new EventingBasicConsumer(channel);
+            consumer.Received += async (model, ea) =>
+            {
+                var eventName = ea.RoutingKey;
+                var message = Encoding.UTF8.GetString(ea.Body);
+
+                await ProcessEvent(eventName, message);
+
+                channel.BasicAck(ea.DeliveryTag, multiple: false);
+            };
+
+            channel.BasicConsume(queue: QUEUE_NAME,
+                                 autoAck: false,
+                                 consumer: consumer);
+
+            channel.CallbackException += (sender, ea) =>
+            {
+                _consumerChannel.Dispose();
+                _consumerChannel = CreateConsumerChannel();
+            };
+
+            return channel;
+        }
+
+        private async Task ProcessEvent(string eventName, string message)
+        {
+            if (_subsManager.ContainsKey(eventName))
+            {
+                var @type = _subsManager[eventName];
+                var @event = JsonConvert.DeserializeObject(message, @type) as IEvent;
+
+                await _eventDispatcher.Dispatch(@event);
             }
         }
 
-        #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
         protected virtual void Dispose(bool disposing)
@@ -117,30 +182,20 @@ namespace Ametista.Infrastructure.Bus
             {
                 if (disposing)
                 {
-                    // TODO: dispose managed state (managed objects).
+                    if (_consumerChannel != null)
+                    {
+                        _consumerChannel.Dispose();
+                    }
+
+                    _subsManager.Clear();
                 }
-
-                // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // TODO: set large fields to null.
-
                 disposedValue = true;
             }
         }
 
-        // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~RabbitMQEventBus() {
-        //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-        //   Dispose(false);
-        // }
-
-        // This code added to correctly implement the disposable pattern.
         void IDisposable.Dispose()
         {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             Dispose(true);
-            // TODO: uncomment the following line if the finalizer is overridden above.
-            // GC.SuppressFinalize(this);
         }
-        #endregion
     }
 }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Ametista.Infrastructure.Persistence.Repository
 {
-    public class CardRepository : ICardWriteOnlyRepository
+    public class CardWriteOnlyRepository : ICardWriteOnlyRepository
     {
         private readonly WriteDbContext writeDbContext;
 
-        public CardRepository(WriteDbContext writeDbContext)
+        public CardWriteOnlyRepository(WriteDbContext writeDbContext)
         {
             this.writeDbContext = writeDbContext ?? throw new ArgumentNullException(nameof(writeDbContext));
         }

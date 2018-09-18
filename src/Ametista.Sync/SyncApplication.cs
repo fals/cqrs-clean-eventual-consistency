@@ -1,6 +1,5 @@
 ﻿using Ametista.Core.Events;
 using Ametista.Core.Interfaces;
-using System.Threading.Tasks;
 
 namespace Ametista.Sync
 {
@@ -20,8 +19,8 @@ namespace Ametista.Sync
 
         public void Run()
         {
-            Task.Run(() => eventBus.Subscribe<CardCreatedEvent>());
-            Task.Run(() => eventBus.Subscribe<TransactionCreatedEvent>());
+            eventBus.Subscribe<CardCreatedEvent>();
+            eventBus.Subscribe<TransactionCreatedEvent>();
         }
     }
 }

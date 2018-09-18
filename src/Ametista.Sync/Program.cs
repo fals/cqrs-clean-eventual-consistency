@@ -5,14 +5,13 @@ using Ametista.Sync;
 using Autofac;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.FileExtensions;
-using Microsoft.Extensions.Configuration.Json;
+using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 
 namespace Amestista.Sync
 {
-    public class Program
+    public static class Program
     {
         private static void Main(string[] args)
         {
@@ -28,6 +27,14 @@ namespace Amestista.Sync
             builder.RegisterType<SyncApplication>()
                 .As<IApplication>();
 
+            builder.RegisterType<LoggerFactory>()
+                .As<ILoggerFactory>()
+                .SingleInstance();
+
+            builder
+                .RegisterGeneric(typeof(Logger<>))
+                .As(typeof(ILogger<>))
+                .SingleInstance();
 
             builder.Register(c =>
             {
