@@ -15,8 +15,6 @@ namespace Amestista.Sync
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Start Sync Application!");
-
             var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json");
@@ -59,10 +57,6 @@ namespace Amestista.Sync
                 var app = scope.Resolve<IApplication>();
                 app.Run();
             }
-
-            Console.WriteLine("Started Sync Application!");
-            Console.WriteLine("Waiting for messages");
-            Console.Read();
         }
     }
 }
