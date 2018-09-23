@@ -25,6 +25,12 @@ services:
     ports:
       - "15672:15672"  # Important: In a production environment your should remove the external port
       - "5672:5672"    # Important: In a production environment your should remove the external port
+  
+  redis.cache:
+    container_name: ametista-redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"
 
   ametista.api:
     container_name: ametista-api
@@ -36,6 +42,7 @@ services:
       - mssql
       - rabbitmq
       - nosql.data
+      - redis.cache
     ports:
       - "5101:80"
 

@@ -18,5 +18,6 @@ namespace Ametista.Core
         public string EventBusHostname { get; set; }
         public string EventBusUsername { get; set; }
         public string EventBusPassword { get; set; }
+        public string RedisCache { get; set; }
     }
 }

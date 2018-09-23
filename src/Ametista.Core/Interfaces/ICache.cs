@@ -7,8 +7,8 @@ namespace Ametista.Core.Interfaces
 {
     public interface ICache
     {
-        Task Store<T>(string key, T value);
-        Task Get<T>(string key);
+        Task Store<T>(string key, T value, params string[] @params);
+        Task<T> Get<T>(string key);
         Task Delete(string key);
     }
 }
