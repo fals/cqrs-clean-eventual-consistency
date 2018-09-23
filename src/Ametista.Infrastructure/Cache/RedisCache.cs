@@ -25,6 +25,12 @@ namespace Ametista.Infrastructure.Cache
         public async Task<T> Get<T>(string key)
         {
             var value = await db.StringGetAsync(key);
+
+            if (!value.HasValue)
+            {
+                return default(T);
+            }
+
             var result = JsonConvert.DeserializeObject<T>(value);
 
             return await Task.FromResult(result);

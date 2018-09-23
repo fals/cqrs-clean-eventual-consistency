@@ -1,6 +1,7 @@
 ﻿using Ametista.Core.Interfaces;
 using Ametista.Core.Repository;
 using Ametista.Infrastructure.Bus;
+using Ametista.Infrastructure.Cache;
 using Ametista.Infrastructure.Persistence.Repository;
 using Autofac;
 using RabbitMQ.Client;
@@ -24,6 +25,11 @@ namespace Ametista.Infrastructure.IoC
             builder
                 .RegisterType<RabbitMQPersistentConnection>()
                 .As<IPersistentConnection<IModel>>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<RedisCache>()
+                .As<ICache>()
                 .SingleInstance();
 
             builder

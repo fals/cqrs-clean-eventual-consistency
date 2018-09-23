@@ -10,10 +10,12 @@ namespace Ametista.Query.EventHandlers
     public class MaterializeTransactionEventHandler : IEventHandler<TransactionCreatedEvent>
     {
         private readonly ReadDbContext readDbContext;
+        private readonly ICache cache;
 
-        public MaterializeTransactionEventHandler(ReadDbContext readDbContext)
+        public MaterializeTransactionEventHandler(ReadDbContext readDbContext, ICache cache)
         {
             this.readDbContext = readDbContext ?? throw new ArgumentNullException(nameof(readDbContext));
+            this.cache = cache ?? throw new ArgumentNullException(nameof(cache));
         }
 
         public async Task Handle(TransactionCreatedEvent e)
@@ -43,8 +45,9 @@ namespace Ametista.Query.EventHandlers
 
             cardList.TransactionCount += 1;
 
+            await cache.Delete(nameof(CardListQueryModel));
             await readDbContext.TransactionListMaterializedView.InsertOneAsync(transactionList);
-            await readDbContext.CardListMaterializedView.ReplaceOneAsync(x => x.Id == cardList.Id, cardList, new UpdateOptions { IsUpsert = true });
+            await readDbContext.CardListMaterializedView.ReplaceOneAsync(filter, cardList, new UpdateOptions { IsUpsert = true });
         }
     }
 }
