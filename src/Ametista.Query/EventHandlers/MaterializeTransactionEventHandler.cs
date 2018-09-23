@@ -1,7 +1,5 @@
 ﻿using Ametista.Core.Events;
 using Ametista.Core.Interfaces;
-using Ametista.Core.Repository;
-using Ametista.Query.Queries;
 using Ametista.Query.QueryModel;
 using MongoDB.Driver;
 using System;
@@ -9,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Ametista.Query.EventHandlers
 {
-    public class SyncTransactionEventHandler : IEventHandler<TransactionCreatedEvent>
+    public class MaterializeTransactionEventHandler : IEventHandler<TransactionCreatedEvent>
     {
         private readonly ReadDbContext readDbContext;
 
-        public SyncTransactionEventHandler(ReadDbContext readDbContext)
+        public MaterializeTransactionEventHandler(ReadDbContext readDbContext)
         {
             this.readDbContext = readDbContext ?? throw new ArgumentNullException(nameof(readDbContext));
         }
@@ -36,7 +34,7 @@ namespace Ametista.Query.EventHandlers
                 UniqueId = e.Data.UniqueId
             };
 
-            if (e.Data.Charge.Amount > cardList.HighestTransactionAmount)
+            if (!cardList.HighestTransactionAmount.HasValue || e.Data.Charge.Amount > cardList.HighestTransactionAmount)
             {
                 cardList.HighestChargeDate = e.Data.ChargeDate;
                 cardList.HighestTransactionId = e.Data.Id;

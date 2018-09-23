@@ -21,7 +21,7 @@ namespace Ametista.Infrastructure.IoC
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterType<SyncTransactionEventHandler>()
+                .RegisterType<MaterializeTransactionEventHandler>()
                 .As<IEventHandler<TransactionCreatedEvent>>()
                 .InstancePerLifetimeScope();
 

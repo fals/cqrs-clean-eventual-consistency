@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Ametista.Query.EventHandlers
 {
-    public class SyncCardEventHandler : IEventHandler<CardCreatedEvent>
+    public class MaterializeCardEventHandler : IEventHandler<CardCreatedEvent>
     {
         private readonly ReadDbContext readDbContext;
 
-        public SyncCardEventHandler(ReadDbContext readDbContext)
+        public MaterializeCardEventHandler(ReadDbContext readDbContext)
         {
             this.readDbContext = readDbContext ?? throw new ArgumentNullException(nameof(readDbContext));
         }
