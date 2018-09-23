@@ -16,7 +16,7 @@ namespace Ametista.Infrastructure.IoC
                 .InstancePerLifetimeScope();
 
             builder
-                .RegisterType<SyncCardEventHandler>()
+                .RegisterType<MaterializeCardEventHandler>()
                 .As<IEventHandler<CardCreatedEvent>>()
                 .InstancePerLifetimeScope();
 
