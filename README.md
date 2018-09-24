@@ -1,4 +1,4 @@
-# ![Guaraci](docs/guaraci-icon.png) Clean Arquiteture CQRS with Derived Data  
+# ![Guaraci](docs/guaraci-icon.png) Clean Architecture CQRS with Derived Data  
 
 CQRS, using Clean Architecture, multiple databases and Eventual Consistency
 
@@ -20,7 +20,7 @@ Here's the basic architecture of this microservice template:
 
 
 * Respecting policy rules, with dependencies always pointing inward
-* Separation of techology details from the rest of the system
+* Separation of technology details from the rest of the system
 * SOLID
 * Single responsibility of each layer
 
@@ -45,7 +45,7 @@ Below you can find a basic interaction between components in the **Command Stack
 
 Responsible to provide data to consumers of your application, containing a simplified and more suitable model for reading, with calculated data, aggregated values and materialized structures.
 
-The fallowing image contains the basic interaction beween components in the **Query Stack**:
+The fallowing image contains the basic interaction between components in the **Query Stack**:
 
 
 
@@ -53,35 +53,35 @@ The fallowing image contains the basic interaction beween components in the **Qu
 
 ## :books: DDD
 
-This exemple contains a simplified Domain Model, with entities, aggregate roots, value objects and events, which are essential to syncronize the writing with reading database.
+This example contains a simplified Domain Model, with entities, aggregate roots, value objects and events, which are essential to synchronize the writing with reading database.
 
 ## :heavy_check_mark: TDD
 
-The project contains a well defined IoC structure that allow you unit test almost every part of this service templates, besides technology dependencies.
+The project contains a well-defined IoC structure that allow you unit test almost every part of this service template, besides technology dependencies.
 
-Inside the main layers you gonna find Interfaces which are essential for the application, but com their implementations inside their own layers, what allow Mocking, Stubbing, using test doubles.
+Inside the main layers you going to find Interfaces which are essential for the application, but com their implementations inside their own layers, what allow Mocking, Stubbing, using test doubles.
 
 ## :bar_chart: Data Intensive Microservice
 
-This microservice template comes with a SRP and SOC in mind. Given the own nature of CQRS, you can easily scale this application tunning each stack separetly.
+This microservice template comes with SRP and SOC in mind. Given the own nature of CQRS, you can easily scale this application tuning each stack separately.
 
 ## :page_facing_up: Derived Data
 
-Having multiple stores of data makes this system a Derived Data system, which means, you never lose data, you can always rebuild one store from another, for exemple, if you lose a event which sync data between the write and read database you can always get this data back from the write database and rebuild the read store.
+Having multiple stores of data makes this system a Derived Data system, which means, you never lose data, you can always rebuild one store from another, for example, if you lose an event which sync data between the write and read database you can always get this data back from the write database and rebuild the read store.
 
 ## :envelope: Message Broker
 
-Given the fisical isolation of data stores, **Command Stack** and **Query Stack** must communicate to syncronize data. This is done here using a Message Broker.
+Given the physical isolation of data stores, **Command Stack** and **Query Stack** must communicate to synchronize data. This is done here using a Message Broker.
 
 ![](docs/sync_write_read.jpg)
 
-Every succeful handled command creates and event, which is published into a Message Broker. An syncronization backgroud process subscribe to those events and is responsible for updating the reading database.
+Every successful handled command creates an event, which is published into a Message Broker. A synchronization background process subscribes to those events and is responsible for updating the reading database.
 
 ## :clock2: Eventual Consistency
 
-Everything comes with some kind of down side. The case of CRQS with multiple databases, to maintaing hight availability and scalability we create inconsistencys between databases.
+Everything comes with some kind of down side. The case of CRQS with multiple databases, to maintain high availability and scalability we create inconsistencies between databases.
 
-More specificaly, replicating data between two databases creates an eventual consistency, which in a specific moment in time, given the replication lag they are different, although is a temporaty state and it eventualy resolves it self.
+More specifically, replicating data between two databases creates an eventual consistency, which in a specific moment in time, given the replication lag they are different, although is a temporary state and it eventually resolves itself.
 
 ## :clipboard: References
 
