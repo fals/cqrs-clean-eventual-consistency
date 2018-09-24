@@ -8,92 +8,86 @@ CQRS, using Clean Architecture, multiple databases and Eventual Consistency
 
 ## :floppy_disk: How do I use it?
 
-Coming soon.
+You need some the fallowing tools:
+
+* Docker
+* Visual Studio 2017
+* .Net Core 2.1
 
 ## :dart: Clean Architecture
 
->The strategy behind that facilitation is to leave as many options open as possible, for as long as possible, Robet C. Martin
+Here's the basic architecture of this microservice template:
 
-Clean Architecture has lots of different interpretations and implementations around. I've tried to implement CQRS with Clean in the best way to take advantage of the main concepts of this architectural pattern, making this microservice template flexible, maintainable, evolvable, testable, detached from technology and what I think as more important respecting the policy rule below:
 
->Source Code dependencies must point only inward, towards higher-level policy.
+* Respecting policy rules, with dependencies always pointing inward
+* Separation of techology details from the rest of the system
+* SOLID
+* Single responsibility of each layer
 
-![cqrs-clean](https://github.com/fals/cqrs-clean-eventual-consistency/blob/master/docs/cqrs-clean.png)
 
-This implementation brings as inner ring what I call **Core**, where you should implement your business rules, and keep the base of you microservice itself, such as: important interfaces, business entities, base classes, events. You're going to find that I'm using DDD here, with entities, aggregates, value objects and repository pattern. I've seem some implementations calling it Domain, but we shouldn't restrict this as a pattern or principles names, because what we can have there is more than what the DDD pattern does, is the heart of the application itself. Also, even if CQRS and DDD are likely to be used together, you can implement your business the way you want and take advantage of what is more important in this sample, data intensive applications.
-
-The next ring, which many implementations call it **Application** contains our Use Cases. CQRS has an strict way to implement these Use Cases, we have an stack responsible for dealing directly with your Business Entities, adding, updating or removing, residing inside **Command**. Those Use Cases that require reading data are inside **Query**, and also the ways to transform business entities to Derived Data format, which is more suitable for reading. Consider both layers **Application**, they are at the same level, but in different assemblies with different responsibilities. 
-
-The **Infrastructure** is responsible strictly to keep technology. You can find there the implementations of repositories for business entities, message brokers, dependency injection and any other thing that represents a detail for Clean Architecture, mostly framework dependent, external dependencies, etc.
-
-The outer ring contains a way for users to communicate with our application, the **UI**. This layer can be anything that allow input or retrieve data. For this implementation I'm using ASP.NET as UI.
+![cqrs-clean](docs/cqrs-clean.png)
 
 ## :scissors: CQRS
 
-In most scenarios business domains are complex, and they grow even more in complexity over time. Implementing simple queries using the same model became harder and using the same entities to perform them not suitable. 
-
-To address this problem a good alternative is CQRS pattern. CRQS is an acronym for Command and Query Responsibility Segregation. As mentioned we have a well defined segregation between the model you write from the one you read.
+Segregation between Commands and Queries, with isolated databases and different models
 
 ![](docs/cqrs_layer_diagram.png)
 
-This pattern is an excellent choice to maintain the scalability of your system, given the single responsibility of each stack, you can perform tuning to the stack in which more commonly operations are performed. 
-
-For example, if you have a heavy load in the query stack you should implement cache strategies and database replication to balance and drastically improve readings. In other hand, if you have a heavy write load in your system, you could simply turn the command stack from a sync model to a async model to improve it.
-
-> Separating queries from commands gives you the chance to work on the scalability aspects of both
-> parts in total isolation, Dino Esposito, Architecting for the Enterprise 2nd edition
-
-This miroservice template contains an implementations of CQRS with different databases, which makes even more clear the separation between commands and queries.
-
-Although, CQRS bring complexity to your system, given that you must support messaging brokers and events to guarantee the synchronization between the write database and the read database.
-
 ### :arrow_down: Command Stack
 
-Commands are responsible for performing writes in your system and should be task based.  
+Has direct access to business rules and is responsible for only writes in the application.
 
-Each command has it own handler, in which the Use Case is implemented. Every time a command is dispatched and processed if the outcome is successful, an event is publish into a message broker with all needed information from your business entity, thereby your query stack can acknowledge changes in the write model, and persist it into the read database.
+Below you can find a basic interaction between components in the **Command Stack**:
 
 ![](docs/create_card_interaction.png)
 
-The example above you can see a CreateCardCommand, which is handled by the CreateCardCommandHandler. The handler acts as the Use Case implementation, making the interactions between the command and Card domain entity. The Card is created given the data carried by the command and persisted using the CardWriteOnlyRepository. A CardCreatedEvent is then published to the event bus and a CreateCardCommandResult is returned to the caller.
-
-Every command has a result pair in this implementations, because its not using an async model for the command stack. If you go for an async model, you could publish the result or even another event to a message queue to inform other clients.
-
 ### :arrow_up: Query Stack
 
-Coming soon.
+Responsible to provide data to consumers of your application, containing a simplified and more suitable model for reading, with calculated data, aggregated values and materialized structures.
+
+The fallowing image contains the basic interaction beween components in the **Query Stack**:
+
+
+
+![](docs/get_card_list_interaction.png)
 
 ## :books: DDD
 
-Coming soon.
+This exemple contains a simplified Domain Model, with entities, aggregate roots, value objects and events, which are essential to syncronize the writing with reading database.
 
 ## :heavy_check_mark: TDD
 
-Coming soon.
+The project contains a well defined IoC structure that allow you unit test almost every part of this service templates, besides technology dependencies.
+
+Inside the main layers you gonna find Interfaces which are essential for the application, but com their implementations inside their own layers, what allow Mocking, Stubbing, using test doubles.
 
 ## :bar_chart: Data Intensive Microservice
 
-Coming soon.
+This microservice template comes with a SRP and SOC in mind. Given the own nature of CQRS, you can easily scale this application tunning each stack separetly.
 
 ## :page_facing_up: Derived Data
 
-Coming soon.
+Having multiple stores of data makes this system a Derived Data system, which means, you never lose data, you can always rebuild one store from another, for exemple, if you lose a event which sync data between the write and read database you can always get this data back from the write database and rebuild the read store.
 
 ## :envelope: Message Broker
 
-Coming soon.
+Given the fisical isolation of data stores, **Command Stack** and **Query Stack** must communicate to syncronize data. This is done here using a Message Broker.
 
-## :straight_ruler: Linearizability
+![](docs/sync_write_read.jpg)
 
-Coming soon.
+Every succeful handled command creates and event, which is published into a Message Broker. An syncronization backgroud process subscribe to those events and is responsible for updating the reading database.
 
-## :loop: Eventual Consistency
+## :clock2: Eventual Consistency
 
-Coming soon.
+Everything comes with some kind of down side. The case of CRQS with multiple databases, to maintaing hight availability and scalability we create inconsistencys between databases.
+
+More specificaly, replicating data between two databases creates an eventual consistency, which in a specific moment in time, given the replication lag they are different, although is a temporaty state and it eventualy resolves it self.
 
 ## :clipboard: References
 
 Here's a list of reliable information used to bring this project to life.
+
+* <a href="https://www.amazon.com/Designing-Data-Intensive-Applications-Reliable-Maintainable/dp/1449373321/ref=sr_1_1?ie=UTF8&qid=1537824366&sr=8-1&keywords=designing+data-intensive+applications" target="_blank">Designing Data Intensive Applications</a>
 
 * <a href="https://www.amazon.com/Clean-Architecture-Craftsmans-Software-Structure/dp/0134494164" target="_blank">Clean Architecture, Robert C. Martin</a>
 
