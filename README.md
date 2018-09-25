@@ -59,7 +59,7 @@ This example contains a simplified Domain Model, with entities, aggregate roots,
 
 The project contains a well-defined IoC structure that allow you unit test almost every part of this service template, besides technology dependencies.
 
-Inside the main layers you going to find Interfaces which are essential for the application, but com their implementations inside their own layers, what allow Mocking, Stubbing, using test doubles.
+Inside the main layers you going to find Interfaces which are essential for the application, but with their implementations inside their own layers, what allow Mocking, Stubbing, using test doubles.
 
 ## :bar_chart: Data Intensive Microservice
 
