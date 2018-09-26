@@ -67,7 +67,7 @@ This microservice template comes with SRP and SOC in mind. Given the own nature 
 
 ## :page_facing_up: Derived Data
 
-Having multiple stores of data makes this system a Derived Data system, which means, you never lose data, you can always rebuild one store from another, for example, if you lose an event which sync data between the write and read database you can always get this data back from the write database and rebuild the read store.
+Having multiple data stores makes this system a Derived Data system, which means, you never lose data, you can always rebuild one store from another, for example, if you lose an event which sync data between the write and read database you can always get this data back from the write database and rebuild the read store.
 
 ## :envelope: Message Broker
 
