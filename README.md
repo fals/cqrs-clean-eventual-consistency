@@ -6,6 +6,17 @@ CQRS, using Clean Architecture, multiple databases and Eventual Consistency
 [![Build status](https://ci.appveyor.com/api/projects/status/github/fals/cqrs-clean-eventual-consistency?branch=master&svg=true)](https://ci.appveyor.com/project/fals/cqrs-clean-eventual-consistency)
 [![codecov](https://codecov.io/gh/fals/cqrs-clean-eventual-consistency/branch/master/graph/badge.svg)](https://codecov.io/gh/fals/cqrs-clean-eventual-consistency)
 
+## :bookmark_tabs: Detailed information
+
+I also keep more detailed information in my blog, and I going to release weekly to clarify my ideas:
+
+- [X] <a her="https://blog.fals.io/2018-09-19-cqrs-clean-architecture/" target="_blank">CQRS Translated to Clean Architecture</a>
+    - [ ] CQRS Deep dive into Commands
+    - [ ] CQRS Queries and Materialization
+    - [ ] CQRS Consensus and Consistency
+    - [ ] CQRS Distributed chaos, CAP Theorem
+
+
 ## :floppy_disk: How do I use it?
 
 You need some the fallowing tools:
