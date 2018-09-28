@@ -10,7 +10,7 @@ CQRS, using Clean Architecture, multiple databases and Eventual Consistency
 
 I also keep more detailed information in my blog, and I going to release weekly to clarify my ideas:
 
-- [X] <a her="https://blog.fals.io/2018-09-19-cqrs-clean-architecture/" target="_blank">CQRS Translated to Clean Architecture</a>
+- [X] [CQRS Translated to Clean Architecture](https://blog.fals.io/2018-09-19-cqrs-clean-architecture/)
     - [ ] CQRS Deep dive into Commands
     - [ ] CQRS Queries and Materialization
     - [ ] CQRS Consensus and Consistency
