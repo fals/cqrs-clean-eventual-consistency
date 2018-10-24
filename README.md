@@ -19,7 +19,7 @@ I also keep more detailed information in my blog, and I going to release weekly 
 
 ## :floppy_disk: How do I use it?
 
-You need some the fallowing tools:
+You need some of the fallowing tools:
 
 * Docker
 * Visual Studio 2017
@@ -90,7 +90,7 @@ Every successful handled command creates an event, which is published into a Mes
 
 ## :clock2: Eventual Consistency
 
-Everything comes with some kind of down side. The case of CRQS with multiple databases, to maintain high availability and scalability we create inconsistencies between databases.
+Everything comes with some kind of down side. The case of CQRS with multiple databases, to maintain high availability and scalability we create inconsistencies between databases.
 
 More specifically, replicating data between two databases creates an eventual consistency, which in a specific moment in time, given the replication lag they are different, although is a temporary state and it eventually resolves itself.
 
