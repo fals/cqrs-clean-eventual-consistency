@@ -1,6 +1,7 @@
 ﻿using Ametista.Core.Events;
 using Ametista.Core.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace Ametista.Sync
 {
@@ -21,13 +22,15 @@ namespace Ametista.Sync
         public void Run()
         {
             Console.WriteLine("Start Sync Application!");
-
-            eventBus.Subscribe<CardCreatedEvent>();
-            eventBus.Subscribe<TransactionCreatedEvent>();
-
-            Console.WriteLine("Started Sync Application!");
             Console.WriteLine("Waiting for messages");
-            Console.Read();
+
+            while (true)
+            {
+                eventBus.Subscribe<CardCreatedEvent>();
+                eventBus.Subscribe<TransactionCreatedEvent>();
+
+                Task.Delay(1000);
+            }
         }
     }
 }

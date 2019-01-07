@@ -42,7 +42,7 @@ namespace Ametista.Query.Queries
                     .Take(query.Limit)
                     .ToListAsync();
 
-                await cache.Store<IEnumerable<CardListQueryModel>>(nameof(GetCardListQuery), itemsTask);
+                await cache.Store<IEnumerable<CardListQueryModel>>(nameof(GetCardListQuery), itemsTask, null);
 
                 return itemsTask;
             }

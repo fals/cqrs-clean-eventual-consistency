@@ -1,5 +1,6 @@
 ﻿using Ametista.Core.Events;
 using Ametista.Core.Interfaces;
+using Ametista.Query;
 using Ametista.Query.EventHandlers;
 using Autofac;
 using System.Reflection;
@@ -24,6 +25,11 @@ namespace Ametista.Infrastructure.IoC
                 .RegisterType<MaterializeTransactionEventHandler>()
                 .As<IEventHandler<TransactionCreatedEvent>>()
                 .InstancePerLifetimeScope();
+
+            builder
+               .RegisterType<ReadDbContext>()
+               .AsSelf()
+               .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<EventDispatcher>()

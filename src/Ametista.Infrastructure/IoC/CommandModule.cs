@@ -1,4 +1,6 @@
 ﻿using Ametista.Command;
+using Ametista.Core.Repository;
+using Ametista.Infrastructure.Persistence.Repository;
 using Autofac;
 using System.Reflection;
 
@@ -8,6 +10,16 @@ namespace Ametista.Infrastructure.IoC
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder
+               .RegisterType<CardWriteOnlyRepository>()
+               .As<ICardWriteOnlyRepository>()
+               .InstancePerLifetimeScope();
+
+            builder
+               .RegisterType<TransactionWriteOnlyRepository>()
+               .As<ITransactionWriteOnlyRepository>()
+               .InstancePerLifetimeScope();
+
             builder
                 .RegisterAssemblyTypes(typeof(ICommandHandler<,>).GetTypeInfo().Assembly)
                 .AsClosedTypesOf(typeof(ICommandHandler<,>))

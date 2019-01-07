@@ -105,20 +105,20 @@ namespace Ametista.Infrastructure.Bus
             var containsKey = _subsManager.ContainsKey(eventName);
             if (!containsKey)
             {
-                if (!_persistentConnection.IsConnected)
-                {
-                    _persistentConnection.TryConnect();
-                }
-
-                using (var channel = _persistentConnection.CreateModel())
-                {
-                    channel.QueueBind(queue: QUEUE_NAME,
-                                      exchange: BROKER_NAME,
-                                      routingKey: eventName);
-                }
+                _subsManager.Add(eventName, typeof(T));
             }
 
-            _subsManager.Add(eventName, typeof(T));
+            if (!_persistentConnection.IsConnected)
+            {
+                _persistentConnection.TryConnect();
+            }
+
+            using (var channel = _persistentConnection.CreateModel())
+            {
+                channel.QueueBind(queue: QUEUE_NAME,
+                                  exchange: BROKER_NAME,
+                                  routingKey: eventName);
+            }
         }
 
         private IModel CreateConsumerChannel()

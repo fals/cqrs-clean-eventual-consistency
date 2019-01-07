@@ -33,21 +33,9 @@ namespace Amestista.Sync
                 .RegisterGeneric(typeof(Logger<>))
                 .As(typeof(ILogger<>))
                 .SingleInstance();
-
-            builder.Register(c =>
-            {
-                var opt = new DbContextOptionsBuilder<WriteDbContext>();
-                opt.UseSqlServer(configuration.GetConnectionString("SqlServerConnectionString"));
-
-                return new WriteDbContext(opt.Options);
-            })
-            .AsSelf()
-            .InstancePerLifetimeScope();
             
-            builder.RegisterModule(new CommandModule());
-            builder.RegisterModule(new EventModule());
             builder.RegisterModule(new InfrastructureModule());
-            builder.RegisterModule(new QueryModule());
+            builder.RegisterModule(new EventModule());
             builder.RegisterInstance(configuration.Get<AmetistaConfiguration>());
 
             var container = builder.Build();

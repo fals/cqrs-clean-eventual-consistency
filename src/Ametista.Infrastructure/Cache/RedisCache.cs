@@ -2,7 +2,7 @@
 using Ametista.Core.Interfaces;
 using Newtonsoft.Json;
 using StackExchange.Redis;
-using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ametista.Infrastructure.Cache
@@ -19,7 +19,12 @@ namespace Ametista.Infrastructure.Cache
 
         public async Task Delete(string key)
         {
-            await db.KeyDeleteAsync(key);
+            foreach (var ep in redis.GetEndPoints())
+            {
+                var server = redis.GetServer(ep);
+                var keys = server.Keys(pattern: key).ToArray();
+                await db.KeyDeleteAsync(keys);
+            }
         }
 
         public async Task<T> Get<T>(string key)
