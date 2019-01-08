@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ametista.Query.Queries
@@ -25,7 +26,7 @@ namespace Ametista.Query.Queries
             {
                 var cached = await cache.Get<IEnumerable<CardListQueryModel>>(nameof(GetCardListQuery));
 
-                if (cached != null)
+                if (cached != null && cached.Any())
                 {
                     return cached;
                 }

@@ -1,8 +1,9 @@
 ﻿using Ametista.Core;
 using Ametista.Core.Interfaces;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using StackExchange.Redis;
-using System.Linq;
+using System;
 using System.Threading.Tasks;
 
 namespace Ametista.Infrastructure.Cache
@@ -11,19 +12,26 @@ namespace Ametista.Infrastructure.Cache
     {
         private readonly ConnectionMultiplexer redis;
         private readonly IDatabase db;
-        public RedisCache(AmetistaConfiguration configuration)
+        private readonly ILogger<RedisCache> _logger;
+
+        public RedisCache(AmetistaConfiguration configuration, ILogger<RedisCache> logger)
         {
             redis = ConnectionMultiplexer.Connect(configuration.ConnectionStrings.RedisCache);
             db = redis.GetDatabase();
+            _logger = logger;
         }
 
-        public async Task Delete(string key)
+        public async Task<bool> Delete(string key)
         {
-            foreach (var ep in redis.GetEndPoints())
+            try
             {
-                var server = redis.GetServer(ep);
-                var keys = server.Keys(pattern: key).ToArray();
-                await db.KeyDeleteAsync(keys);
+                return await db.KeyDeleteAsync(key);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro when deleting redis cache key");
+
+                throw;
             }
         }
 

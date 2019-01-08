@@ -9,6 +9,6 @@ namespace Ametista.Core.Interfaces
     {
         Task Store<T>(string key, T value, params string[] @params);
         Task<T> Get<T>(string key);
-        Task Delete(string key);
+        Task<bool> Delete(string key);
     }
 }
