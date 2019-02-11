@@ -4,6 +4,11 @@ namespace Ametista.Command.Commands
 {
     public class CreateCardCommandResult : CommandResult
     {
+        public CreateCardCommandResult()
+        {
+            Success = false;
+        }
+
         public CreateCardCommandResult(Guid id, string number, string cardHolder, DateTime expirationDate, bool success)
         {
             Id = id;

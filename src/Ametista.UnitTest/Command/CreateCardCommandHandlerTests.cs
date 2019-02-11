@@ -83,7 +83,7 @@ namespace Ametista.UnitTest.Command
 
         private CreateCardCommand CreateCardCommand()
         {
-            return new CreateCardCommand("33334444555566667777", "MR FILIPE LIMA", DateTime.Now.Date);
+            return new CreateCardCommand("371449635398431", "MR FILIPE LIMA", DateTime.Now.Date);
         }
     }
 }

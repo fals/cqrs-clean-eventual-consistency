@@ -1,6 +1,7 @@
 ﻿using Ametista.Core.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ametista.Core.Entities.Cards
 {
@@ -13,8 +14,8 @@ namespace Ametista.Core.Entities.Cards
         private Card(string number, string cardHolder, DateTime expirationDate)
         {
             Id = Guid.NewGuid();
-            Number = number ?? throw new ArgumentNullException(nameof(number));
-            CardHolder = cardHolder ?? throw new ArgumentNullException(nameof(cardHolder));
+            Number = number;
+            CardHolder = cardHolder;
             ExpirationDate = expirationDate;
         }
 
@@ -26,7 +27,7 @@ namespace Ametista.Core.Entities.Cards
 
         public string Number { get; private set; }
 
-        public bool Valid => throw new NotImplementedException();
+        public bool Valid { get; private set; }
 
         public static Card CreateNewCard(string number, string cardHolder, DateTime expirationDate)
         {
@@ -52,7 +53,11 @@ namespace Ametista.Core.Entities.Cards
 
         public void Validate(ValidationNotificationHandler notificationHandler)
         {
-            throw new NotImplementedException();
+            var validator = new CardValidator(notificationHandler);
+
+            validator.Validate(this);
+
+            Valid = !notificationHandler.Notifications.Any();
         }
     }
 }

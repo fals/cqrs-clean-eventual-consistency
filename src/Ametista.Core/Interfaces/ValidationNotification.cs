@@ -5,13 +5,13 @@ namespace Ametista.Core
 {
     public class ValidationNotification : IEquatable<ValidationNotification>
     {
-        public ValidationNotification(string errorCode, string message)
+        public ValidationNotification(string code, string message)
         {
-            Code = Guid.Parse(errorCode);
+            Code = code;
             Message = message ?? throw new ArgumentNullException(nameof(message));
         }
 
-        public Guid Code { get; private set; }
+        public string Code { get; private set; }
         public string Message { get; private set; }
 
         public override bool Equals(object obj)
@@ -29,7 +29,7 @@ namespace Ametista.Core
         public override int GetHashCode()
         {
             var hashCode = -1809243720;
-            hashCode = hashCode * -1521134295 + EqualityComparer<Guid>.Default.GetHashCode(Code);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Code);
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Message);
             return hashCode;
         }

@@ -11,7 +11,7 @@ namespace Ametista.Core
             this.notificationHandler = notificationHandler ?? throw new ArgumentNullException(nameof(notificationHandler));
         }
 
-        public abstract bool Validate(TEntity entity);
+        public abstract void Validate(TEntity entity);
 
         protected void CheckRule(TEntity entity, ISpecification<TEntity> specification, string code, string message)
         {
