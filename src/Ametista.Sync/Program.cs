@@ -1,12 +1,9 @@
 ﻿using Ametista.Core;
 using Ametista.Infrastructure.IoC;
-using Ametista.Infrastructure.Persistence;
 using Ametista.Sync;
 using Autofac;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using System;
 using System.IO;
 
 namespace Amestista.Sync

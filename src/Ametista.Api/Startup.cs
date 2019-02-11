@@ -1,4 +1,5 @@
-﻿using Ametista.Core;
+﻿using Ametista.Api.Filters;
+using Ametista.Core;
 using Ametista.Infrastructure.IoC;
 using Ametista.Infrastructure.Persistence;
 using Autofac;
@@ -34,7 +35,11 @@ namespace Ametista.Api
 
             services.AddSingleton(Configuration.Get<AmetistaConfiguration>());
 
-            services.AddMvc().AddApplicationPart(typeof(Startup).Assembly);
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(ValidateModelStateAttribute));
+            })
+            .AddApplicationPart(typeof(Startup).Assembly);
 
             services.AddSwaggerGen(c =>
             {
