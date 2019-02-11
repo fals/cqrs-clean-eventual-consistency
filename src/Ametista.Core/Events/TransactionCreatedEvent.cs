@@ -1,4 +1,4 @@
-﻿using Ametista.Core.Entity;
+﻿using Ametista.Core.Entities.Transactions;
 
 namespace Ametista.Core.Events
 {

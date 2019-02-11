@@ -1,4 +1,4 @@
-﻿using Ametista.Core.Entity;
+﻿using Ametista.Core.Entities.Cards;
 using System;
 
 namespace Ametista.Core.Events

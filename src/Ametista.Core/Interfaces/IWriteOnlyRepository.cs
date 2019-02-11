@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Ametista.Core.Interfaces
 {
-    public interface IWriteOnlyRepository<TEntity> where TEntity : IAggregate
+    public interface IWriteOnlyRepository<TEntity> where TEntity : IAggregateRoot
     {
         Task<TEntity> FindAsync(Guid id); // only allowed find the entity for update or delete
 

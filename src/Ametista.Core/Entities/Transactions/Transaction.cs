@@ -3,9 +3,9 @@ using Ametista.Core.ValueObjects;
 using System;
 using System.Collections.Generic;
 
-namespace Ametista.Core.Entity
+namespace Ametista.Core.Entities.Transactions
 {
-    public class Transaction : IAggregate
+    public class Transaction : IAggregateRoot
     {
         protected Transaction()
         {
@@ -30,6 +30,8 @@ namespace Ametista.Core.Entity
 
         public string UniqueId { get; private set; }
 
+        public bool Valid => throw new NotImplementedException();
+
         public static Transaction CreateTransactionForCard(Guid cardGuid, string uniqueId, DateTimeOffset chargeDate, Money charge)
         {
             return new Transaction(cardGuid, uniqueId, chargeDate, charge);
@@ -50,6 +52,11 @@ namespace Ametista.Core.Entity
         public override int GetHashCode()
         {
             return -401120461 + EqualityComparer<string>.Default.GetHashCode(UniqueId);
+        }
+
+        public void Validate(ValidationNotificationHandler notificationHandler)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,9 +1,13 @@
-﻿using System;
-
-namespace Ametista.Core.Interfaces
+﻿namespace Ametista.Core
 {
     public interface IEntity
     {
-        Guid Id { get; }
+        bool Valid { get; }
+        void Validate(ValidationNotificationHandler notificationHandler);
+    }
+
+    public interface IEntity<T> : IEntity
+    {
+        T Id { get; }
     }
 }

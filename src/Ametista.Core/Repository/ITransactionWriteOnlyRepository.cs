@@ -1,4 +1,4 @@
-﻿using Ametista.Core.Entity;
+﻿using Ametista.Core.Entities.Transactions;
 using Ametista.Core.Interfaces;
 
 namespace Ametista.Core.Repository

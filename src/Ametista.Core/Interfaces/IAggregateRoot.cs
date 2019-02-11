@@ -1,6 +1,6 @@
 ﻿namespace Ametista.Core.Interfaces
 {
-    public interface IAggregate : IEntity
+    public interface IAggregateRoot : IEntity
     {
     }
 }

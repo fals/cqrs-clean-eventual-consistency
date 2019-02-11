@@ -1,4 +1,5 @@
-﻿using Ametista.Core.Entity;
+﻿using Ametista.Core.Entities.Cards;
+using Ametista.Core.Entities.Transactions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ametista.Infrastructure.Persistence

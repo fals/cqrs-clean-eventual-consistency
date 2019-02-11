@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace Ametista.Core.Entity
+namespace Ametista.Core.Entities.Cards
 {
-    public class Card : IAggregate
+    public class Card : IAggregateRoot
     {
         protected Card()
         {
@@ -26,6 +26,8 @@ namespace Ametista.Core.Entity
 
         public string Number { get; private set; }
 
+        public bool Valid => throw new NotImplementedException();
+
         public static Card CreateNewCard(string number, string cardHolder, DateTime expirationDate)
         {
             return new Card(number, cardHolder, expirationDate);
@@ -46,6 +48,11 @@ namespace Ametista.Core.Entity
             hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(CardHolder);
             hashCode = hashCode * -1521134295 + ExpirationDate.GetHashCode();
             return hashCode;
+        }
+
+        public void Validate(ValidationNotificationHandler notificationHandler)
+        {
+            throw new NotImplementedException();
         }
     }
 }

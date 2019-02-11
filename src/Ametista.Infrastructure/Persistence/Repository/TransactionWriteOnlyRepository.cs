@@ -1,4 +1,4 @@
-﻿using Ametista.Core.Entity;
+﻿using Ametista.Core.Entities.Transactions;
 using Ametista.Core.Repository;
 using System;
 using System.Linq;
