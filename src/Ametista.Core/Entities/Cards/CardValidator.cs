@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ametista.Core.Entities.Cards
+﻿namespace Ametista.Core.Entities.Cards
 {
     public class CardValidator : Validator<Card>
     {

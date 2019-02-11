@@ -37,6 +37,12 @@ namespace Ametista.Infrastructure.Persistence.Repository
             return await writeDbContext.Cards.FindAsync(id);
         }
 
+        public bool IsDuplicatedCardNumber(string cardNamber)
+        {
+            return writeDbContext.Cards
+                .Any(x => x.Number == cardNamber);
+        }
+
         public async Task<bool> Update(Card entity)
         {
             writeDbContext.Cards.Update(entity);

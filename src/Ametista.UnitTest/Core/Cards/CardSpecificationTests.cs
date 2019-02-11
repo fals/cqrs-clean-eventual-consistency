@@ -1,7 +1,5 @@
 ﻿using Ametista.Core.Entities.Cards;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Ametista.UnitTest.Core.Cards

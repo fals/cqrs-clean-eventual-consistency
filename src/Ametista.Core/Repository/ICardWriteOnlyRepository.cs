@@ -5,5 +5,6 @@ namespace Ametista.Core.Repository
 {
     public interface ICardWriteOnlyRepository : IWriteOnlyRepository<Card>
     {
+        bool IsDuplicatedCardNumber(string cardNamber);
     }
 }

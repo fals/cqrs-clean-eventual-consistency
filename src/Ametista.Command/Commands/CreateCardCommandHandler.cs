@@ -23,6 +23,11 @@ namespace Ametista.Command.Commands
 
         public async Task<CreateCardCommandResult> Handle(CreateCardCommand command)
         {
+            if (cardRepository.IsDuplicatedCardNumber(command.Number))
+            {
+                notificationHandler.AddNotification(nameof(CreateCardCommand.Number), $"Card number already exists {command.Number}");
+            }
+
             var newCard = Card.CreateNewCard(command.Number, command.CardHolder, command.ExpirationDate);
             newCard.Validate(notificationHandler);
 
