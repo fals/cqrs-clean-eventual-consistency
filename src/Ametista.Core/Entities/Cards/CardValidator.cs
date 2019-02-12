@@ -8,7 +8,7 @@
 
         public override void Validate(Card entity)
         {
-            CheckRule<CardHasValidCardNumberSpec>(entity, nameof(Card.Number), $"Ivalid Card Number {entity.Number}");
+            CheckRule<CardHasValidNumberSpec>(entity, nameof(Card.Number), $"Ivalid Card Number {entity.Number}");
         }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Ametista.Core.Entities.Cards
 {
-    public class CardHasValidCardNumberSpec : CompositeSpecification<Card>
+    public class CardHasValidNumberSpec : CompositeSpecification<Card>
     {
-        public CardHasValidCardNumberSpec()
+        public CardHasValidNumberSpec()
         {
 
         }

@@ -18,11 +18,12 @@ namespace Ametista.UnitTest.Core.Cards
         [InlineData("30569309025904", true)]
         [InlineData("5555555555554444", true)]
         [InlineData("4111111111111111", true)]
+        [InlineData("AAAAAAAAAAAAAAAA", false)]
         public void Card_Has_Valid_Card_Number_Spec(string number, bool valid)
         {
             // Arrange
             var card = Card.CreateNewCard(number, null, DateTime.Now);
-            var spec = new CardHasValidCardNumberSpec();
+            var spec = new CardHasValidNumberSpec();
 
             // Act
             var isSatisfiedBy = spec.IsSatisfiedBy(card);
