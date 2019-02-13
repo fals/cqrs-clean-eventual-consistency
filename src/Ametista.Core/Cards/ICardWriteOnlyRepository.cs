@@ -1,7 +1,7 @@
-﻿using Ametista.Core.Entities.Cards;
+﻿
 using Ametista.Core.Interfaces;
 
-namespace Ametista.Core.Repository
+namespace Ametista.Core.Cards
 {
     public interface ICardWriteOnlyRepository : IWriteOnlyRepository<Card>
     {

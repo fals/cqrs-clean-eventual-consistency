@@ -1,4 +1,4 @@
-﻿using Ametista.Core.Entities.Cards;
+﻿using Ametista.Core.Cards;
 using System;
 using Xunit;
 
@@ -23,7 +23,7 @@ namespace Ametista.UnitTest.Core.Cards
         {
             // Arrange
             var card = Card.CreateNewCard(number, null, DateTime.Now);
-            var spec = new CardHasValidNumberSpec();
+            var spec = new HasValidNumberSpec();
 
             // Act
             var isSatisfiedBy = spec.IsSatisfiedBy(card);

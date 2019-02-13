@@ -1,4 +1,4 @@
-﻿using Ametista.Core.Events;
+﻿using Ametista.Core.Cards;
 using Ametista.Core.Interfaces;
 using Ametista.Query.QueryModel;
 using System;

@@ -1,5 +1,4 @@
-﻿using Ametista.Core.Entities.Cards;
-using Ametista.Core.Repository;
+﻿using Ametista.Core.Cards;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

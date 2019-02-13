@@ -1,5 +1,6 @@
 ﻿using Ametista.Command;
-using Ametista.Core.Repository;
+using Ametista.Core.Cards;
+using Ametista.Core.Transactions;
 using Ametista.Infrastructure.Persistence.Repository;
 using Autofac;
 using System.Reflection;

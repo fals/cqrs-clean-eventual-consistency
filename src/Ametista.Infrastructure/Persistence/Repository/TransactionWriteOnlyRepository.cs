@@ -1,5 +1,4 @@
-﻿using Ametista.Core.Entities.Transactions;
-using Ametista.Core.Repository;
+﻿using Ametista.Core.Transactions;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

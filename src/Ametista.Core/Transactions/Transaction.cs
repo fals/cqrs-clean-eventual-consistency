@@ -1,9 +1,8 @@
 ﻿using Ametista.Core.Interfaces;
-using Ametista.Core.ValueObjects;
 using System;
 using System.Collections.Generic;
 
-namespace Ametista.Core.Entities.Transactions
+namespace Ametista.Core.Transactions
 {
     public class Transaction : IAggregateRoot
     {

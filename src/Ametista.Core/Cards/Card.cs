@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ametista.Core.Entities.Cards
+namespace Ametista.Core.Cards
 {
     public class Card : IAggregateRoot
     {

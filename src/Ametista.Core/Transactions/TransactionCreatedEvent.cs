@@ -1,6 +1,4 @@
-﻿using Ametista.Core.Entities.Transactions;
-
-namespace Ametista.Core.Events
+﻿namespace Ametista.Core.Transactions
 {
     public class TransactionCreatedEvent : Event
     {

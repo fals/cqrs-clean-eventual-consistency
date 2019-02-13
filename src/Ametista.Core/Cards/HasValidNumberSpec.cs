@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 
-namespace Ametista.Core.Entities.Cards
+namespace Ametista.Core.Cards
 {
-    public class CardHasValidNumberSpec : CompositeSpecification<Card>
+    public class HasValidNumberSpec : CompositeSpecification<Card>
     {
-        public CardHasValidNumberSpec()
+        public HasValidNumberSpec()
         {
 
         }

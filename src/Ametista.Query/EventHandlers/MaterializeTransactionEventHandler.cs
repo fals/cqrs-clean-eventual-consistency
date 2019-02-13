@@ -1,4 +1,4 @@
-﻿using Ametista.Core.Events;
+﻿using Ametista.Core.Transactions;
 using Ametista.Core.Interfaces;
 using Ametista.Query.QueryModel;
 using MongoDB.Driver;

@@ -1,4 +1,5 @@
-﻿using Ametista.Core.Events;
+﻿using Ametista.Core.Cards;
+using Ametista.Core.Transactions;
 using Ametista.Core.Interfaces;
 using Ametista.Query;
 using Ametista.Query.EventHandlers;

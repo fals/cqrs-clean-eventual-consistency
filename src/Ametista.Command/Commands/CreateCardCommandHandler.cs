@@ -1,8 +1,6 @@
 ﻿using Ametista.Core;
-using Ametista.Core.Entities.Cards;
-using Ametista.Core.Events;
+using Ametista.Core.Cards;
 using Ametista.Core.Interfaces;
-using Ametista.Core.Repository;
 using System;
 using System.Threading.Tasks;
 

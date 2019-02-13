@@ -1,4 +1,5 @@
-﻿using Ametista.Core.Events;
+﻿using Ametista.Core.Transactions;
+using Ametista.Core.Cards;
 using Ametista.Core.Interfaces;
 using System;
 using System.Threading.Tasks;

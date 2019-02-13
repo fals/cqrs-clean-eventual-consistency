@@ -1,4 +1,4 @@
-﻿namespace Ametista.Core.Entities.Cards
+﻿namespace Ametista.Core.Cards
 {
     public class CardValidator : Validator<Card>
     {
@@ -8,7 +8,7 @@
 
         public override void Validate(Card entity)
         {
-            CheckRule<CardHasValidNumberSpec>(entity, nameof(Card.Number), $"Ivalid Card Number {entity.Number}");
+            CheckRule<HasValidNumberSpec>(entity, nameof(Card.Number), $"Ivalid Card Number {entity.Number}");
         }
     }
 }

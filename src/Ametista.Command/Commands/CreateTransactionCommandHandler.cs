@@ -1,10 +1,8 @@
-﻿using Ametista.Core.Entities.Transactions;
-using Ametista.Core.Events;
+﻿using Ametista.Core.Transactions;
 using Ametista.Core.Interfaces;
-using Ametista.Core.Repository;
-using Ametista.Core.ValueObjects;
 using System;
 using System.Threading.Tasks;
+using Ametista.Core;
 
 namespace Ametista.Command.Commands
 {

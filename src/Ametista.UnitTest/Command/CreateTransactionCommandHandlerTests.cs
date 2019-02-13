@@ -1,7 +1,6 @@
 ﻿using Ametista.Command.Commands;
-using Ametista.Core.Entities.Transactions;
+using Ametista.Core.Transactions;
 using Ametista.Core.Interfaces;
-using Ametista.Core.Repository;
 using Moq;
 using System;
 using System.Threading.Tasks;

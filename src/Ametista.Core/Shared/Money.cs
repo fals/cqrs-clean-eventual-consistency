@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Ametista.Core.ValueObjects
+namespace Ametista.Core
 {
     public sealed class Money
     {

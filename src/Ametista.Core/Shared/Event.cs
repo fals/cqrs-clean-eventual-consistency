@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ametista.Core.Events
+namespace Ametista.Core
 {
     public class Event : IEvent
     {
