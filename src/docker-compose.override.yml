@@ -6,7 +6,3 @@ services:
       - ASPNETCORE_ENVIRONMENT=Docker
     ports:
       - "80"
-networks:
-  default:
-    external:
-      name: nat
