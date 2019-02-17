@@ -47,7 +47,9 @@ namespace Ametista.Api
             });
 
             services
-                .AddDbContext<WriteDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString")));
+                .AddDbContext<WriteDbContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"), 
+                b => b.MigrationsAssembly("Ametista.Infrastructure")));
         }
 
         public virtual void ConfigureContainer(ContainerBuilder builder)

@@ -19,8 +19,14 @@ namespace Ametista.Infrastructure.Persistence
             modelBuilder.Entity<Card>()
             .ToTable("Cards");
 
+            modelBuilder.Entity<Card>()
+                .Ignore(x => x.Valid);
+
             modelBuilder.Entity<Transaction>()
             .ToTable("Transactions");
+
+            modelBuilder.Entity<Transaction>()
+                .Ignore(x => x.Valid);
 
             modelBuilder
                 .Entity<Transaction>()
