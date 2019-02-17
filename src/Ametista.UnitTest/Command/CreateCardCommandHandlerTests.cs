@@ -21,7 +21,7 @@ namespace Ametista.UnitTest.Command
             cardRepositoryMock.Setup(x => x.Add(It.IsAny<Card>()))
                 .ReturnsAsync(true);
 
-            handler = new CreateCardCommandHandler(eventBusMock.Object, cardRepositoryMock.Object);
+            handler = new CreateCardCommandHandler(eventBusMock.Object, cardRepositoryMock.Object, new Ametista.Core.ValidationNotificationHandler());
         }
 
         [Fact]

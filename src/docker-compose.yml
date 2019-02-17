@@ -46,15 +46,5 @@ services:
     ports:
       - "5101:80"
 
-  ametista.sync:
-    container_name: ametista-sync
-    image: ametistasync
-    build:
-      context: .
-      dockerfile: Ametista.Sync/Dockerfile
-    depends_on:
-      - rabbitmq
-      - mssql
-      - nosql.data
 volumes:
   mssql_server_data:

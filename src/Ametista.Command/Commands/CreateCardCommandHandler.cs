@@ -12,11 +12,11 @@ namespace Ametista.Command.Commands
         private readonly ICardWriteOnlyRepository cardRepository;
         private readonly ValidationNotificationHandler notificationHandler;
 
-        public CreateCardCommandHandler(IEventBus eventBus, ICardWriteOnlyRepository cardRepository)
+        public CreateCardCommandHandler(IEventBus eventBus, ICardWriteOnlyRepository cardRepository, ValidationNotificationHandler notificationHandler)
         {
             this.eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
             this.cardRepository = cardRepository ?? throw new ArgumentNullException(nameof(cardRepository));
-            this.notificationHandler = new ValidationNotificationHandler();
+            this.notificationHandler = notificationHandler ?? throw new ArgumentNullException(nameof(notificationHandler)); ;
         }
 
         public async Task<CreateCardCommandResult> Handle(CreateCardCommand command)

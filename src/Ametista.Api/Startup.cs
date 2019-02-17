@@ -1,5 +1,8 @@
 ﻿using Ametista.Api.Filters;
 using Ametista.Core;
+using Ametista.Core.Cards;
+using Ametista.Core.Interfaces;
+using Ametista.Core.Transactions;
 using Ametista.Infrastructure.IoC;
 using Ametista.Infrastructure.Persistence;
 using Autofac;
@@ -33,6 +36,7 @@ namespace Ametista.Api
                     .AllowCredentials());
             });
 
+            services.AddScoped<ValidationNotificationHandler>();
             services.AddSingleton(Configuration.Get<AmetistaConfiguration>());
 
             services.AddMvc(options =>
@@ -60,6 +64,14 @@ namespace Ametista.Api
             builder.RegisterModule(new QueryModule());
         }
 
+        private void ConfigureEventBus(IApplicationBuilder app)
+        {
+            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();
+
+            eventBus.Subscribe<CardCreatedEvent>();
+            eventBus.Subscribe<TransactionCreatedEvent>();
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public virtual void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -84,6 +96,8 @@ namespace Ametista.Api
             }
 
             app.UseMvc();
+
+            ConfigureEventBus(app);
         }
     }
 }
