@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ametista.Infrastructure.Cache
@@ -25,7 +26,14 @@ namespace Ametista.Infrastructure.Cache
         {
             try
             {
-                return await db.KeyDeleteAsync(key);
+                foreach (var ep in redis.GetEndPoints())
+                {
+                    var server = redis.GetServer(ep);
+                    var keys = server.Keys(database: 0, pattern: key + "*").ToArray();
+                    await db.KeyDeleteAsync(keys);
+                }
+                
+                return await Task.FromResult(true);
             }
             catch (Exception ex)
             {

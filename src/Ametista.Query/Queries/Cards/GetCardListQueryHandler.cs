@@ -24,7 +24,7 @@ namespace Ametista.Query.Queries
         {
             try
             {
-                var cached = await cache.Get<IEnumerable<CardListQueryModel>>(nameof(GetCardListQuery));
+                var cached = await cache.Get<IEnumerable<CardListQueryModel>>(nameof(CardListQueryModel));
 
                 if (cached != null && cached.Any())
                 {

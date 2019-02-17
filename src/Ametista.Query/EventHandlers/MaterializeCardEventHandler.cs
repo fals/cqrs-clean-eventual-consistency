@@ -39,8 +39,6 @@ namespace Ametista.Query.EventHandlers
                 TransactionCount = 0
             };
 
-            await cache.Delete(nameof(CardListQueryModel));
-            await cache.Delete(nameof(CardViewQueryModel));
             await readDbContext.CardViewMaterializedView.InsertOneAsync(cardView);
             await readDbContext.CardListMaterializedView.InsertOneAsync(cardList);
         }
