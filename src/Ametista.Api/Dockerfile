@@ -1,8 +1,8 @@
-FROM microsoft/dotnet:2.1-aspnetcore-runtime AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.1 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM microsoft/dotnet:2.1-sdk AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1 AS build
 WORKDIR /src
 COPY ["Ametista.Api/Ametista.Api.csproj", "Ametista.Api/"]
 COPY ["Ametista.Command/Ametista.Command.csproj", "Ametista.Command/"]
