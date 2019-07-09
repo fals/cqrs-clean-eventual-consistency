@@ -1,4 +1,5 @@
 ﻿using Ametista.Query;
+using Ametista.Query.Materializers;
 using Autofac;
 using System.Reflection;
 
@@ -20,6 +21,16 @@ namespace Ametista.Infrastructure.IoC
             builder
                 .RegisterType<QueryDispatcher>()
                 .As<IQueryDispatcher>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<CardListQueryModelMaterializer>()
+                .As<ICardListQueryModelMaterializer>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<TransactionListQueryModelMaterializer>()
+                .As<ITransactionListQueryModelMaterializer>()
                 .SingleInstance();
         }
     }

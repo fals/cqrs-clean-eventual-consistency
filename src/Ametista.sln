@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27428.2043
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29025.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Core", "Ametista.Core\Ametista.Core.csproj", "{37C6046C-D32F-4819-930B-333C635FCE53}"
 EndProject
@@ -9,11 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.UnitTest", "Ametista.UnitTest\Ametista.UnitTest.csproj", "{3DDBA5F3-B1AF-4FFF-8738-E9A65FF9A343}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Fitness", "Ametista.Fitness\Ametista.Fitness.csproj", "{9F682592-DF9A-4EA9-82E7-3497C2D31DC2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C04D6B23-BFAD-4FBF-9D28-69BC9C6213B4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.IntegrationTest", "Ametista.IntegrationTest\Ametista.IntegrationTest.csproj", "{35D9F966-61FF-4D17-A666-34F4D2C9E847}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Query", "Ametista.Query\Ametista.Query.csproj", "{952E7FC7-DC35-4093-9395-BE43B9DD814A}"
 EndProject
@@ -41,14 +37,6 @@ Global
 		{3DDBA5F3-B1AF-4FFF-8738-E9A65FF9A343}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DDBA5F3-B1AF-4FFF-8738-E9A65FF9A343}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DDBA5F3-B1AF-4FFF-8738-E9A65FF9A343}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F682592-DF9A-4EA9-82E7-3497C2D31DC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F682592-DF9A-4EA9-82E7-3497C2D31DC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F682592-DF9A-4EA9-82E7-3497C2D31DC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F682592-DF9A-4EA9-82E7-3497C2D31DC2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{35D9F966-61FF-4D17-A666-34F4D2C9E847}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{35D9F966-61FF-4D17-A666-34F4D2C9E847}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{35D9F966-61FF-4D17-A666-34F4D2C9E847}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{35D9F966-61FF-4D17-A666-34F4D2C9E847}.Release|Any CPU.Build.0 = Release|Any CPU
 		{952E7FC7-DC35-4093-9395-BE43B9DD814A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{952E7FC7-DC35-4093-9395-BE43B9DD814A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{952E7FC7-DC35-4093-9395-BE43B9DD814A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -71,8 +59,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3DDBA5F3-B1AF-4FFF-8738-E9A65FF9A343} = {C04D6B23-BFAD-4FBF-9D28-69BC9C6213B4}
-		{9F682592-DF9A-4EA9-82E7-3497C2D31DC2} = {C04D6B23-BFAD-4FBF-9D28-69BC9C6213B4}
-		{35D9F966-61FF-4D17-A666-34F4D2C9E847} = {C04D6B23-BFAD-4FBF-9D28-69BC9C6213B4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C456BE88-D66C-4D9A-8786-ED184F8C9341}

@@ -72,6 +72,8 @@ The project contains a well-defined IoC structure that allow you unit test almos
 
 Inside the main layers you going to find Interfaces which are essential for the application, but with their implementations inside their own layers, what allow Mocking, Stubbing, using test doubles.
 
+There's a simple example using Mother Object Pattern and Builder to simplify unit tests and keep it maintainable and clean.
+
 ## :bar_chart: Data Intensive Microservice
 
 This microservice template comes with SRP and SOC in mind. Given the own nature of CQRS, you can easily scale this application tuning each stack separately.
@@ -79,6 +81,8 @@ This microservice template comes with SRP and SOC in mind. Given the own nature 
 ## :page_facing_up: Derived Data
 
 Having multiple data stores makes this system a Derived Data system, which means, you never lose data, you can always rebuild one store from another, for example, if you lose an event which sync data between the write and read database you can always get this data back from the write database and rebuild the read store.
+
+*Domain Model* is materialized to *Query Models* using view materializer. Keeping this as separed component in the query stack allows fully control to mapped properties and fully testable.
 
 ## :envelope: Message Broker
 

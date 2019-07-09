@@ -29,16 +29,11 @@ namespace Ametista.Core.Transactions
 
         public string UniqueId { get; private set; }
 
-        public bool Valid => throw new NotImplementedException();
+        public bool Valid { get; private set; }
 
         public static Transaction CreateTransactionForCard(Guid cardGuid, string uniqueId, DateTimeOffset chargeDate, Money charge)
         {
             return new Transaction(cardGuid, uniqueId, chargeDate, charge);
-        }
-
-        public static object CreateTransactionForCard(object cardId, object uniqueId, object chargeDate, Money charge)
-        {
-            throw new NotImplementedException();
         }
 
         public override bool Equals(object obj)
