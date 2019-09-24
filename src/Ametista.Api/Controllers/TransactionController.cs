@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using System.Linq;
+using Ametista.Core;
 
 namespace Ametista.Api.Controllers
 {
@@ -16,11 +17,13 @@ namespace Ametista.Api.Controllers
     {
         private readonly ICommandDispatcher commandDispatcher;
         private readonly IQueryDispatcher queryDispatcher;
+        private readonly ValidationNotificationHandler validationNotificationHandler;
 
-        public TransactionController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher)
+        public TransactionController(ICommandDispatcher commandDispatcher, IQueryDispatcher queryDispatcher, ValidationNotificationHandler validationNotificationHandler)
         {
             this.commandDispatcher = commandDispatcher ?? throw new ArgumentNullException(nameof(commandDispatcher));
             this.queryDispatcher = queryDispatcher ?? throw new ArgumentNullException(nameof(queryDispatcher));
+            this.validationNotificationHandler = validationNotificationHandler ?? throw new ArgumentNullException(nameof(validationNotificationHandler));
         }
 
         [HttpGet]
@@ -77,7 +80,7 @@ namespace Ametista.Api.Controllers
                 return Ok(response);
             }
 
-            return BadRequest(request);
+            return BadRequest(validationNotificationHandler.Notifications);
         }
     }
 }

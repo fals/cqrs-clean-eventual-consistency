@@ -42,12 +42,6 @@ namespace Ametista.Api
 
             services.AddConnections();
 
-            services.AddMvc(options =>
-            {
-                options.Filters.Add(typeof(ValidateModelStateAttribute));
-            })
-            .AddApplicationPart(typeof(Startup).Assembly);
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
