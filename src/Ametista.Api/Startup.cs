@@ -11,7 +11,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace Ametista.Api
 {
@@ -39,6 +40,8 @@ namespace Ametista.Api
             services.AddScoped<ValidationNotificationHandler>();
             services.AddSingleton(Configuration.Get<AmetistaConfiguration>());
 
+            services.AddConnections();
+
             services.AddMvc(options =>
             {
                 options.Filters.Add(typeof(ValidateModelStateAttribute));
@@ -47,7 +50,7 @@ namespace Ametista.Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
             services
@@ -73,7 +76,7 @@ namespace Ametista.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public virtual void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSwagger();
 
@@ -95,7 +98,11 @@ namespace Ametista.Api
                 context.Database.Migrate();
             }
 
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             ConfigureEventBus(app);
         }
