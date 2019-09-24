@@ -1,5 +1,4 @@
-﻿using Ametista.Api.Filters;
-using Ametista.Core;
+﻿using Ametista.Core;
 using Ametista.Core.Cards;
 using Ametista.Core.Interfaces;
 using Ametista.Core.Transactions;
@@ -40,7 +39,7 @@ namespace Ametista.Api
             services.AddScoped<ValidationNotificationHandler>();
             services.AddSingleton(Configuration.Get<AmetistaConfiguration>());
 
-            services.AddConnections();
+            services.AddControllers();
 
             services.AddSwaggerGen(c =>
             {

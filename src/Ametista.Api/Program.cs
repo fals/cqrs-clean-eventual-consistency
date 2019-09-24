@@ -16,6 +16,7 @@ namespace Ametista.Api
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
           WebHost.CreateDefaultBuilder(args)
+                .ConfigureServices(services => services.AddAutofac())
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config.SetBasePath(Directory.GetCurrentDirectory());
@@ -23,7 +24,6 @@ namespace Ametista.Api
                     config.AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true);
                 })
                 .UseKestrel()
-                .ConfigureServices(services => services.AddAutofac())
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureLogging((hostingContext, logging) =>
                 {
