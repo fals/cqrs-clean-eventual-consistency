@@ -30,7 +30,7 @@ namespace Ametista.UnitTest.Controllers
 
             queryDispatcherMock = new Mock<IQueryDispatcher>();
 
-            controller = new TransactionController(commandDispatcherMock.Object, queryDispatcherMock.Object);
+            controller = new TransactionController(commandDispatcherMock.Object, queryDispatcherMock.Object, new Ametista.Core.ValidationNotificationHandler());
         }
 
         [Fact]
