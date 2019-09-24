@@ -22,8 +22,8 @@ I also keep more detailed information in my blog, and I going to release weekly 
 You need some of the fallowing tools:
 
 * Docker
-* Visual Studio 2017
-* .Net Core 2.1
+* Visual Studio 2019
+* .Net Core 3.0
 
 ## :dart: Clean Architecture
 
