@@ -43,7 +43,7 @@ namespace Ametista.Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
             services
@@ -91,6 +91,7 @@ namespace Ametista.Api
                 context.Database.Migrate();
             }
 
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
