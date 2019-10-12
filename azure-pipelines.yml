@@ -14,8 +14,8 @@ variables:
 
 steps:
 - script: |
-    dotnet build --configuration $(buildConfiguration)
-    dotnet test dotnetcore-tests --configuration $(buildConfiguration) --logger trx
+    dotnet build .\src\Ametista.sln --configuration $(buildConfiguration)
+    dotnet test .\src\Ametista.sln dotnetcore-tests --configuration $(buildConfiguration) --logger trx
 - task: PublishTestResults@2
   inputs:
     testRunner: VSTest
