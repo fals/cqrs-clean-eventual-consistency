@@ -2,9 +2,7 @@
 
 CQRS, using Clean Architecture, multiple databases and Eventual Consistency
 
-[![CodeFactor](https://www.codefactor.io/repository/github/fals/cqrs-clean-eventual-consistency/badge)](https://www.codefactor.io/repository/github/fals/cqrs-clean-eventual-consistency)
-[![Build status](https://ci.appveyor.com/api/projects/status/github/fals/cqrs-clean-eventual-consistency?branch=master&svg=true)](https://ci.appveyor.com/project/fals/cqrs-clean-eventual-consistency)
-[![codecov](https://codecov.io/gh/fals/cqrs-clean-eventual-consistency/branch/master/graph/badge.svg)](https://codecov.io/gh/fals/cqrs-clean-eventual-consistency)
+[![Build Status](https://fals.visualstudio.com/fals.io/_apis/build/status/fals.cqrs-clean-eventual-consistency?branchName=master)](https://fals.visualstudio.com/fals.io/_build/latest?definitionId=2&branchName=master)
 
 ## :bookmark_tabs: Detailed information
 
