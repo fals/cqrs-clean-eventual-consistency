@@ -47,7 +47,7 @@ namespace Ametista.Query.Queries
 
                 return itemsTask;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
