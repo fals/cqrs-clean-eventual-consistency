@@ -5,6 +5,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
 WORKDIR /src
 COPY ["Ametista.Api/Ametista.Api.csproj", "Ametista.Api/"]
+COPY ["Ametista.Api.Model/Ametista.Api.Model.csproj", "Ametista.Api.Model/"]
 COPY ["Ametista.Command/Ametista.Command.csproj", "Ametista.Command/"]
 COPY ["Ametista.Core/Ametista.Core.csproj", "Ametista.Core/"]
 COPY ["Ametista.Infrastructure/Ametista.Infrastructure.csproj", "Ametista.Infrastructure/"]
