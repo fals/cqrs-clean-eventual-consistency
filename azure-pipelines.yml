@@ -16,12 +16,3 @@ steps:
 - script: |
     dotnet build src/Ametista.sln --configuration $(buildConfiguration)
     dotnet test src/Ametista.sln
-- task: VSTest@2
-  inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*test*.dll
-      **\*UnitTest*.dll
-      !**\*TestAdapter.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)'
