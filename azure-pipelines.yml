@@ -16,7 +16,12 @@ steps:
 - script: |
     dotnet build src/Ametista.sln --configuration $(buildConfiguration)
     dotnet test src/Ametista.sln
-- task: PublishTestResults@2
+- task: VSTest@2
   inputs:
-    testRunner: VSTest
-    testResultsFiles: '**/*.trx'
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*test*.dll
+      **\*UnitTest*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
