@@ -46,5 +46,16 @@ services:
     ports:
       - "5101:80"
 
+  ametista.blazor:
+    container_name: ametista-blazor
+    image: ametistablazor
+    build:
+      context: .
+      dockerfile: Ametista.Blazor/Dockerfile
+    depends_on:
+      - ametista-api
+    ports:
+      - "8080:80"
+
 volumes:
   mssql_server_data:
