@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ametista.Api.Model\Ametista.Api.Model.csproj" />
     <ProjectReference Include="..\Ametista.Command\Ametista.Command.csproj" />
     <ProjectReference Include="..\Ametista.Infrastructure\Ametista.Infrastructure.csproj" />
     <ProjectReference Include="..\Ametista.Query\Ametista.Query.csproj" />
