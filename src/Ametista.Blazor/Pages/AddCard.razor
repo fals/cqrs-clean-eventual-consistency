@@ -3,6 +3,8 @@
 @using Ametista.Api.Model
 @inject HttpClient Http
 
+<h1>Add Card</h1>
+
 <EditForm Model="@newCard" OnValidSubmit="@SaveItem">
     <DataAnnotationsValidator />
     <ValidationSummary />
@@ -18,5 +20,5 @@
     private CreateCardRequest newCard = new CreateCardRequest();
 
     private async Task SaveItem() =>
-        await Http.PutJsonAsync($"api/card/", newCard);
+        await Http.SendJsonAsync(HttpMethod.Post, $"http://localhost:5101/api/card/", newCard);
 }

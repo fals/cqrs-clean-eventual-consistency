@@ -53,7 +53,7 @@ services:
       context: .
       dockerfile: Ametista.Blazor/Dockerfile
     ports:
-      - "8080:5102"
+      - "8080:80"
 
 volumes:
   mssql_server_data:

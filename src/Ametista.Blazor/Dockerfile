@@ -12,5 +12,5 @@ RUN dotnet publish "Ametista.Blazor.csproj" -c Release -o /app/publish
 
 FROM nginx:alpine AS final
 WORKDIR /usr/share/nginx/html
-COPY --from=publish /app/publish .
+COPY --from=publish app/publish/Ametista.Blazor/dist .
 COPY Ametista.Blazor/nginx.conf /etc/nginx/nginx.conf

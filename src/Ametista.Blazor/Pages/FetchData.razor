@@ -1,11 +1,11 @@
 ﻿@page "/fetchdata"
 @inject HttpClient Http
 
-<h1>Weather forecast</h1>
+<h1>Card List</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
 
-@if (forecasts == null)
+@if (CardList == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -15,19 +15,19 @@ else
         <thead>
             <tr>
                 <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th>Card Holder. (C)</th>
+                <th>Number. (F)</th>
+                <th>Highest Transaction</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var forecast in forecasts)
+            @foreach (var forecast in CardList)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
-                    <td>@forecast.Summary</td>
+                    <td>@forecast.ExpirationDate.ToShortDateString()</td>
+                    <td>@forecast.CardHolder</td>
+                    <td>@forecast.Number</td>
+                    <td>@forecast.HighestTransactionAmount</td>
                 </tr>
             }
         </tbody>
@@ -35,21 +35,10 @@ else
 }
 
 @code {
-    WeatherForecast[] forecasts;
+    GetCardListResponse[] CardList;
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetJsonAsync<WeatherForecast[]>("sample-data/weather.json");
-    }
-
-    public class WeatherForecast
-    {
-        public DateTime Date { get; set; }
-
-        public int TemperatureC { get; set; }
-
-        public string Summary { get; set; }
-
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        CardList = await Http.GetJsonAsync<GetCardListResponse[]>("http://localhost:5101/api/card/");
     }
 }
