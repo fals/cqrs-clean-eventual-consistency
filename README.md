@@ -17,7 +17,7 @@ I also keep more detailed information in my blog, and I going to release weekly 
 
 ## :floppy_disk: How do I use it?
 
-You need some of the fallowing tools:
+You need some of the following tools:
 
 * Docker
 * Visual Studio 2019
