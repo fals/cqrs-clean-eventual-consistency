@@ -54,7 +54,7 @@ Below you can find a basic interaction between components in the **Command Stack
 
 Responsible to provide data to consumers of your application, containing a simplified and more suitable model for reading, with calculated data, aggregated values and materialized structures.
 
-The fallowing image contains the basic interaction between components in the **Query Stack**:
+The image contains the basic interaction between components in the **Query Stack**:
 
 
 
