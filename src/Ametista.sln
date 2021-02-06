@@ -17,10 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Api", "Ametista.Ap
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CC54E3EC-A638-4984-AF61-C3D8FDC5B363}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ametista.Blazor", "Ametista.Blazor\Ametista.Blazor.csproj", "{DAD2AECA-49C0-4867-9C4D-F0D6786325DD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ametista.Api.Model", "Ametista.Api.Model\Ametista.Api.Model.csproj", "{EC8A2007-6BC7-4B18-9A49-AD76DAC740F7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
