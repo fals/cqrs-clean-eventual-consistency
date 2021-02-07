@@ -34,6 +34,7 @@ services:
 
   ametista.api:
     container_name: ametista-api
+    restart: always
     image: ametistaapi
     build:
       context: .
@@ -44,7 +45,9 @@ services:
       - nosql.data
       - redis.cache
     ports:
-      - "5101:80"
+      - "80:8080"
+    environment: 
+      - ASPNETCORE_ENVIRONMENT=Docker
 
 volumes:
   mssql_server_data:
