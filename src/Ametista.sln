@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29025.244
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Core", "Ametista.Core\Ametista.Core.csproj", "{37C6046C-D32F-4819-930B-333C635FCE53}"
 EndProject
@@ -14,8 +14,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Command", "Ametista.Command\Ametista.Command.csproj", "{3F46E2CF-F965-4785-A02C-FD14DFD1FC7E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ametista.Api", "Ametista.Api\Ametista.Api.csproj", "{8C3E9371-487F-4BCF-AA05-DC7586C5B206}"
-EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{CC54E3EC-A638-4984-AF61-C3D8FDC5B363}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,18 +45,6 @@ Global
 		{8C3E9371-487F-4BCF-AA05-DC7586C5B206}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C3E9371-487F-4BCF-AA05-DC7586C5B206}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C3E9371-487F-4BCF-AA05-DC7586C5B206}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC54E3EC-A638-4984-AF61-C3D8FDC5B363}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC54E3EC-A638-4984-AF61-C3D8FDC5B363}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC54E3EC-A638-4984-AF61-C3D8FDC5B363}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC54E3EC-A638-4984-AF61-C3D8FDC5B363}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DAD2AECA-49C0-4867-9C4D-F0D6786325DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DAD2AECA-49C0-4867-9C4D-F0D6786325DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DAD2AECA-49C0-4867-9C4D-F0D6786325DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DAD2AECA-49C0-4867-9C4D-F0D6786325DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC8A2007-6BC7-4B18-9A49-AD76DAC740F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC8A2007-6BC7-4B18-9A49-AD76DAC740F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC8A2007-6BC7-4B18-9A49-AD76DAC740F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC8A2007-6BC7-4B18-9A49-AD76DAC740F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

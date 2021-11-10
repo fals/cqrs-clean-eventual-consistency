@@ -1,32 +1,31 @@
 # ![Guaraci](docs/guaraci-icon.png) Clean Architecture CQRS with Derived Data  
 
-CQRS, using Clean Architecture, multiple databases and Eventual Consistency
+CQRS, using Clean Architecture, multiple databases, and Eventual Consistency
 
 [![Build Status](https://fals.visualstudio.com/fals.io/_apis/build/status/fals.cqrs-clean-eventual-consistency?branchName=master)](https://fals.visualstudio.com/fals.io/_build/latest?definitionId=2&branchName=master)
 
 ## :bookmark_tabs: Detailed information
 
-I also keep more detailed information in my blog, and I going to release weekly to clarify my ideas:
+I also keep more detailed information in my blog
 
 - [X] [CQRS Translated to Clean Architecture](https://blog.fals.io/2018-09-19-cqrs-clean-architecture/)
-    - [ ] CQRS Deep dive into Commands
-    - [ ] CQRS Queries and Materialization
-    - [ ] CQRS Consensus and Consistency
-    - [ ] CQRS Distributed chaos, CAP Theorem
+    - [X] CQRS Deep dive into Commands
+    - [X] CQRS Queries and Materialization
+    - [X] CQRS Consensus and Consistency
+    - [X] CQRS Distributed chaos, CAP Theorem
 
 
 ## :floppy_disk: How do I use it?
 
-You need some of the following tools:
+You're going to need the following tools:
 
 * Docker
-* Visual Studio 2019
-* .Net Core 3.0
+* Visual Studio 2019+ or Visual Studio Code
+* .Net 6
 
 ## :dart: Clean Architecture
 
 Here's the basic architecture of this microservice template:
-
 
 * Respecting policy rules, with dependencies always pointing inward
 * Separation of technology details from the rest of the system
@@ -66,9 +65,9 @@ This example contains a simplified Domain Model, with entities, aggregate roots,
 
 ## :heavy_check_mark: TDD
 
-The project contains a well-defined IoC structure that allow you unit test almost every part of this service template, besides technology dependencies.
+The project contains a well-defined IoC structure that allows you unit test almost every part of this service template, besides technology dependencies.
 
-Inside the main layers you going to find Interfaces which are essential for the application, but with their implementations inside their own layers, what allow Mocking, Stubbing, using test doubles.
+Inside the main layer you're going to find Interfaces that are essential for the application, but with their implementations inside their own layers, what allow Mocking, Stubbing, using test doubles.
 
 There's a simple example using Mother Object Pattern and Builder to simplify unit tests and keep it maintainable and clean.
 

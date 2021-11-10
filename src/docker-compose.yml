@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   mssql:
-    image: microsoft/mssql-server-linux:2017-latest
+    image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: ametista-mssql
     volumes:
       - mssql_server_data:/var/opt/mssql/data

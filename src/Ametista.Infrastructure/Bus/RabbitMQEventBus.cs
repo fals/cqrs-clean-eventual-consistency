@@ -25,7 +25,7 @@ namespace Ametista.Infrastructure.Bus
         private readonly IEventDispatcher _eventDispatcher;
         private readonly IPersistentConnection<IModel> _persistentConnection;
         private readonly ILogger<RabbitMQEventBus> _logger;
-        private static Dictionary<string, Type> _subsManager = new Dictionary<string, Type>();
+        private readonly static Dictionary<string, Type> _subsManager = new();
         private readonly int _retryCount;
 
         private IModel _consumerChannel;
@@ -58,31 +58,29 @@ namespace Ametista.Infrastructure.Bus
                 .Or<SocketException>()
                 .WaitAndRetry(_retryCount, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), (ex, time) =>
                 {
-                    _logger.LogWarning(ex.ToString());
+                    _logger.LogWarning("Retrying message because of error {0}", ex.ToString());
                 });
 
-            using (var channel = _persistentConnection.CreateModel())
+            using var channel = _persistentConnection.CreateModel();
+            var eventName = @event.GetType().Name;
+
+            channel.ExchangeDeclare(exchange: BROKER_NAME,
+                                type: "direct");
+
+            var message = JsonConvert.SerializeObject(@event);
+            var body = Encoding.UTF8.GetBytes(message);
+
+            policy.Execute(() =>
             {
-                var eventName = @event.GetType().Name;
-
-                channel.ExchangeDeclare(exchange: BROKER_NAME,
-                                    type: "direct");
-
-                var message = JsonConvert.SerializeObject(@event);
-                var body = Encoding.UTF8.GetBytes(message);
-
-                policy.Execute(() =>
-                {
-                    var properties = channel.CreateBasicProperties();
-                    properties.DeliveryMode = 2; // persistent
+                var properties = channel.CreateBasicProperties();
+                properties.DeliveryMode = 2; // persistent
 
                     channel.BasicPublish(exchange: BROKER_NAME,
-                                     routingKey: eventName,
-                                     mandatory: true,
-                                     basicProperties: properties,
-                                     body: body);
-                });
-            }
+                                 routingKey: eventName,
+                                 mandatory: true,
+                                 basicProperties: properties,
+                                 body: body);
+            });
         }
 
         public class NonPublicPropertiesResolver : DefaultContractResolver
@@ -113,12 +111,10 @@ namespace Ametista.Infrastructure.Bus
                 _persistentConnection.TryConnect();
             }
 
-            using (var channel = _persistentConnection.CreateModel())
-            {
-                channel.QueueBind(queue: QUEUE_NAME,
-                                  exchange: BROKER_NAME,
-                                  routingKey: eventName);
-            }
+            using var channel = _persistentConnection.CreateModel();
+            channel.QueueBind(queue: QUEUE_NAME,
+                              exchange: BROKER_NAME,
+                              routingKey: eventName);
         }
 
         private IModel CreateConsumerChannel()
@@ -143,7 +139,7 @@ namespace Ametista.Infrastructure.Bus
             consumer.Received += async (model, ea) =>
             {
                 var eventName = ea.RoutingKey;
-                var message = Encoding.UTF8.GetString(ea.Body);
+                var message = Encoding.UTF8.GetString(ea.Body.ToArray());
 
                 await ProcessEvent(eventName, message);
 

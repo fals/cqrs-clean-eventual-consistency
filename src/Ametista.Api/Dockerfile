@@ -1,8 +1,9 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
+EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["Ametista.Api/Ametista.Api.csproj", "Ametista.Api/"]
 COPY ["Ametista.Command/Ametista.Command.csproj", "Ametista.Command/"]
@@ -12,12 +13,12 @@ COPY ["Ametista.Query/Ametista.Query.csproj", "Ametista.Query/"]
 RUN dotnet restore "Ametista.Api/Ametista.Api.csproj"
 COPY . .
 WORKDIR "/src/Ametista.Api"
-RUN dotnet build "Ametista.Api.csproj" -c Release -o /app
+RUN dotnet build "Ametista.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Ametista.Api.csproj" -c Release -o /app
+RUN dotnet publish "Ametista.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Ametista.Api.dll"]
