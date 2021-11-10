@@ -2,8 +2,6 @@
 
 CQRS, using Clean Architecture, multiple databases, and Eventual Consistency
 
-[![Build Status](https://fals.visualstudio.com/fals.io/_apis/build/status/fals.cqrs-clean-eventual-consistency?branchName=master)](https://fals.visualstudio.com/fals.io/_build/latest?definitionId=2&branchName=master)
-
 ## :bookmark_tabs: Detailed information
 
 I also keep more detailed information in my blog
