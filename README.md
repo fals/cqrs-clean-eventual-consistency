@@ -33,6 +33,12 @@ Open your browser and hit the URL to see the OpenApi
 
 `http://localhost:5000/swagger/index.html`
 
+If you can't run you can hit the health checks to see if a component is down.
+
+`http://localhost:5000/healthcheck`
+
+If you still have issues, don't run as detached and look the error on the console after executing the docker command.
+
 ## :dart: Clean Architecture
 
 Here's the basic architecture of this microservice template:

@@ -44,10 +44,19 @@ namespace Ametista.Api
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My API", Version = "v1" });
             });
 
+            var sqlConnString = Configuration.GetConnectionString("SqlServerConnectionString");
+
             services
                 .AddDbContext<WriteDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"),
+                options.UseSqlServer(sqlConnString,
                 b => b.MigrationsAssembly("Ametista.Infrastructure")));
+
+            var redisConnString = Configuration.GetConnectionString("RedisCache");
+
+            services
+                .AddHealthChecks()
+                .AddSqlServer(sqlConnString)
+                .AddRedis(redisConnString);
         }
 
         public virtual void ConfigureContainer(ContainerBuilder builder)
@@ -95,6 +104,7 @@ namespace Ametista.Api
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/healthcheck");
             });
 
             ConfigureEventBus(app);
