@@ -1,4 +1,5 @@
 ﻿using Ametista.Query;
+using Ametista.Query.Abstractions;
 using Ametista.Query.Materializers;
 using Autofac;
 using System.Reflection;

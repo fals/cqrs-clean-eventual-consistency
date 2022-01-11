@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Ametista.Command
+namespace Ametista.Command.Abstractions
 {
     public interface ICommandHandler { }
 

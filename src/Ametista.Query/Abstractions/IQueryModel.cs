@@ -1,4 +1,4 @@
-﻿namespace Ametista.Query
+﻿namespace Ametista.Query.Abstractions
 {
     public interface IQueryModel
     {

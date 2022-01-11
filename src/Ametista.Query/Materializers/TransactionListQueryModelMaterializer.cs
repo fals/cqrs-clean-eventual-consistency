@@ -1,9 +1,10 @@
 ﻿using Ametista.Core.Transactions;
+using Ametista.Query.Abstractions;
 using Ametista.Query.QueryModel;
 
 namespace Ametista.Query.Materializers
 {
-    public interface ITransactionListQueryModelMaterializer: IMaterializer<TransactionListQueryModel, Transaction, CardListQueryModel>
+    public interface ITransactionListQueryModelMaterializer : IMaterializer<TransactionListQueryModel, Transaction, CardListQueryModel>
     {
 
     }

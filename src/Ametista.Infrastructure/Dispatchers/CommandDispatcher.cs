@@ -1,4 +1,4 @@
-﻿using Ametista.Command;
+﻿using Ametista.Command.Abstractions;
 using Autofac;
 using System.Threading.Tasks;
 

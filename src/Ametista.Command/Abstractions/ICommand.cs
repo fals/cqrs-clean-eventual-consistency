@@ -1,4 +1,4 @@
-﻿namespace Ametista.Command
+﻿namespace Ametista.Command.Abstractions
 {
     public interface ICommand
     { }

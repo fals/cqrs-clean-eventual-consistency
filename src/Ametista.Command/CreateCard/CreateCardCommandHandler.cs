@@ -1,10 +1,11 @@
-﻿using Ametista.Core;
+﻿using Ametista.Command.Abstractions;
+using Ametista.Core;
 using Ametista.Core.Cards;
 using Ametista.Core.Interfaces;
 using System;
 using System.Threading.Tasks;
 
-namespace Ametista.Command.Commands
+namespace Ametista.Command.CreateCard
 {
     public class CreateCardCommandHandler : ICommandHandler<CreateCardCommand, CreateCardCommandResult>
     {

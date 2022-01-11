@@ -1,4 +1,4 @@
-﻿using Ametista.Command.Commands;
+﻿using Ametista.Command.CreateCard;
 using Ametista.Core.Cards;
 using Ametista.Core.Interfaces;
 using Moq;
@@ -10,7 +10,7 @@ namespace Ametista.UnitTest.Command
 {
     public class CreateCardCommandHandlerTests
     {
-        private readonly CreateCardCommandHandler handler;
+        private readonly CreateCardCommandHandler sut;
         private readonly Mock<IEventBus> eventBusMock;
         private readonly Mock<ICardWriteOnlyRepository> cardRepositoryMock;
 
@@ -21,7 +21,7 @@ namespace Ametista.UnitTest.Command
             cardRepositoryMock.Setup(x => x.Add(It.IsAny<Card>()))
                 .ReturnsAsync(true);
 
-            handler = new CreateCardCommandHandler(eventBusMock.Object, cardRepositoryMock.Object, new Ametista.Core.ValidationNotificationHandler());
+            sut = new CreateCardCommandHandler(eventBusMock.Object, cardRepositoryMock.Object, new Ametista.Core.ValidationNotificationHandler());
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace Ametista.UnitTest.Command
             var command = CreateCardCommand();
 
             // Act
-            var result = await handler.Handle(command);
+            var result = await sut.Handle(command);
 
             // Assert
             Assert.True(result.Success);
@@ -46,7 +46,7 @@ namespace Ametista.UnitTest.Command
             var command = CreateCardCommand();
 
             // Act
-            var result = await handler.Handle(command);
+            var result = await sut.Handle(command);
 
             // Assert
             Assert.Equal(command.CardHolder, result.CardHolder);
@@ -60,7 +60,7 @@ namespace Ametista.UnitTest.Command
             var command = CreateCardCommand();
 
             // Act
-            var result = await handler.Handle(command);
+            var result = await sut.Handle(command);
 
             // Assert
             Assert.Equal(command.Number, result.Number);
@@ -74,7 +74,7 @@ namespace Ametista.UnitTest.Command
             var command = CreateCardCommand();
 
             // Act
-            var result = await handler.Handle(command);
+            var result = await sut.Handle(command);
 
             // Assert
             Assert.Equal(command.ExpirationDate, result.ExpirationDate);

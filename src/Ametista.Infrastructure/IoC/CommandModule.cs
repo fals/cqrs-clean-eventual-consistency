@@ -1,4 +1,4 @@
-﻿using Ametista.Command;
+﻿using Ametista.Command.Abstractions;
 using Ametista.Core.Cards;
 using Ametista.Core.Transactions;
 using Ametista.Infrastructure.Persistence.Repository;

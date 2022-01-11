@@ -1,4 +1,5 @@
 ﻿using Ametista.Core.Interfaces;
+using Ametista.Query.Abstractions;
 using Ametista.Query.QueryModel;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;

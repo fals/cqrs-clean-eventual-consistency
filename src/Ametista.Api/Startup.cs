@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace Ametista.Api
 {
@@ -46,8 +45,8 @@ namespace Ametista.Api
             });
 
             services
-                .AddDbContext<WriteDbContext>(options => 
-                options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"), 
+                .AddDbContext<WriteDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString"),
                 b => b.MigrationsAssembly("Ametista.Infrastructure")));
         }
 

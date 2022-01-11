@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ametista.Command
+namespace Ametista.Command.Abstractions
 {
     public abstract class CommandResult : ICommandResult
     {

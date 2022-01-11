@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Ametista.Command.Abstractions;
+using System;
 
-namespace Ametista.Command.Commands
+namespace Ametista.Command.CreateTransaction
 {
     public class CreateTransactionCommand : ICommand<CreateTransactionCommandResult>
     {

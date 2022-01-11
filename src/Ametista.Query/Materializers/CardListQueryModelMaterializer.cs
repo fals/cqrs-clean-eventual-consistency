@@ -1,4 +1,5 @@
 ﻿using Ametista.Core.Transactions;
+using Ametista.Query.Abstractions;
 using Ametista.Query.QueryModel;
 
 namespace Ametista.Query.Materializers

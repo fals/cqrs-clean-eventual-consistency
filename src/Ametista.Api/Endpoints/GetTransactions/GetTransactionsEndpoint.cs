@@ -1,9 +1,9 @@
-﻿using Ametista.Query;
+﻿using Ametista.Query.Abstractions;
 using Ametista.Query.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Ametista.Api.Endpoints.GetTransactions
 {

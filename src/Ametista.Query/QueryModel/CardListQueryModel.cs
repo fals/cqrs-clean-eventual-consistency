@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ametista.Query.Abstractions;
+using System;
 
 namespace Ametista.Query.QueryModel
 {

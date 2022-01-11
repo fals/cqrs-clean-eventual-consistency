@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Ametista.Query
+namespace Ametista.Query.Abstractions
 {
     public interface IQueryDispatcher
     {

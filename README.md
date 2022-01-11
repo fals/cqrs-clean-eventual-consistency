@@ -21,6 +21,18 @@ You're going to need the following tools:
 * Visual Studio 2019+ or Visual Studio Code
 * .Net 6
 
+Execute in your favorite command line from the `/src` folder
+
+```bash
+$ cd src
+$ docker compose build
+$ docker compose up
+```
+
+Open your browser and hit the URL to see the OpenApi
+
+`http://localhost:5000/swagger/index.html`
+
 ## :dart: Clean Architecture
 
 Here's the basic architecture of this microservice template:
@@ -41,7 +53,7 @@ Segregation between Commands and Queries, with isolated databases and different 
 
 ### :arrow_down: Command Stack
 
-Has direct access to business rules and is responsible for only writes in the application.
+Has direct access to business rules and is responsible for only writing in the application.
 
 Below you can find a basic interaction between components in the **Command Stack**:
 
@@ -49,7 +61,7 @@ Below you can find a basic interaction between components in the **Command Stack
 
 ### :arrow_up: Query Stack
 
-Responsible to provide data to consumers of your application, containing a simplified and more suitable model for reading, with calculated data, aggregated values and materialized structures.
+Responsible for providing data to consumers of your application, containing a simplified and more suitable model for reading, with calculated data, aggregated values and materialized structures.
 
 The image contains the basic interaction between components in the **Query Stack**:
 
@@ -75,7 +87,7 @@ This microservice template comes with SRP and SOC in mind. Given the own nature 
 
 ## :page_facing_up: Derived Data
 
-Having multiple data stores makes this system a Derived Data system, which means, you never lose data, you can always rebuild one store from another, for example, if you lose an event which sync data between the write and read database you can always get this data back from the write database and rebuild the read store.
+Having multiple data stores makes this system a Derived Data system, which means, you never lose data, you can always rebuild one store from another, for example, if you lose an event which syncs data between the write and read database you can always get this data back from the write database and rebuild the read store.
 
 *Domain Model* is materialized to *Query Models* using view materializer. Keeping this as separed component in the query stack allows fully control to mapped properties and fully testable.
 
@@ -89,7 +101,7 @@ Every successful handled command creates an event, which is published into a Mes
 
 ## :clock2: Eventual Consistency
 
-Everything comes with some kind of down side. The case of CQRS with multiple databases, to maintain high availability and scalability we create inconsistencies between databases.
+Everything comes with some trade offs. The case of CQRS with multiple databases, to maintain high availability and scalability we create inconsistencies between databases.
 
 More specifically, replicating data between two databases creates an eventual consistency, which in a specific moment in time, given the replication lag they are different, although is a temporary state and it eventually resolves itself.
 

@@ -1,4 +1,5 @@
-﻿using Ametista.Query.QueryModel;
+﻿using Ametista.Query.Abstractions;
+using Ametista.Query.QueryModel;
 using MongoDB.Driver;
 using System;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace Ametista.Query.Queries
             {
                 throw;
             }
-            
+
         }
     }
 }

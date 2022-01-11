@@ -1,10 +1,11 @@
-﻿using Ametista.Core.Transactions;
+﻿using Ametista.Command.Abstractions;
+using Ametista.Core;
 using Ametista.Core.Interfaces;
+using Ametista.Core.Transactions;
 using System;
 using System.Threading.Tasks;
-using Ametista.Core;
 
-namespace Ametista.Command.Commands
+namespace Ametista.Command.CreateTransaction
 {
     public class CreateTransactionCommandHandler : ICommandHandler<CreateTransactionCommand, CreateTransactionCommandResult>
     {

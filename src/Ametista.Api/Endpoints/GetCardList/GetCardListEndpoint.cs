@@ -1,4 +1,4 @@
-﻿using Ametista.Query;
+﻿using Ametista.Query.Abstractions;
 using Ametista.Query.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,7 +19,7 @@ namespace Ametista.Api.Endpoints.GetCardList
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery]GetCardListRequest request)
+        public async Task<IActionResult> Get([FromQuery] GetCardListRequest request)
         {
             var query = new GetCardListQuery()
             {
@@ -43,7 +43,7 @@ namespace Ametista.Api.Endpoints.GetCardList
                 Number = x.Number,
                 CardHolder = x.CardHolder,
                 ExpirationDate = x.ExpirationDate,
-                HighestTransactionAmount= x.HighestTransactionAmount,
+                HighestTransactionAmount = x.HighestTransactionAmount,
                 HighestTransactionId = x.HighestTransactionId
             });
 

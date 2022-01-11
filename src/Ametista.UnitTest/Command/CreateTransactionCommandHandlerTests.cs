@@ -1,6 +1,6 @@
-﻿using Ametista.Command.Commands;
-using Ametista.Core.Transactions;
+﻿using Ametista.Command.CreateTransaction;
 using Ametista.Core.Interfaces;
+using Ametista.Core.Transactions;
 using Moq;
 using System;
 using System.Threading.Tasks;
@@ -10,7 +10,7 @@ namespace Ametista.UnitTest.Command
 {
     public class CreateTransactionCommandHandlerTests
     {
-        private readonly CreateTransactionCommandHandler handler;
+        private readonly CreateTransactionCommandHandler sut;
         private readonly Mock<IEventBus> eventBusMock;
         private readonly Mock<ITransactionWriteOnlyRepository> transactionRepositoryMock;
 
@@ -21,7 +21,7 @@ namespace Ametista.UnitTest.Command
             transactionRepositoryMock.Setup(x => x.Add(It.IsAny<Transaction>()))
                 .ReturnsAsync(true);
 
-            handler = new CreateTransactionCommandHandler(eventBusMock.Object, transactionRepositoryMock.Object);
+            sut = new CreateTransactionCommandHandler(eventBusMock.Object, transactionRepositoryMock.Object);
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace Ametista.UnitTest.Command
             var command = CreateTransactionCommand();
 
             // Act
-            var result = await handler.Handle(command);
+            var result = await sut.Handle(command);
 
             // Assert
             Assert.True(result.Success);
@@ -46,7 +46,7 @@ namespace Ametista.UnitTest.Command
             var command = CreateTransactionCommand();
 
             // Act
-            var result = await handler.Handle(command);
+            var result = await sut.Handle(command);
 
             // Assert
             Assert.NotEqual(Guid.Empty, result.Id);
@@ -60,7 +60,7 @@ namespace Ametista.UnitTest.Command
             var command = CreateTransactionCommand();
 
             // Act
-            var result = await handler.Handle(command);
+            var result = await sut.Handle(command);
 
             // Assert
             Assert.Equal(command.UniqueId, result.UniqueId);
@@ -74,7 +74,7 @@ namespace Ametista.UnitTest.Command
             var command = CreateTransactionCommand();
 
             // Act
-            var result = await handler.Handle(command);
+            var result = await sut.Handle(command);
 
             // Assert
             Assert.Equal(command.ChargeDate, result.ChargeDate);
@@ -88,7 +88,7 @@ namespace Ametista.UnitTest.Command
             var command = CreateTransactionCommand();
 
             // Act
-            var result = await handler.Handle(command);
+            var result = await sut.Handle(command);
 
             // Assert
             Assert.Equal(command.Amount, result.Amount);
@@ -102,7 +102,7 @@ namespace Ametista.UnitTest.Command
             var command = CreateTransactionCommand();
 
             // Act
-            var result = await handler.Handle(command);
+            var result = await sut.Handle(command);
 
             // Assert
             Assert.Equal(command.CurrencyCode, result.CurrencyCode);

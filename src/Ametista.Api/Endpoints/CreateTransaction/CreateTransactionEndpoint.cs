@@ -1,5 +1,5 @@
-﻿using Ametista.Command;
-using Ametista.Command.Commands;
+﻿using Ametista.Command.Abstractions;
+using Ametista.Command.CreateTransaction;
 using Ametista.Core;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,7 +21,7 @@ namespace Ametista.Api.Endpoints.CreateTransaction
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]CreateTransactionRequest request)
+        public async Task<IActionResult> Post([FromBody] CreateTransactionRequest request)
         {
             var command = new CreateTransactionCommand(request.Amount, request.CurrencyCode, request.CardId, request.UniqueId, request.ChargeDate);
             var result = await commandDispatcher.Dispatch(command);

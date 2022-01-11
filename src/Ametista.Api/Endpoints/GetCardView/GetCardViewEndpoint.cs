@@ -1,4 +1,4 @@
-﻿using Ametista.Query;
+﻿using Ametista.Query.Abstractions;
 using Ametista.Query.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System;

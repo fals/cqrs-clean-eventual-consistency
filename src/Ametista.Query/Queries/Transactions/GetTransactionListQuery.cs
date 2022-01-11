@@ -1,7 +1,7 @@
-﻿using Ametista.Query.QueryModel;
+﻿using Ametista.Query.Abstractions;
+using Ametista.Query.QueryModel;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Ametista.Query.Queries
 {

@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Ametista.Query.Abstractions;
 using Ametista.Query.QueryModel;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Ametista.Query.Queries
 {
     public class GetTransactionListQueryHandler : IQueryHandler<GetTransactionListQuery, IEnumerable<TransactionListQueryModel>>
     {
         private readonly ReadDbContext readDbContext;
-        
+
         public GetTransactionListQueryHandler(ReadDbContext readDbContext)
         {
             this.readDbContext = readDbContext ?? throw new ArgumentNullException(nameof(readDbContext));
