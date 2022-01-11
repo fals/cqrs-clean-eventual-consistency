@@ -33,7 +33,7 @@ namespace Ametista.Api.Endpoints.CreateCard
                     ExpirationDate = result.ExpirationDate
                 };
 
-                return Ok(response);
+                return CreatedAtAction(null, response);
             }
 
             return BadRequest(request);

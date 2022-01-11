@@ -33,7 +33,6 @@ namespace Ametista.Api
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             });
-
             services.AddScoped<ValidationNotificationHandler>();
             services.AddSingleton(Configuration.Get<AmetistaConfiguration>());
 
@@ -92,10 +91,13 @@ namespace Ametista.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            using (var serviceScope = app.ApplicationServices.CreateScope())
+            if (env.EnvironmentName == "Docker")
             {
-                var context = serviceScope.ServiceProvider.GetService<WriteDbContext>();
-                context.Database.Migrate();
+                using (var serviceScope = app.ApplicationServices.CreateScope())
+                {
+                    var context = serviceScope.ServiceProvider.GetService<WriteDbContext>();
+                    context.Database.Migrate();
+                }
             }
 
             app.UseStaticFiles();

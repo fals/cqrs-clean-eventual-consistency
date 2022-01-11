@@ -38,7 +38,7 @@ namespace Ametista.Api.Endpoints.CreateTransaction
                     UniqueId = result.UniqueId
                 };
 
-                return Ok(response);
+                return CreatedAtAction(null, response);
             }
 
             return BadRequest(validationNotificationHandler.Notifications);

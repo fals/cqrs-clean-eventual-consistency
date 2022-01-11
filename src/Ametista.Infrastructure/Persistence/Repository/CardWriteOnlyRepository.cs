@@ -38,8 +38,15 @@ namespace Ametista.Infrastructure.Persistence.Repository
 
         public bool IsDuplicatedCardNumber(string cardNamber)
         {
-            return writeDbContext.Cards
-                .Any(x => x.Number == cardNamber);
+            try
+            {
+                return writeDbContext.Cards.Any(x => x.Number == cardNamber);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
         }
 
         public async Task<bool> Update(Card entity)
